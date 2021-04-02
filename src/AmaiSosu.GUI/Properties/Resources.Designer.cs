@@ -1,20 +1,20 @@
 /**
  * Copyright (C) 2018-2019 Emilian Roman
- * 
- * This file is part of HCE.AmaiSosu.
- * 
- * HCE.AmaiSosu is free software: you can redistribute it and/or modify
+ *
+ * This file is part of AmaiSosu.
+ *
+ * AmaiSosu is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
- * HCE.AmaiSosu is distributed in the hope that it will be useful,
+ *
+ * AmaiSosu is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
- * along with HCE.AmaiSosu.  If not, see <http://www.gnu.org/licenses/>.
+ * along with AmaiSosu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 ﻿//------------------------------------------------------------------------------
@@ -29,8 +29,8 @@
 
 namespace AmaiSosu.GUI.Properties {
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -42,15 +42,15 @@ namespace AmaiSosu.GUI.Properties {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
-        
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
         internal Resources() {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
@@ -64,7 +64,7 @@ namespace AmaiSosu.GUI.Properties {
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.

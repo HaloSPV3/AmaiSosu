@@ -3,7 +3,7 @@
         <img src="https://user-images.githubusercontent.com/10241434/61166409-7f6f7d80-a55f-11e9-8e68-bfaa3e39890e.png">
     <p>
     <h1 align="center">
-        HCE.AmaiSosu
+        AmaiSosu
     </h1>
     <h3 align="center">
         An Alternative OpenSauce Installer
@@ -12,7 +12,7 @@
         <img src="https://user-images.githubusercontent.com/10241434/61166547-fc035b80-a561-11e9-8928-d39d5d4a6a77.png">
     <p>
     <p align="center">
-        <a href="https://github.com/yumiris/HCE.AmaiSosu/releases/latest">
+        <a href="https://github.com/HaloSPV3/AmaiSosu/releases/latest">
             Download
         </a>
         •
@@ -77,7 +77,7 @@ Note that attempting to install AmaiSosu to HCE in a restricted location (e.g.
 
 # Support
 
-Please [post an issue](https://github.com/yumiris/HCE.AmaiSosu/issues/new) if
+Please [post an issue](https://github.com/HaloSPV3/AmaiSosu/issues/new) if
 you encounter any problems.
 
 # Contributors

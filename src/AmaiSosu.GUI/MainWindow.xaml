@@ -7,7 +7,7 @@
                       xmlns:gui="clr-namespace:AmaiSosu.GUI"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       mc:Ignorable="d"
-                      Title="HCE.AmaiSosu | OpenSauce Installer"
+                      Title="AmaiSosu | OpenSauce Installer"
                       Width="860"
                       Height="480"
                       WindowStartupLocation="CenterScreen"
