@@ -121,6 +121,27 @@ namespace AmaiSosu.Installation
                 package.Install();
 
             WriteSuccess("OpenSauce has been successfully installed to the filesystem.");
+            WriteInfo("Direct3D9 Extensions must be installed for Open Sauce to work.");
+
+            var process = new System.Diagnostics.Process
+            {
+                StartInfo = new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = Combine(GetFolderPath(CommonApplicationData),
+                                       "Kornner Studios",
+                                       "OpenSauce",
+                                       "dxredist",
+                                       "dxsetup.exe"),
+                    Verb = "RunAs",
+                }
+            };
+
+            if (process.Start())
+                WriteAndThrow(new System.Exception("Failed to start DirectX Setup."));
+
+            process.WaitForExit();
+            if (process.ExitCode != 0)
+                WriteAndThrow(new System.Exception($"DirectX Setup exitted with code {process.ExitCode}."));
         }
     }
 }
