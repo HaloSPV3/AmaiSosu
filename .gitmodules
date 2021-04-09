@@ -1,0 +1,3 @@
+[submodule "ext/HCE"]
+	path = ext/HCE
+	url = ../HCE
