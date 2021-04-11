@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2018-2019 Emilian Roman
+ * Copyright (c) 2021 Noah Sherwin
  *
  * This file is part of AmaiSosu.
  *
@@ -26,13 +27,15 @@ using System.Runtime.CompilerServices;
 using AmaiSosu.Detection;
 using AmaiSosu.GUI.Properties;
 using AmaiSosu.GUI.Resources;
+using System.Windows;
+using System.Threading.Tasks;
 
 namespace AmaiSosu.GUI
 {
     /// <summary>
     ///     Main AmaiSosu model.
     /// </summary>
-    public sealed class Main : INotifyPropertyChanged
+    public sealed partial class Main : INotifyPropertyChanged
     {
         /// <summary>
         ///     Installation is possible given the current state.
@@ -49,6 +52,32 @@ namespace AmaiSosu.GUI
         ///     Path is expected to contain the HCE executable.
         /// </summary>
         private string _path;
+
+        public MainCompile CompileMode { get; set; } = new MainCompile();
+        public MainInstall InstallMode { get; set; } = new MainInstall();
+
+        public void Initialise()
+        {
+            switch (Context.Infer())
+            {
+                case Context.Type.Compile:
+                    CompileMode.Visibility = Visibility.Visible;
+                    Task.Run(() => { Assets.Initialise(); });
+                    break;
+                case Context.Type.Install:
+                    InstallMode.Visibility = Visibility.Visible;
+                    break;
+                case Context.Type.Invalid:
+                    //Error.Visibility = Visibility.Visible;
+                    //Error.Content = "Please ensure this loader is in the appropriate SPV3 folder.";
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+
+            if (Exists(Paths.Compile))
+                MainCompile.Visibility = Visibility.Visible;
+        }
 
         /// <summary>
         ///     Git version.
@@ -114,7 +143,7 @@ namespace AmaiSosu.GUI
         /// <summary>
         ///     Initialise the HCE path detection attempt.
         /// </summary>
-        public void Initialise(System.Windows.StartupEventArgs e = null)
+        public void Initialise(StartupEventArgs e = null)
         {
             bool AutoStart = e != null && e.Args.Any(param => param.ToLower() == "--auto");
             try

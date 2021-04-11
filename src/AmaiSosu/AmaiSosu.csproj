@@ -60,6 +60,7 @@
     <Compile Include="Installation\IO\MoveFile.cs" />
     <Compile Include="Installation\OpenSauceException.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Main.Install.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\FileNames.Designer.cs">
       <AutoGen>True</AutoGen>
