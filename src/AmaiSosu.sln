@@ -9,6 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentat
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmaiSosu.GUI", "AmaiSosu.GUI\AmaiSosu.GUI.csproj", "{4AB5A870-7A84-4206-994B-EAB91473CD6C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ACAA5D9F-B23D-43E1-B2DF-8C03230975A1} = {ACAA5D9F-B23D-43E1-B2DF-8C03230975A1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmaiSosu", "AmaiSosu\AmaiSosu.csproj", "{693BF44B-7BA3-461C-8CE1-D0F11FBE930D}"
 EndProject

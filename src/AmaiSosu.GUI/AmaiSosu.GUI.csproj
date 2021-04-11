@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Costura.Fody.3.3.3\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.3.3.3\build\Costura.Fody.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -9,13 +9,14 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>AmaiSosu.GUI</RootNamespace>
     <AssemblyName>AmaiSosu.GUI</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -110,6 +111,10 @@
     <Page Include="MainWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ext\HCE\hxe\kernel\src\HXE.csproj">
+      <Project>{acaa5d9f-b23d-43e1-b2df-8c03230975a1}</Project>
+      <Name>HXE</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AmaiSosu\AmaiSosu.csproj">
       <Project>{693bf44b-7ba3-461c-8ce1-d0f11fbe930d}</Project>
       <Name>AmaiSosu</Name>
