@@ -19,10 +19,13 @@
 
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using AmaiSosu.Common;
+using HXE;
 using static System.Environment;
 using static System.Environment.SpecialFolder;
 using static System.IO.Path;
+using static System.Reflection.Assembly;
 
 namespace AmaiSosu.Installation
 {
@@ -78,7 +81,7 @@ namespace AmaiSosu.Installation
             if (!Directory.Exists(_hcePath))
                 return new Verification(false, "Target directory for OpenSauce installation does not exist.");
 
-            if (!File.Exists(Combine(_hcePath, "haloce.exe")))
+            if (!System.IO.File.Exists(Combine(_hcePath, "haloce.exe")))
                 return new Verification(false, "Invalid target HCE directory path for OpenSauce installation.");
 
             foreach (var package in _packages)
@@ -103,6 +106,16 @@ namespace AmaiSosu.Installation
         /// </exception>
         public void Install()
         {
+            // TODO
+            // Where should this go?
+            Task.Run(() => {
+                SFX.Extract(new SFX.Configuration
+                {
+                    Target = new DirectoryInfo(Package.Directory),
+                    Executable = new FileInfo(GetExecutingAssembly().Location)
+                });
+            });
+
             WriteInfo("Verifying the OpenSauce installer.");
             var state = Verify();
 

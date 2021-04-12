@@ -76,6 +76,7 @@
     <Compile Include="Main.Compile.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Main.Install.cs" />
+    <Compile Include="Main.Startup.cs" />
     <Compile Include="Resources\FileNames.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -21,7 +21,6 @@
 using System;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using AmaiSosu.Detection;
@@ -55,29 +54,6 @@ namespace AmaiSosu.GUI
 
         public MainCompile CompileMode { get; set; } = new MainCompile();
         public MainInstall InstallMode { get; set; } = new MainInstall();
-
-        public void Initialise()
-        {
-            switch (Context.Infer())
-            {
-                case Context.Type.Compile:
-                    CompileMode.Visibility = Visibility.Visible;
-                    Task.Run(() => { Assets.Initialise(); });
-                    break;
-                case Context.Type.Install:
-                    InstallMode.Visibility = Visibility.Visible;
-                    break;
-                case Context.Type.Invalid:
-                    //Error.Visibility = Visibility.Visible;
-                    //Error.Content = "Please ensure this loader is in the appropriate SPV3 folder.";
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            if (Exists(Paths.Compile))
-                MainCompile.Visibility = Visibility.Visible;
-        }
 
         /// <summary>
         ///     Git version.
@@ -143,26 +119,41 @@ namespace AmaiSosu.GUI
         /// <summary>
         ///     Initialise the HCE path detection attempt.
         /// </summary>
-        public void Initialise(StartupEventArgs e = null)
+        public void Initialise()
         {
-            bool AutoStart = e != null && e.Args.Any(param => param.ToLower() == "--auto");
-            try
+            switch (Context.Infer(Startup.Compile))
             {
-                if (AutoStart)
-                {
-                    Path = Environment.CurrentDirectory;
-                    Install();
-                    return;
-                 }
-                else
-                {
-                    Path = System.IO.Path.GetDirectoryName(Loader.Detect());
-                    OnPathChanged();
-                }
-            }
-            catch (Exception)
-            {
-                InstallText = Messages.BrowseHce;
+                case Context.Type.Compile:
+                    CompileMode.Visibility = Visibility.Visible;
+                    Task.Run(() => {
+                        HXE.SFX.Compile(new HXE.SFX.Configuration
+                        {
+                            Source = new DirectoryInfo(Environment.CurrentDirectory),
+                            Target = new DirectoryInfo(Packages(Path)),
+                            Executable = new FileInfo(Assembly.GetExecutingAssembly().Location)
+                        });
+                    });
+                    break;
+                case Context.Type.Install:
+                    InstallMode.Visibility = Visibility.Visible;
+                    try
+                    {
+                        Path = !string.IsNullOrWhiteSpace(Startup.Path) ?
+                           Startup.Path :
+                           System.IO.Path.GetDirectoryName(Loader.Detect());
+
+                        OnPathChanged();
+
+                        if (Startup.Auto)
+                            Install();
+                    }
+                    catch (Exception)
+                    {
+                        InstallText = Messages.BrowseHce;
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -193,6 +184,11 @@ namespace AmaiSosu.GUI
             InstallText = CanInstall
                 ? Messages.InstallReady
                 : Messages.BrowseHce;
+        }
+
+        public static string Packages(string target)
+        {
+            return System.IO.Path.Combine(target, "data");
         }
 
         [NotifyPropertyChangedInvocator]

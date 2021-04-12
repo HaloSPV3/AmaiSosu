@@ -16,18 +16,53 @@
  * You should have received a copy of the GNU General Public License
  * along with AmaiSosu.  If not, see <http://www.gnu.org/licenses/>.
  */
+using System;
 using System.Windows;
+using static AmaiSosu.GUI.Startup;
 
-﻿namespace AmaiSosu.GUI
+namespace AmaiSosu.GUI
 {
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-        private void AppStart_Auto(object sender, StartupEventArgs e)
+        private void AppStart(object sender, StartupEventArgs e)
         {
-            new MainWindow(e).Show();
+            /** Set Startup Settings */
+            if (e.Args.Length != 0)
+            {
+                foreach (var arg in e.Args)
+                {
+                    switch(arg)
+                    {
+                        case "--auto":
+                            Auto = true;
+                            break;
+                        case "--compile":
+                            Compile = true;
+                            break;
+                        case "--help":
+                            Help = true;
+                            break;
+                        case "--path":
+                            int index = Array.IndexOf(e.Args, arg);
+                            int next = index + 1;
+                            if (e.Args.Length < next)
+                                break;
+                            if (e.Args[next].StartsWith("--"))
+                                break;
+                            if (!System.IO.Path.IsPathRooted(e.Args[next]))
+                                break;
+                            Path = e.Args[next];
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            new MainWindow().Show();
         }
     }
 }

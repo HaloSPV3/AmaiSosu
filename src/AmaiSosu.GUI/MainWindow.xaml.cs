@@ -37,13 +37,6 @@ namespace AmaiSosu.GUI
             _main.Initialise();
         }
 
-        public MainWindow(StartupEventArgs e)
-        {
-            InitializeComponent();
-            _main = (Main) DataContext;
-            _main.Initialise(e);
-        }
-
         private async void Install(object sender, RoutedEventArgs e)
         {
             InstallButton.IsEnabled = false;

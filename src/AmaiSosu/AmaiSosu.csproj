@@ -47,6 +47,7 @@
     <Compile Include="Common\Output.cs" />
     <Compile Include="Common\Package.cs" />
     <Compile Include="Common\Verification.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="Detection\Executable.cs" />
     <Compile Include="Detection\ExecutableFactory.cs" />
     <Compile Include="Detection\Loader.cs" />
@@ -79,6 +80,12 @@
     <EmbeddedResource Include="Resources\Version.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ext\HCE\hxe\kernel\src\HXE.csproj">
+      <Project>{acaa5d9f-b23d-43e1-b2df-8c03230975a1}</Project>
+      <Name>HXE</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
