@@ -19,7 +19,7 @@
 
 using System;
 
-namespace AmaiSosu.GUI
+namespace AmaiSosu
 {
     public static class Startup
     {
@@ -43,6 +43,7 @@ namespace AmaiSosu.GUI
         /// it will display a list of its command
         /// line arguments.
         /// </summary>
+        /// TODO: Implement Help output
         public static bool   Help = false;
 
         /// <summary>

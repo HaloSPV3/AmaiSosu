@@ -18,7 +18,7 @@
  */
 using System;
 using System.Windows;
-using static AmaiSosu.GUI.Startup;
+using static AmaiSosu.Startup;
 
 namespace AmaiSosu.GUI
 {

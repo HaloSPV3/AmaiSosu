@@ -22,7 +22,7 @@ namespace AmaiSosu
     /// <summary>
     ///   Module for determining the scenario of the app environment.
     /// </summary>
-    public class Context
+    public static class Context
     {
         /// <summary>
         ///   Possible environment states.
@@ -40,9 +40,13 @@ namespace AmaiSosu
         /// <returns>
         ///   <see cref="Type" />
         /// </returns>
-        public static Type Infer(bool Compile = false)
+        public static Type Infer()
         {
-            return Compile ? Type.Compile : Type.Install;
+            if (Startup.Compile)
+                return Type.Compile;
+            else if (Startup.Help)
+                return Type.Help;
+            else return Type.Install;
         }
     }
 }

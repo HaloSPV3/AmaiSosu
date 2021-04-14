@@ -121,7 +121,7 @@ namespace AmaiSosu.GUI
         /// </summary>
         public void Initialise()
         {
-            switch (Context.Infer(Startup.Compile))
+            switch (Context.Infer())
             {
                 case Context.Type.Compile:
                     CompileMode.Visibility = Visibility.Visible;
@@ -152,6 +152,10 @@ namespace AmaiSosu.GUI
                         InstallText = Messages.BrowseHce;
                     }
                     break;
+                case Context.Type.Help:
+                    // TODO: Create Help control
+                    // HelpMode.Visibility = Visibility.Visible;
+                    throw new NotImplementedException();
                 default:
                     throw new ArgumentOutOfRangeException();
             }
