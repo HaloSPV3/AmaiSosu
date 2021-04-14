@@ -35,6 +35,10 @@ namespace AmaiSosu.GUI
             InitializeComponent();
             _main = (Main) DataContext;
             _main.Initialise();
+
+            var UCCompile = new UserControlCompile{ Visibility = Visibility.Collapsed };
+            var UCHelp = new UserControlHelp{ Visibility = Visibility.Collapsed };
+            var UCInstall = new UserControlInstall{ Visibility = Visibility.Collapsed };
         }
 
         private async void Install(object sender, RoutedEventArgs e)

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace AmaiSosu.GUI
 {
     /// <summary>
-    /// Interaction logic for CompileUserControl.xaml
+    /// Interaction logic for UserControl.xaml
     /// </summary>
-    public partial class CompileUserControl : UserControl
+    public partial class UserControlHelp : UserControl
     {
-        public CompileUserControl()
+        public UserControlHelp()
         {
             InitializeComponent();
         }

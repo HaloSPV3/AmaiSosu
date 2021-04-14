@@ -73,11 +73,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CompileUserControl.xaml.cs">
-      <DependentUpon>CompileUserControl.xaml</DependentUpon>
+    <Compile Include="UserControl.Compile.xaml.cs">
+      <DependentUpon>UserControl.Compile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InstallUserControl.xaml.cs">
-      <DependentUpon>InstallUserControl.xaml</DependentUpon>
+    <Compile Include="UserControl.Help.xaml.cs">
+      <DependentUpon>UserControl.Help.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl.Install.xaml.cs">
+      <DependentUpon>UserControl.Install.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main.Compile.cs" />
     <Compile Include="Main.cs" />
@@ -116,11 +119,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CompileUserControl.xaml">
+    <Page Include="UserControl.Compile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InstallUserControl.xaml">
+    <Page Include="UserControl.Help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl.Install.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

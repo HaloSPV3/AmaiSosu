@@ -18,9 +18,9 @@ namespace AmaiSosu.GUI
     /// <summary>
     /// Interaction logic for InstallUserControl.xaml
     /// </summary>
-    public partial class InstallUserControl : UserControl
+    public partial class UserControlInstall : UserControl
     {
-        public InstallUserControl()
+        public UserControlInstall()
         {
             InitializeComponent();
         }
