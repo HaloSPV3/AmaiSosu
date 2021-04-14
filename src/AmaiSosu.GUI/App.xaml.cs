@@ -40,10 +40,10 @@ namespace AmaiSosu.GUI
                             Auto = true;
                             break;
                         case "--compile":
-                            Compile = true;
+                            AmaiSosu.Startup.Compile = true;
                             break;
                         case "--help":
-                            Help = true;
+                            AmaiSosu.Startup.Help = true;
                             break;
                         case "--path":
                             int index = Array.IndexOf(e.Args, arg);
@@ -54,7 +54,7 @@ namespace AmaiSosu.GUI
                                 break;
                             if (!System.IO.Path.IsPathRooted(e.Args[next]))
                                 break;
-                            Path = e.Args[next];
+                            AmaiSosu.Startup.Path = e.Args[next];
                             break;
                         default:
                             break;

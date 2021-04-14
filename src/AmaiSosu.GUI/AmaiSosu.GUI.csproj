@@ -73,7 +73,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Main.Help.cs" />
+    <Compile Include="Help.cs" />
     <Compile Include="UserControl.Compile.xaml.cs">
       <DependentUpon>UserControl.Compile.xaml</DependentUpon>
     </Compile>
@@ -83,9 +83,9 @@
     <Compile Include="UserControl.Install.xaml.cs">
       <DependentUpon>UserControl.Install.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Main.Compile.cs" />
+    <Compile Include="Compile.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="Main.Install.cs" />
+    <Compile Include="Install.cs" />
     <Compile Include="Resources\FileNames.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

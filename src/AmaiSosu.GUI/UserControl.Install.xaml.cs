@@ -42,7 +42,7 @@ namespace AmaiSosu.GUI
         {
             InstallButton.IsEnabled = false;
 
-            await Task.Run(() => _main.MInstall.Install());
+            await Task.Run(() => _main.Install.Invoke());
 
             InstallButton.IsEnabled = true;
         }

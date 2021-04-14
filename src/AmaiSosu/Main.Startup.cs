@@ -17,41 +17,37 @@
  * along with AmaiSosu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using System;
+using AmaiSosu.Detection;
 
 namespace AmaiSosu
 {
     public static class Startup
     {
         /// <summary>
-        /// If --auto is passed to this app,
-        /// it will automatically Compile a release package
-        /// or Install its package to a given path
-        /// depending on the Context.
+        /// Set by the presence of the --auto startup argument.
+        /// Either the Compile or Install procedure will Invoke()
+        /// with default parameters.
         /// </summary>
-        public static bool   Auto    = false;
+        public static bool Auto = false;
 
         /// <summary>
-        /// If --compile is passed to this app,
-        /// it will begin the Compile procedure
-        /// to create a release package.
+        /// Set by the presence of the --compile startup argument.
+        /// Indicates to AmaiSosu that it should load the
+        /// Release Compilation procedure.
         /// </summary>
-        public static bool   Compile = false;
+        public static bool Compile = false;
 
         /// <summary>
-        /// If --help is passed to this app,
-        /// it will display a list of its command
-        /// line arguments.
+        /// Set by the presence of the --help startup argument.
+        /// Indicates to AmaiSosu that it should load the
+        /// Help procedure to display the startup arguments to
+        /// the user.
         /// </summary>
-        /// TODO: Implement Help output
-        public static bool   Help = false;
+        public static bool Help = false;
 
         /// <summary>
-        /// If --path is passed to this app
-        /// and is followed by a path to a directory,
-        /// the string will be assigned as the default path
-        /// for the Install procedure.
+        /// String passed via the --path startup argument.
         /// </summary>
-        public static string Path  = Environment.CurrentDirectory;
+        public static string Path = System.IO.Path.GetDirectoryName(Loader.Detect());
     }
 }

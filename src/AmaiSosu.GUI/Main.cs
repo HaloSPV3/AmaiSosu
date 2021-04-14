@@ -27,7 +27,6 @@ using AmaiSosu.Detection;
 using AmaiSosu.GUI.Properties;
 using AmaiSosu.GUI.Resources;
 using System.Windows;
-using System.Threading.Tasks;
 
 namespace AmaiSosu.GUI
 {
@@ -40,10 +39,11 @@ namespace AmaiSosu.GUI
         ///     Installation path.
         ///     Path is expected to contain the HCE executable.
         /// </summary>
-        private string _path;
+        private string _path = Startup.Path;
 
-        public MainCompile MCompile { get; set; } = new MainCompile();
-        public MainInstall MInstall { get; set; } = new MainInstall();
+        public Compile Compile { get; set; } = new Compile();
+        public Install Install { get; set; } = new Install();
+        public Help    Help    { get; set; } = new Help();
 
         /// <summary>
         ///     Git version.
@@ -69,9 +69,6 @@ namespace AmaiSosu.GUI
             }
         }
 
-        /// <summary>
-        ///     Installation path.
-        /// </summary>
         public string Path
         {
             get => _path;
@@ -80,7 +77,8 @@ namespace AmaiSosu.GUI
                 if (value == _path) return;
                 _path = value;
                 OnPropertyChanged();
-                OnPathChanged();
+                Compile.Path = value;
+                Install.Path = value;
             }
         }
 
@@ -94,46 +92,36 @@ namespace AmaiSosu.GUI
             switch (Context.Infer())
             {
                 case Context.Type.Compile:
-                    MCompile.Visibility = Visibility.Visible;
-                    Task.Run(() => {
-                        HXE.SFX.Compile(new HXE.SFX.Configuration
-                        {
-                            Source = new DirectoryInfo(Environment.CurrentDirectory),
-                            Target = new DirectoryInfo(Packages(Path)),
-                            Executable = new FileInfo(Assembly.GetExecutingAssembly().Location)
-                        });
-                    });
+                    Compile.Visibility = Visibility.Visible;
                     break;
                 case Context.Type.Install:
-                    MInstall.Visibility = Visibility.Visible;
+                    Install.Visibility = Visibility.Visible;
                     try
                     {
                         Path = !string.IsNullOrWhiteSpace(Startup.Path) ?
                            Startup.Path :
                            System.IO.Path.GetDirectoryName(Loader.Detect());
 
-                        OnPathChanged();
-
                         if (Startup.Auto)
-                            MInstall.Install();
+                            Install.Invoke();
                     }
                     catch (Exception)
                     {
-                        MInstall.InstallText = Messages.BrowseHce;
+                        Install.InstallText = Messages.BrowseHce;
                     }
                     break;
                 case Context.Type.Help:
+                    Help.Visibility = Visibility.Visible;
+                    try
+                    {
+
+                    }
                     // TODO: Create Help control
                     // HelpMode.Visibility = Visibility.Visible;
                     throw new NotImplementedException();
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        public static string Packages(string target)
-        {
-            return System.IO.Path.Combine(target, "data");
         }
 
         [NotifyPropertyChangedInvocator]

@@ -25,30 +25,27 @@ using AmaiSosu.GUI.Properties;
 
 namespace AmaiSosu.GUI
 {
-    public sealed partial class Main
+    public class Help : INotifyPropertyChanged
     {
-        public class MainCompile : INotifyPropertyChanged
+        private Visibility _visibility = Visibility.Collapsed;
+
+        public Visibility Visibility
         {
-            private Visibility _visibility = Visibility.Collapsed;
-
-            public Visibility Visibility
+            get => _visibility;
+            set
             {
-                get => _visibility;
-                set
-                {
-                    if (value == _visibility) return;
-                    _visibility = value;
-                    OnPropertyChanged();
-                }
+                if (value == _visibility) return;
+                _visibility = value;
+                OnPropertyChanged();
             }
+        }
 
-            public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-            [NotifyPropertyChangedInvocator]
-            protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-            {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
