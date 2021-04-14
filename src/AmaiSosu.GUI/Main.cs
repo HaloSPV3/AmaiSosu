@@ -37,23 +37,13 @@ namespace AmaiSosu.GUI
     public sealed partial class Main : INotifyPropertyChanged
     {
         /// <summary>
-        ///     Installation is possible given the current state.
-        /// </summary>
-        private bool _canInstall;
-
-        /// <summary>
-        ///     Current state of the OpenSauce installation.
-        /// </summary>
-        private string _installState = Messages.BrowseHce;
-
-        /// <summary>
         ///     Installation path.
         ///     Path is expected to contain the HCE executable.
         /// </summary>
         private string _path;
 
-        public MainCompile CompileMode { get; set; } = new MainCompile();
-        public MainInstall InstallMode { get; set; } = new MainInstall();
+        public MainCompile MCompile { get; set; } = new MainCompile();
+        public MainInstall MInstall { get; set; } = new MainInstall();
 
         /// <summary>
         ///     Git version.
@@ -68,6 +58,14 @@ namespace AmaiSosu.GUI
                 {
                     return reader.ReadToEnd().Trim();
                 }
+            }
+        }
+
+        public Context.Type Mode
+        {
+            get
+            {
+                return Context.Infer();
             }
         }
 
@@ -86,34 +84,6 @@ namespace AmaiSosu.GUI
             }
         }
 
-        /// <summary>
-        ///     Installation is possible given the current state.
-        /// </summary>
-        public bool CanInstall
-        {
-            get => _canInstall;
-            set
-            {
-                if (value == _canInstall) return;
-                _canInstall = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        ///     Current state of the OpenSauce installation.
-        /// </summary>
-        public string InstallText
-        {
-            get => _installState;
-            set
-            {
-                if (value == _installState) return;
-                _installState = value;
-                OnPropertyChanged();
-            }
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
@@ -124,7 +94,7 @@ namespace AmaiSosu.GUI
             switch (Context.Infer())
             {
                 case Context.Type.Compile:
-                    CompileMode.Visibility = Visibility.Visible;
+                    MCompile.Visibility = Visibility.Visible;
                     Task.Run(() => {
                         HXE.SFX.Compile(new HXE.SFX.Configuration
                         {
@@ -135,7 +105,7 @@ namespace AmaiSosu.GUI
                     });
                     break;
                 case Context.Type.Install:
-                    InstallMode.Visibility = Visibility.Visible;
+                    MInstall.Visibility = Visibility.Visible;
                     try
                     {
                         Path = !string.IsNullOrWhiteSpace(Startup.Path) ?
@@ -145,11 +115,11 @@ namespace AmaiSosu.GUI
                         OnPathChanged();
 
                         if (Startup.Auto)
-                            Install();
+                            MInstall.Install();
                     }
                     catch (Exception)
                     {
-                        InstallText = Messages.BrowseHce;
+                        MInstall.InstallText = Messages.BrowseHce;
                     }
                     break;
                 case Context.Type.Help:
@@ -159,35 +129,6 @@ namespace AmaiSosu.GUI
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
-
-        /// <summary>
-        ///     Invokes the installation procedure.
-        /// </summary>
-        public void Install()
-        {
-            try
-            {
-                InstallText = "...";
-                new AmaiSosu.Main(_path).Install();
-                InstallText = Messages.InstallSuccess;
-            }
-            catch (Exception e)
-            {
-                InstallText = e.Message;
-            }
-        }
-
-        /// <summary>
-        ///     Updates the install text upon successful path provision.
-        /// </summary>
-        private void OnPathChanged()
-        {
-            CanInstall = Directory.Exists(Path) && File.Exists(System.IO.Path.Combine(Path, FileNames.HceExecutable));
-
-            InstallText = CanInstall
-                ? Messages.InstallReady
-                : Messages.BrowseHce;
         }
 
         public static string Packages(string target)

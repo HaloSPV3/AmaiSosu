@@ -73,6 +73,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Main.Help.cs" />
     <Compile Include="UserControl.Compile.xaml.cs">
       <DependentUpon>UserControl.Compile.xaml</DependentUpon>
     </Compile>

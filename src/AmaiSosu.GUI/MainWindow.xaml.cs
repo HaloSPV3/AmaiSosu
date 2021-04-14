@@ -17,18 +17,20 @@
  * along with AmaiSosu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System;
 using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using MahApps.Metro.Controls;
-using Microsoft.Win32;
 
 namespace AmaiSosu.GUI
 {
     public partial class MainWindow : MetroWindow
     {
-        private readonly Main _main;
+        private Main _main;
+        private Main.MainCompile _compile;
+        private Main.MainHelp    _help;
+        private Main.MainInstall _install;
+
 
         public MainWindow()
         {
@@ -36,29 +38,20 @@ namespace AmaiSosu.GUI
             _main = (Main) DataContext;
             _main.Initialise();
 
-            var UCCompile = new UserControlCompile{ Visibility = Visibility.Collapsed };
-            var UCHelp = new UserControlHelp{ Visibility = Visibility.Collapsed };
-            var UCInstall = new UserControlInstall{ Visibility = Visibility.Collapsed };
-        }
-
-        private async void Install(object sender, RoutedEventArgs e)
-        {
-            InstallButton.IsEnabled = false;
-
-            await Task.Run(() => _main.Install());
-
-            InstallButton.IsEnabled = true;
-        }
-
-        private void Browse(object sender, RoutedEventArgs e)
-        {
-            var openFileDialog = new OpenFileDialog
+            switch(_main.Mode)
             {
-                Filter = "HCE Executable|haloce.exe"
-            };
-
-            if (openFileDialog.ShowDialog() == true)
-                _main.Path = Path.GetDirectoryName(openFileDialog.FileName);
+                case Context.Type.Compile:
+                    _compile = new Main.MainCompile();
+                    break;
+                case Context.Type.Help:
+                    _help = new Main.MainHelp();
+                    break;
+                case Context.Type.Install:
+                    _install = new Main.MainInstall();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void About(object sender, RoutedEventArgs e)

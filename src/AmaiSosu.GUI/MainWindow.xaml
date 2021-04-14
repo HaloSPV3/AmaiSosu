@@ -52,39 +52,11 @@
             </Label>
         </StackPanel>
 
-        <!-- Body -->
-        <Grid x:Name="Install"
-              Visibility="{Binding }"
-              VerticalAlignment="Bottom"
-              Margin="10,140">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
 
-            <DockPanel Grid.Column="0"
-                       Margin="5">
-                <Button DockPanel.Dock="Right"
-                        Style="{DynamicResource SquareButtonStyle}"
-                        BorderThickness="0"
-                        Content="Browse"
-                        Margin="1,0,0,0"
-                        Click="Browse" />
-                <TextBox Text="{Binding Path}"
-                         HorizontalContentAlignment="Center"
-                         BorderThickness="0"
-                         VerticalContentAlignment="Center" />
-            </DockPanel>
-
-            <Button Grid.Column="1"
-                    Style="{DynamicResource SquareButtonStyle}"
-                    BorderThickness="0"
-                    Margin="5"
-                    Content="{Binding InstallText}"
-                    IsEnabled="{Binding CanInstall}"
-                    Click="Install"
-                    Name="InstallButton" />
-        </Grid>
+    <!-- Body -->
+        <gui:UserControlCompile Visibility="{Binding _main.CompileMode.Visibility}"/>
+        <gui:UserControlHelp Visibility="{Binding _main.HelpMode.Visibility}"/>
+        <gui:UserControlInstall Visibility="{Binding _main.HelpMode.Visibility}"/>
 
         <!-- Footer -->
         <StackPanel x:Name="Footer"
