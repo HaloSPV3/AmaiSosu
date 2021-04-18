@@ -48,6 +48,6 @@ namespace AmaiSosu
         /// <summary>
         /// String passed via the --path startup argument.
         /// </summary>
-        public static string Path = System.IO.Path.GetDirectoryName(Loader.Detect());
+        public static string Path;
     }
 }

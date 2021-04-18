@@ -47,6 +47,7 @@
     <Compile Include="Common\Output.cs" />
     <Compile Include="Common\Package.cs" />
     <Compile Include="Common\Verification.cs" />
+    <Compile Include="Compilation\Compiler.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Detection\Executable.cs" />
     <Compile Include="Detection\ExecutableFactory.cs" />
@@ -62,7 +63,7 @@
     <Compile Include="Installation\OpenSauceException.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Main.Install.cs" />
-    <Compile Include="Main.Startup.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\FileNames.Designer.cs">
       <AutoGen>True</AutoGen>

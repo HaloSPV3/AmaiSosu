@@ -7,29 +7,29 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-    <Grid x:Name="Install"
-          VerticalAlignment="Bottom"
-          Margin="10,140">
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition />
-        <ColumnDefinition />
-      </Grid.ColumnDefinitions>
-
-      <DockPanel Grid.Column="0"
+        <Grid x:Name="Install"
+              VerticalAlignment="Bottom"
+              Margin="10,140">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+    
+            <DockPanel Grid.Column="0"
                        Margin="5">
-        <Button DockPanel.Dock="Right"
+                <Button DockPanel.Dock="Right"
                         Style="{DynamicResource SquareButtonStyle}"
                         BorderThickness="0"
                         Content="Browse"
                         Margin="1,0,0,0"
                         Click="Browse" />
-        <TextBox Text="{Binding Path}"
-                  HorizontalContentAlignment="Center"
-                  BorderThickness="0"
-                  VerticalContentAlignment="Center" />
-      </DockPanel>
-
-      <Button Grid.Column="1"
+                <TextBox Text="{Binding Path}"
+                         HorizontalContentAlignment="Center"
+                         BorderThickness="0"
+                         VerticalContentAlignment="Center" />
+            </DockPanel>
+    
+            <Button Grid.Column="1"
                     Style="{DynamicResource SquareButtonStyle}"
                     BorderThickness="0"
                     Margin="5"
@@ -37,7 +37,7 @@
                     IsEnabled="{Binding CanInstall}"
                     Click="Install"
                     Name="InstallButton" />
-    </Grid>
+        </Grid>
 
   </Grid>
 </UserControl>
