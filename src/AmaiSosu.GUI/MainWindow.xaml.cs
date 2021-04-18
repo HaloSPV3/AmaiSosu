@@ -27,30 +27,12 @@ namespace AmaiSosu.GUI
     public partial class MainWindow : MetroWindow
     {
         private Main _main;
-        private Compile _compile;
-        private Help    _help;
-        private Install _install;
 
         public MainWindow()
         {
             InitializeComponent();
             _main = (Main) DataContext;
             _main.Initialise();
-
-            switch(_main.Mode)
-            {
-                case Context.Type.Compile:
-                    _compile = new Compile();
-                    break;
-                case Context.Type.Help:
-                    _help = new Help();
-                    break;
-                case Context.Type.Install:
-                    _install = new Install();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
         }
 
         private void About(object sender, RoutedEventArgs e)

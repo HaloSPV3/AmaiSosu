@@ -89,11 +89,18 @@ namespace AmaiSosu.GUI
         /// </summary>
         public void Initialise()
         {
+            /// Most of the contextual setup is done by Main.Window,
+            /// so we're only 
             switch (Context.Infer())
             {
                 case Context.Type.Compile:
                     Compile.Visibility = Visibility.Visible;
                     break;
+                case Context.Type.Help:
+                    Help.Visibility = Visibility.Visible;
+                    // TODO: Create Help control
+                    // HelpMode.Visibility = Visibility.Visible;
+                    throw new NotImplementedException();
                 case Context.Type.Install:
                     Install.Visibility = Visibility.Visible;
                     try
@@ -110,15 +117,6 @@ namespace AmaiSosu.GUI
                         Install.InstallText = Messages.BrowseHce;
                     }
                     break;
-                case Context.Type.Help:
-                    Help.Visibility = Visibility.Visible;
-                    try
-                    {
-
-                    }
-                    // TODO: Create Help control
-                    // HelpMode.Visibility = Visibility.Visible;
-                    throw new NotImplementedException();
                 default:
                     throw new ArgumentOutOfRangeException();
             }
