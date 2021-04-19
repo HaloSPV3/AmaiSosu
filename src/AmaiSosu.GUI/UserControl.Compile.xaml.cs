@@ -14,7 +14,8 @@ namespace AmaiSosu.GUI
         /// <summary>
         /// An instance of the Main class pass to this class.
         /// </summary>
-        private Main _main = null;
+        private Main _main;
+        private Compile _compile;
 
         public UserControlCompile()
         {
@@ -30,7 +31,6 @@ namespace AmaiSosu.GUI
 
         public UserControlCompile(Main main = null)
         {
-            
             InitializeComponent();
             if (!_main.Equals(null))
                 _main = main;
@@ -39,14 +39,9 @@ namespace AmaiSosu.GUI
                 var msg = $"{Name} was started without an instanced DataContext of {_main.GetType().Name}.";
                 throw new NullReferenceException(msg);
             }
-        }
+            _compile = (Compile) DataContext;
+            _compile.Initialise();
 
-        public Main Main
-        {
-            set
-            {
-                _main = value;
-            }
         }
 
         private async void Compile(object sender, RoutedEventArgs e)

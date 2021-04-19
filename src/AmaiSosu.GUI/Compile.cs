@@ -38,6 +38,12 @@ namespace AmaiSosu.GUI
         private string _target;
         private Visibility _visibility = Visibility.Collapsed;
 
+        internal void Initialise()
+        {
+            throw new NotImplementedException();
+            /// Is this even necessary?
+        }
+
         public void Invoke()
         {
             Task.Run(() => {

@@ -27,12 +27,32 @@ namespace AmaiSosu.GUI
     public partial class MainWindow : MetroWindow
     {
         private Main _main;
+        private UserControlCompile _ucCompile;
+        private UserControlHelp _ucHelp;
+        private UserControlInstall _ucInstall;
 
         public MainWindow()
         {
             InitializeComponent();
             _main = (Main) DataContext;
             _main.Initialise();
+
+            switch (_main.Mode)
+            {
+                case Context.Type.Compile:
+                    _ucCompile = new UserControlCompile(_main);
+                    break;
+                case Context.Type.Help:
+                    _ucHelp = new UserControlHelp(_main);
+                    break;
+                case Context.Type.Install:
+                    _ucInstall = new UserControlInstall(_main);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            /// Great! We've 'attached' an instance of a UserControl!
+            /// Now what?
         }
 
         private void About(object sender, RoutedEventArgs e)

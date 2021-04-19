@@ -17,12 +17,10 @@ namespace AmaiSosu.GUI
             InitializeComponent();
         }
 
-        public Main Main
+        public UserControlHelp(Main main)
         {
-            set
-            {
-                _main = value;
-            }
+            _main = main;
+            InitializeComponent();
         }
     }
 }
