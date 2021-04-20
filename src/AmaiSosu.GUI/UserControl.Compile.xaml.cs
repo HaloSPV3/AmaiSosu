@@ -39,9 +39,9 @@ namespace AmaiSosu.GUI
                 var msg = $"{Name} was started without an instanced DataContext of {_main.GetType().Name}.";
                 throw new NullReferenceException(msg);
             }
+
             _compile = (Compile) DataContext;
             _compile.Initialise();
-
         }
 
         private async void Compile(object sender, RoutedEventArgs e)
@@ -57,7 +57,10 @@ namespace AmaiSosu.GUI
         {
             var openFileDialog = new OpenFileDialog
             {
-                Filter = "HCE Executable|haloce.exe"
+                Title = "Locate OpenSauce's freshly-built binaries",
+                
+                ReadOnlyChecked = true,
+                Filter = "OpenSauce DLL|*.dll"
             };
 
             if (openFileDialog.ShowDialog() == true)
