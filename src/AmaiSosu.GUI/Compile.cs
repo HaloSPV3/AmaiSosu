@@ -33,7 +33,6 @@ namespace AmaiSosu.GUI
     public class Compile : INotifyPropertyChanged
     {
         private string _path;
-        private string _source;
         private List<string> _files;
         private string _target;
         private Visibility _visibility = Visibility.Collapsed;
@@ -67,18 +66,7 @@ namespace AmaiSosu.GUI
             }
         }
 
-        public string Source
-        {
-            get => _source;
-            set
-            {
-                if (value == _source) return;
-                _source = value;
-                OnPropertyChanged();
-            }
-        }
-
-        // This is an okay start, but it needs to be moved to the AmaiSosu project.
+        // This is an okay start, but it needs to be moved to the AmaiSosu namespace.
         public List<string> Lib; //
         public List<string> Gui; // {}
         public List<string> Usr; // {-path}/OpenSauce/*
@@ -93,6 +81,9 @@ namespace AmaiSosu.GUI
             }
         }
 
+        /// <summary>
+        /// Directory where the completed SFX assembly is saved
+        /// </summary>
         public string Target
         {
             get => _target;
