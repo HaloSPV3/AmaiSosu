@@ -64,7 +64,7 @@ namespace AmaiSosu.GUI
             };
 
             if (openFileDialog.ShowDialog() == true)
-                _main.Path = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
+                _compile.Path = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
         }
     }
 }
