@@ -11,12 +11,12 @@ using static System.Environment;
 
 namespace AmaiSosu.Compilation
 {
-    public class Compiler : Module, IVerifiable
+    public class Compiler : Module
     {
         public const string LibPackage = "lib";
         public const string GuiPackage = "gui";
         private readonly string _binariesPath;
-        private readonly static string _progDataPath = System.IO.Path.Combine(GetFolderPath(SpecialFolder.CommonApplicationData), "Kornner Studios");
+        private readonly static string _progDataPath = Path.Combine(GetFolderPath(SpecialFolder.CommonApplicationData), "Kornner Studios");
         public List<Package> _packages;
 
         public Compiler(string binariesPath, List<Package> packages)
@@ -31,25 +31,14 @@ namespace AmaiSosu.Compilation
             _packages = packages;
         }
 
+        public static List<Package> Packages = new List<Package> { LibPak,  };
+
+        public static Package LibPak = new Package(archiveName: "lib", description: "", path: Path.GetDirectoryName(_progDataPath));
+        public static Package GuiPak = new Package("gui", "", "");
+
+        public static System.IO.Compression.ZipArchive LibZip;
+        public static System.IO.Compression.ZipArchive GuiZip;
+
         protected override string Identifier { get; } = "OpenSauce.Compile";
-
-        public Verification Verify()
-        {
-            if (!Directory.Exists(_binariesPath))
-                return new Verification(false, $"Could not find path: '{_progDataPath}'");
-
-            if (!System.IO.File.Exists(Path.Combine(_binariesPath, "haloce.exe")))
-                return new Verification(false, "");
-
-            foreach (var package in _packages)
-            {
-                var packageState = package.Verify();
-                if(packageState.IsValid)
-                    return new Verification(false, packageState.Reason);
-            }
-
-            return new Verification(true);
-        }
-
     }
 }

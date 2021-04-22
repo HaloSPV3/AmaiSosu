@@ -38,19 +38,30 @@ namespace AmaiSosu.Common
         /// </summary>
         public const string Extension = "pkg";
 
-        public Package(string archiveName, string description, string destination)
+        public Package(string archiveName, string description, string path)
         {
             ArchiveName = archiveName;
             Description = description;
-            Destination = destination;
+            Path = path;
         }
 
-        public Package(string archiveName, string description, string destination, Output output)
+        public Package(string archiveName, string description, string path, Output output)
             : base(output)
         {
             ArchiveName = archiveName;
             Description = description;
-            Destination = destination;
+            Path = path;
+        }
+
+        public Package Pack()
+        {
+            Package newPak = new Package();
+
+            /// ZipArchive, ZipArchiveMode, and similar things are referred to in
+            /// system classes, but they are not accessible as-is.
+            /// Where are they?
+
+            return newPak;
         }
 
         protected override string Identifier { get; } = "Atarashii.Package";
@@ -66,9 +77,9 @@ namespace AmaiSosu.Common
         public string Description { get; }
 
         /// <summary>
-        ///     Destination directory path for the installed contents.
+        ///     Source or destination directory path for the installed contents.
         /// </summary>
-        public string Destination { get; }
+        public string Path { get; }
 
         /// <inheritdoc />
         /// False if:
@@ -79,7 +90,7 @@ namespace AmaiSosu.Common
             if (!File.Exists(ArchiveName))
                 return new Verification(false, "Cannot install specified package. Package archive does not exist.");
 
-            if (!System.IO.Directory.Exists(Destination))
+            if (!System.IO.Directory.Exists(Path))
                 return new Verification(false, "Cannot install specified package. Destination does not exist.");
 
             return new Verification(true);
@@ -105,7 +116,7 @@ namespace AmaiSosu.Common
 
             try
             {
-                ZipFile.ExtractToDirectory(ArchiveName, Destination);
+                ZipFile.ExtractToDirectory(ArchiveName, Path);
             }
             catch (IOException)
             {
