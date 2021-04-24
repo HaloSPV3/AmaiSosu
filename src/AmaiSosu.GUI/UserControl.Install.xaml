@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid x:Name="Install"
+        <Grid x:Name="GridInstall"
               VerticalAlignment="Bottom"
               Margin="10,140">
             <Grid.ColumnDefinitions>
@@ -23,7 +23,7 @@
                         Content="Browse"
                         Margin="1,0,0,0"
                         Click="Browse" />
-                <TextBox Text="{Binding Path}"
+                <TextBox Text="{Binding Install.Path}"
                          HorizontalContentAlignment="Center"
                          BorderThickness="0"
                          VerticalContentAlignment="Center" />
@@ -33,8 +33,8 @@
                     Style="{DynamicResource SquareButtonStyle}"
                     BorderThickness="0"
                     Margin="5"
-                    Content="{Binding InstallText}"
-                    IsEnabled="{Binding CanInstall}"
+                    Content="{Binding Install.InstallText}"
+                    IsEnabled="{Binding Install.CanInstall}"
                     Click="Install"
                     Name="InstallButton" />
         </Grid>

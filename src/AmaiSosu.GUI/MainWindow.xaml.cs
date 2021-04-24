@@ -40,13 +40,22 @@ namespace AmaiSosu.GUI
             switch (_main.Mode)
             {
                 case Context.Type.Compile:
-                    _ucCompile = new UserControlCompile(_main);
+                    _ucCompile = new UserControlCompile
+                    {
+                        Visibility = Visibility.Visible
+                    };
                     break;
                 case Context.Type.Help:
-                    _ucHelp = new UserControlHelp(_main);
+                    _ucHelp = new UserControlHelp
+                    {
+                        Visibility = Visibility.Visible
+                    };
                     break;
                 case Context.Type.Install:
-                    _ucInstall = new UserControlInstall(_main);
+                    _ucInstall = new UserControlInstall
+                    {
+                        Visibility = Visibility.Visible
+                    };
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -54,9 +54,9 @@
 
 
     <!-- Body -->
-        <gui:UserControlCompile Visibility="{Binding _main.CompileMode.Visibility}"/>
-        <gui:UserControlHelp Visibility="{Binding _main.HelpMode.Visibility}"/>
-        <gui:UserControlInstall Visibility="{Binding _main.HelpMode.Visibility}"/>
+        <gui:UserControlCompile Visibility="{Binding Compile.Visibility}"/>
+        <gui:UserControlHelp Visibility="{Binding Help.Visibility}"/>
+        <gui:UserControlInstall Visibility="{Binding Install.Visibility}"/>
 
         <!-- Footer -->
         <StackPanel x:Name="Footer"

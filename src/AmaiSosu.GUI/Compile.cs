@@ -34,14 +34,8 @@ namespace AmaiSosu.GUI
     {
         private string _path;
         private List<string> _files;
-        private string _target;
+        private string _destination;
         private Visibility _visibility = Visibility.Collapsed;
-
-        internal void Initialise()
-        {
-            throw new NotImplementedException();
-            /// Is this even necessary?
-        }
 
         public void Invoke()
         {
@@ -66,10 +60,6 @@ namespace AmaiSosu.GUI
             }
         }
 
-        // This is an okay start, but it needs to be moved to the AmaiSosu namespace.
-        public List<string> Lib; //
-        public List<string> Gui; // {}
-        public List<string> Usr; // {-path}/OpenSauce/*
         public List<string> Files
         {
             get => _files;
@@ -82,21 +72,21 @@ namespace AmaiSosu.GUI
         }
 
         /// <summary>
-        /// Directory where the completed SFX assembly is saved
+        ///     Directory where the completed SFX assembly is saved
         /// </summary>
-        public string Target
+        public string Destination
         {
-            get => _target;
+            get => _destination;
             set
             {
-                if (value == _target) return;
-                _target = value;
+                if (value == _destination) return;
+                _destination = value;
                 OnPropertyChanged();
             }
         }
 
         /// <summary>
-        /// Visibility property of the Compile UserControl
+        ///     Visibility property of the Compile UserControl
         /// </summary>
         public Visibility Visibility
         {

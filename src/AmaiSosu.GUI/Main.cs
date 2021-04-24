@@ -89,20 +89,16 @@ namespace AmaiSosu.GUI
         /// </summary>
         public void Initialise()
         {
-            /// Most of the contextual setup is done by Main.Window,
-            /// so we're only 
-            switch (Context.Infer())
+            switch (Mode)
             {
                 case Context.Type.Compile:
-                    Compile.Visibility = Visibility.Visible;
+                    // Nothing to do here. See MainWindow.xaml.cs.
                     break;
                 case Context.Type.Help:
-                    Help.Visibility = Visibility.Visible;
+                    // Nothing to do here. See MainWindow.xaml.cs.
                     // TODO: Create Help control
-                    // HelpMode.Visibility = Visibility.Visible;
-                    throw new NotImplementedException();
+                    break;
                 case Context.Type.Install:
-                    Install.Visibility = Visibility.Visible;
                     try
                     {
                         Path = !string.IsNullOrWhiteSpace(Startup.Path) ?

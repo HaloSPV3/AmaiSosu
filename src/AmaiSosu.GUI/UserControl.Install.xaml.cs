@@ -8,41 +8,24 @@ using Microsoft.Win32;
 namespace AmaiSosu.GUI
 {
     /// <summary>
-    /// Interaction logic for InstallUserControl.xaml
+    ///     Interaction logic for InstallUserControl.xaml, <br/>
+    ///     a component of MainWindow.xaml
     /// </summary>
     public partial class UserControlInstall : UserControl
     {
-        /// <summary>
-        /// An instance of the Main class pass to this class.
-        /// </summary>
-        private Main _main = null;
+        private Install _install = new Install();
 
         public UserControlInstall()
         {
             InitializeComponent();
-        }
-
-        public UserControlInstall(Main main = null)
-        {
-            InitializeComponent();
-            if (_main.Equals(null))
-                throw new NullReferenceException("The 'Install' UserControl was started without an instance/DataContext of 'Main'.");
-            else _main = main;
-        }
-
-        public Main Main
-        {
-            set
-            {
-                _main = value;
-            }
+            _install = (Install) DataContext;
         }
 
         private async void Install(object sender, RoutedEventArgs e)
         {
             InstallButton.IsEnabled = false;
 
-            await Task.Run(() => _main.Install.Invoke());
+            await Task.Run(() => _install.Invoke());
 
             InstallButton.IsEnabled = true;
         }
@@ -55,7 +38,7 @@ namespace AmaiSosu.GUI
             };
 
             if (openFileDialog.ShowDialog() == true)
-                _main.Path = Path.GetDirectoryName(openFileDialog.FileName);
+                _install.Path = Path.GetDirectoryName(openFileDialog.FileName);
         }
     }
 }

@@ -22,7 +22,7 @@
                         Content="Browse"
                         Margin="1,0,0,0"
                         Click="Browse" />
-                <TextBox Text="{Binding Path}"
+                <TextBox Text="{Binding Compile.Destination}"
                          HorizontalContentAlignment="Center"
                          BorderThickness="0"
                          VerticalContentAlignment="Center" />
@@ -32,11 +32,10 @@
                     Style="{DynamicResource SquareButtonStyle}"
                     BorderThickness="0"
                     Margin="5"
-                    Content="{Binding CompileText}"
-                    IsEnabled="{Binding CanCompile}"
+                    Content="{Binding Compile.CompileText}"
+                    IsEnabled="{Binding Compile.CanCompile}"
                     Click="Compile"
                     Name="CompileButton" />
         </Grid>
-
     </Grid>
 </UserControl>
