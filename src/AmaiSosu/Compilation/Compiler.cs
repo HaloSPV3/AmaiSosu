@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using HXE;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AmaiSosu.Common;
-using static System.Reflection.Assembly;
 using static System.Environment;
 
 namespace AmaiSosu.Compilation
@@ -15,8 +10,8 @@ namespace AmaiSosu.Compilation
     {
         public const string LibPackage = "lib";
         public const string GuiPackage = "gui";
-        private readonly string _binariesPath;
-        private readonly static string _progDataPath = Path.Combine(GetFolderPath(SpecialFolder.CommonApplicationData), "Kornner Studios");
+        private static string _binariesPath = string.Empty;
+        private static readonly string _progDataPath = Path.Combine(GetFolderPath(SpecialFolder.CommonApplicationData), "Kornner Studios");
         public List<Package> _packages;
 
         public Compiler(string binariesPath, List<Package> packages)
@@ -31,13 +26,20 @@ namespace AmaiSosu.Compilation
             _packages = packages;
         }
 
-        public static List<Package> Packages = new List<Package> { LibPak,  };
+        public List<Package> Packages
+        {
+            get => _packages;
+            set
+            {
+                if (value.SequenceEqual(_packages)) return;
+                _packages = value;
+            }
+        }
 
-        public static Package LibPak = new Package(archiveName: "lib", description: "", path: Path.GetDirectoryName(_progDataPath));
-        public static Package GuiPak = new Package("gui", "", "");
+        // create the packages. Pass the paths. For ProgDatam, grab the folder name (in Package class).
+        public Package LibPak = new Package("lib", "", _progDataPath);
+        public Package GuiPak = new Package("gui", "", _binariesPath);
 
-        public static System.IO.Compression.ZipArchive LibZip;
-        public static System.IO.Compression.ZipArchive GuiZip;
 
         protected override string Identifier { get; } = "OpenSauce.Compile";
     }

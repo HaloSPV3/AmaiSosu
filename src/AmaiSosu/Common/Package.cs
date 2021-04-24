@@ -29,6 +29,12 @@ namespace AmaiSosu.Common
     public class Package : Module, IVerifiable
     {
         /// <summary>
+        ///     Whether or not the parent/root directory of a package is preserved. <br/>
+        ///     Useful for the 'Kornner Studios' directory.
+        /// </summary>
+        private bool _includeBaseDirectory;
+
+        /// <summary>
         ///     Directory containing the expected packages.
         /// </summary>
         public const string Directory = "Packages";
@@ -38,30 +44,36 @@ namespace AmaiSosu.Common
         /// </summary>
         public const string Extension = "pkg";
 
-        public Package(string archiveName, string description, string path)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Package"/> class.
+        /// </summary>
+        /// <param name="archiveName">Name of the archive.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="path">The source or destination path.</param>
+        /// <remarks>
+        ///     Remember to get the parent directory when needed.
+        /// </remarks>
+        public Package(string archiveName, string description, string path, bool includeBaseDirectory = false)
         {
             ArchiveName = archiveName;
             Description = description;
             Path = path;
+            _includeBaseDirectory = includeBaseDirectory;
         }
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Package"/> class.
+        /// </summary>
+        /// <param name="archiveName">Name of the archive.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="path">The source or destination path.</param>
+        /// <param name="output">The instance of Output for outputting inbound messages.</param>
         public Package(string archiveName, string description, string path, Output output)
             : base(output)
         {
             ArchiveName = archiveName;
             Description = description;
             Path = path;
-        }
-
-        public Package Pack()
-        {
-            Package newPak = new Package();
-
-            /// ZipArchive, ZipArchiveMode, and similar things are referred to in
-            /// system classes, but they are not accessible as-is.
-            /// Where are they?
-
-            return newPak;
         }
 
         protected override string Identifier { get; } = "Atarashii.Package";
@@ -97,6 +109,31 @@ namespace AmaiSosu.Common
         }
 
         /// <summary>
+        ///     Compiles a directory to a new Package instance.
+        /// </summary>
+        /// TODO Instead of multiple packages, compile to just one package with
+        /// contents' destinations determined at compile time.
+        public void Compile()
+        {
+            try
+            {
+                ZipFile.CreateFromDirectory(Path, ArchiveName, CompressionLevel.Optimal, _includeBaseDirectory);
+            }
+            catch(IOException)
+            {
+                WriteWarn($"{Description} failed to compress to an archive.");
+            }
+
+            WriteInfo($"Verifying {Description} package.");
+            var state = Verify();
+
+            if (!state.IsValid)
+                WriteAndThrow(new PackageException(state.Reason));
+
+            WriteSuccess($"Package {Description} has been successfully verified.");
+        }
+
+        /// <summary>
         ///     Applies the files in the package to the destination on the filesystem.
         /// </summary>
         /// <exception cref="PackageException">
@@ -104,6 +141,7 @@ namespace AmaiSosu.Common
         ///     - or -
         ///     Destination directory does not exist.
         /// </exception>
+        /// TODO Modify for HXE-SFX
         public void Install()
         {
             WriteInfo($"Verifying {Description} package.");
