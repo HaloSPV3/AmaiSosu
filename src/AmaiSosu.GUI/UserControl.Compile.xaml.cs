@@ -19,7 +19,7 @@ namespace AmaiSosu.GUI
             _compile = (Compile) DataContext;
         }
 
-        private async void Compile(object sender, RoutedEventArgs e)
+        private async void Commit(object sender, RoutedEventArgs e)
         {
             CompileButton.IsEnabled = false;
 

@@ -13,7 +13,7 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class UserControlInstall : UserControl
     {
-        private Install _install = new Install();
+        private Install _install;
 
         public UserControlInstall()
         {
@@ -21,7 +21,7 @@ namespace AmaiSosu.GUI
             _install = (Install) DataContext;
         }
 
-        private async void Install(object sender, RoutedEventArgs e)
+        private async void Commit(object sender, RoutedEventArgs e)
         {
             InstallButton.IsEnabled = false;
 

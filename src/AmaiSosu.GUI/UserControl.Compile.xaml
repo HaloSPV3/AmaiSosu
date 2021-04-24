@@ -34,7 +34,7 @@
                     Margin="5"
                     Content="{Binding Compile.CompileText}"
                     IsEnabled="{Binding Compile.CanCompile}"
-                    Click="Compile"
+                    Click="Commit"
                     Name="CompileButton" />
         </Grid>
     </Grid>

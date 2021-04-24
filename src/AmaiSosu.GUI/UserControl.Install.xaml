@@ -35,7 +35,7 @@
                     Margin="5"
                     Content="{Binding Install.InstallText}"
                     IsEnabled="{Binding Install.CanInstall}"
-                    Click="Install"
+                    Click="Commit"
                     Name="InstallButton" />
         </Grid>
 

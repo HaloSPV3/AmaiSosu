@@ -7,20 +7,12 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class UserControlHelp : UserControl
     {
-        /// <summary>
-        /// An instance of the Main class pass to this class.
-        /// </summary>
-        private Main _main = null;
+        private Help _help;
 
         public UserControlHelp()
         {
             InitializeComponent();
-        }
-
-        public UserControlHelp(Main main)
-        {
-            _main = main;
-            InitializeComponent();
+            _help = (Help) DataContext;
         }
     }
 }
