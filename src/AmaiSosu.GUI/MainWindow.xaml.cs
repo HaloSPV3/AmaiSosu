@@ -42,18 +42,21 @@ namespace AmaiSosu.GUI
                 case Context.Type.Compile:
                     _ucCompile = new UserControlCompile
                     {
+                        DataContext = _main.Compile,
                         Visibility = Visibility.Visible
                     };
                     break;
                 case Context.Type.Help:
                     _ucHelp = new UserControlHelp
                     {
+                        DataContext = _main.Help,
                         Visibility = Visibility.Visible
                     };
                     break;
                 case Context.Type.Install:
                     _ucInstall = new UserControlInstall
                     {
+                        DataContext = _main.Install,
                         Visibility = Visibility.Visible
                     };
                     break;

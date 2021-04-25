@@ -11,19 +11,19 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class UserControlCompile : UserControl
     {
-        private Compile _compile;
+        public Compile Compile;
 
         public UserControlCompile()
         {
             InitializeComponent();
-            _compile = (Compile) DataContext;
+            Compile = (Compile) DataContext;
         }
 
         private async void Commit(object sender, RoutedEventArgs e)
         {
             CompileButton.IsEnabled = false;
 
-            await Task.Run(() => _compile.Invoke());
+            await Task.Run(() => Compile.Invoke());
 
             CompileButton.IsEnabled = true;
         }
@@ -49,7 +49,7 @@ namespace AmaiSosu.GUI
             };
 
             if (openFileDialog.ShowDialog() == true)
-                _compile.Path = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
+                Compile.Path = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
         }
     }
 }

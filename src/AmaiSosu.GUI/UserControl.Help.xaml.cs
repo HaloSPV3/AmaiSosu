@@ -7,12 +7,12 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class UserControlHelp : UserControl
     {
-        private Help _help;
+        public Help Help;
 
         public UserControlHelp()
         {
             InitializeComponent();
-            _help = (Help) DataContext;
+            Help = (Help) DataContext;
         }
     }
 }

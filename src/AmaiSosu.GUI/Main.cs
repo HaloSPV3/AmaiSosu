@@ -26,7 +26,6 @@ using System.Runtime.CompilerServices;
 using AmaiSosu.Detection;
 using AmaiSosu.GUI.Properties;
 using AmaiSosu.GUI.Resources;
-using System.Windows;
 
 namespace AmaiSosu.GUI
 {
@@ -36,10 +35,11 @@ namespace AmaiSosu.GUI
     public sealed partial class Main : INotifyPropertyChanged
     {
         /// <summary>
-        ///     Installation path.
-        ///     Path is expected to contain the HCE executable.
+        ///     A multipurpose path variable.
         /// </summary>
-        private string _path = Startup.Path;
+        private string _path = string.IsNullOrWhiteSpace(Startup.Path) ?
+                                Environment.CurrentDirectory :
+                                Startup.Path;
 
         public Compile Compile { get; set; } = new Compile();
         public Install Install { get; set; } = new Install();
@@ -76,9 +76,9 @@ namespace AmaiSosu.GUI
             {
                 if (value == _path) return;
                 _path = value;
-                OnPropertyChanged();
                 Compile.Path = value;
                 Install.Path = value;
+                OnPropertyChanged();
             }
         }
 
@@ -89,22 +89,21 @@ namespace AmaiSosu.GUI
         /// </summary>
         public void Initialise()
         {
+            /** See MainWindow.xaml.cs */
             switch (Mode)
             {
                 case Context.Type.Compile:
-                    // Nothing to do here. See MainWindow.xaml.cs.
+                    Compile.Path = Path;
                     break;
                 case Context.Type.Help:
-                    // Nothing to do here. See MainWindow.xaml.cs.
                     // TODO: Create Help control
                     break;
                 case Context.Type.Install:
+                    Install.Path = string.IsNullOrWhiteSpace(Path) ?
+                            System.IO.Path.GetDirectoryName(Loader.Detect()) :
+                            _path;
                     try
                     {
-                        Path = !string.IsNullOrWhiteSpace(Startup.Path) ?
-                           Startup.Path :
-                           System.IO.Path.GetDirectoryName(Loader.Detect());
-
                         if (Startup.Auto)
                             Install.Invoke();
                     }
