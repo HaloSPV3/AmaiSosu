@@ -13,7 +13,7 @@ namespace AmaiSosu.GUI
         /// <summary>
         ///     Installation is possible given the current state.
         /// </summary>
-        private bool _canInstall;
+        private bool _canInstall = false;
 
         private string _path = Startup.Path;
 

@@ -33,34 +33,37 @@ namespace AmaiSosu.GUI
 {
     public class Compile : INotifyPropertyChanged
     {
-        private string _path;
+        private bool _canCompile;
         private List<string> _files;
-        private string _destination;
+        private string _compileText = "Locate the files to package.";
+        private string _source;
         private Visibility _visibility = Visibility.Collapsed;
 
-        public void Invoke()
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance can compile.
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if this instance can compile; otherwise, <c>false</c>.
+        /// </value>
+        /// TODO Edit XML Comment Template for CanCompile
+        public bool CanCompile
         {
-            Task.Run(() => {
-                HXE.SFX.Compile(new HXE.SFX.Configuration
-                {
-                    Source = new DirectoryInfo(Environment.CurrentDirectory),
-                    Target = new DirectoryInfo(Packages(Path)),
-                    Executable = new FileInfo(Assembly.GetExecutingAssembly().Location)
-                });
-            });
-        }
-
-        public string Path
-        {
-            get => _path;
+            get => _canCompile;
             set
             {
-                if (value == _path) return;
-                _path = value;
+                if (value == _canCompile) return;
+                _canCompile = value;
                 OnPropertyChanged();
             }
         }
 
+        /// <summary>
+        /// Gets or sets the files.
+        /// </summary>
+        /// <value>
+        /// The files.
+        /// </value>
+        /// TODO Edit XML Comment Template for Files
         public List<string> Files
         {
             get => _files;
@@ -73,17 +76,54 @@ namespace AmaiSosu.GUI
         }
 
         /// <summary>
-        ///     Directory where the completed SFX assembly is saved
+        /// Gets or sets the compile text.
         /// </summary>
-        public string Destination
+        /// <value>
+        /// The compile text.
+        /// </value>
+        /// TODO Edit XML Comment Template for CompileText
+        public string CompileText
         {
-            get => _destination;
+            get => _compileText;
             set
             {
-                if (value == _destination) return;
-                _destination = value;
+                if (value == _compileText) return;
+                _compileText = value;
                 OnPropertyChanged();
             }
+        }
+
+        /// <summary>
+        /// Gets or sets the path.
+        /// </summary>
+        /// <value>
+        /// The path.
+        /// </value>
+        /// TODO Edit XML Comment Template for Path
+        public string Source
+        {
+            get => _source;
+            set
+            {
+                if (value == _source) return;
+                _source = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        ///     Invokes HXE's SFX Compiler
+        /// </summary>
+        public void Invoke()
+        {
+            Task.Run(() => {
+                HXE.SFX.Compile(new HXE.SFX.Configuration
+                {
+                    Source = new DirectoryInfo(Source),
+                    Target = new DirectoryInfo(Environment.CurrentDirectory),
+                    Executable = new FileInfo(Assembly.GetExecutingAssembly().Location)
+                });
+            });
         }
 
         /// <summary>
@@ -98,11 +138,6 @@ namespace AmaiSosu.GUI
                 _visibility = value;
                 OnPropertyChanged();
             }
-        }
-
-        private static string Packages(string target)
-        {
-            return System.IO.Path.Combine(target, "data");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

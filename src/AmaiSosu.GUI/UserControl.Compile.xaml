@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:gui="clr-namespace:AmaiSosu.GUI"
-             mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=gui:Compile}"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid VerticalAlignment="Bottom"
@@ -22,8 +22,8 @@
                         BorderThickness="0"
                         Content="Browse"
                         Margin="1,0,0,0"
-                        Click="Browse" />
-                <TextBox Text="{Binding Compile.Destination}"
+                        Click="BrowseSource" />
+                <TextBox Text="{Binding Source}"
                          HorizontalContentAlignment="Center"
                          BorderThickness="0"
                          VerticalContentAlignment="Center" />
@@ -33,10 +33,11 @@
                     Style="{DynamicResource SquareButtonStyle}"
                     BorderThickness="0"
                     Margin="5"
-                    Content="{Binding Compile.CompileText}"
-                    IsEnabled="{Binding Compile.CanCompile}"
+                    Content="{Binding CompileText}"
+                    IsEnabled="{Binding CanCompile}"
                     Click="Commit"
                     Name="CompileButton" />
+            
         </Grid>
     </Grid>
 </UserControl>

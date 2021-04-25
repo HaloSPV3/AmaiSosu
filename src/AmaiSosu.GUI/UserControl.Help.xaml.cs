@@ -7,7 +7,7 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class UserControlHelp : UserControl
     {
-        public Help Help;
+        public Help Help { get; set; } = new Help();
 
         public UserControlHelp()
         {

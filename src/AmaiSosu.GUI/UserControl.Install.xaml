@@ -5,11 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:gui="clr-namespace:AmaiSosu.GUI"
              mc:Ignorable="d"
-             d:DataContext="{d:DesignInstance Type=gui:Install}"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid x:Name="GridInstall"
-              VerticalAlignment="Bottom"
+        <Grid VerticalAlignment="Bottom"
               Margin="10,140">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -24,7 +22,7 @@
                         Content="Browse"
                         Margin="1,0,0,0"
                         Click="Browse" />
-                <TextBox Text="{Binding Install.Path}"
+                <TextBox Text="{Binding Path}"
                          HorizontalContentAlignment="Center"
                          BorderThickness="0"
                          VerticalContentAlignment="Center" />
@@ -34,8 +32,8 @@
                     Style="{DynamicResource SquareButtonStyle}"
                     BorderThickness="0"
                     Margin="5"
-                    Content="{Binding Install.InstallText}"
-                    IsEnabled="{Binding Install.CanInstall}"
+                    Content="{Binding InstallText}"
+                    IsEnabled="{Binding CanInstall}"
                     Click="Commit"
                     Name="InstallButton" />
         </Grid>

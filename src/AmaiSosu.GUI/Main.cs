@@ -23,6 +23,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using AmaiSosu.Detection;
 using AmaiSosu.GUI.Properties;
 using AmaiSosu.GUI.Resources;
@@ -41,9 +42,9 @@ namespace AmaiSosu.GUI
                                 Environment.CurrentDirectory :
                                 Startup.Path;
 
-        public Compile Compile { get; set; } = new Compile();
-        public Install Install { get; set; } = new Install();
-        public Help    Help    { get; set; } = new Help();
+        public UserControlCompile UCCompile { get; set; } = new UserControlCompile();
+        public UserControlHelp    UCHelp    { get; set; } = new UserControlHelp();
+        public UserControlInstall UCInstall { get; set; } = new UserControlInstall();
 
         /// <summary>
         ///     Git version.
@@ -69,6 +70,11 @@ namespace AmaiSosu.GUI
             }
         }
 
+        /// <summary>
+        /// Gets or sets <see cref="_path"/> and sets
+        /// <see cref="Compile.Source"/> and
+        /// <see cref="Install.Path"/>.
+        /// </summary>
         public string Path
         {
             get => _path;
@@ -76,8 +82,8 @@ namespace AmaiSosu.GUI
             {
                 if (value == _path) return;
                 _path = value;
-                Compile.Path = value;
-                Install.Path = value;
+                UCCompile.Compile.Source = value;
+                UCInstall.Install.Path = value;
                 OnPropertyChanged();
             }
         }
@@ -89,28 +95,33 @@ namespace AmaiSosu.GUI
         /// </summary>
         public void Initialise()
         {
-            /** See MainWindow.xaml.cs */
             switch (Mode)
             {
                 case Context.Type.Compile:
-                    Compile.Path = Path;
+                    UCCompile.Compile.Source = Path;
+                    UCCompile.Compile.Visibility = Visibility.Visible;
                     break;
                 case Context.Type.Help:
-                    // TODO: Create Help control
+                    UCHelp.Help.Visibility = Visibility.Visible;
                     break;
                 case Context.Type.Install:
-                    Install.Path = string.IsNullOrWhiteSpace(Path) ?
+                    UCInstall.Install.Path = string.IsNullOrWhiteSpace(Path) ?
                             System.IO.Path.GetDirectoryName(Loader.Detect()) :
                             _path;
-                    try
+                    if (Startup.Auto)
                     {
-                        if (Startup.Auto)
-                            Install.Invoke();
+                        UCInstall.Install.Visibility = Visibility.Collapsed;
+                        try
+                        {
+                            UCInstall.Install.Invoke();
+                        }
+                        catch (Exception)
+                        {
+                            UCInstall.Install.InstallText = Messages.BrowseHce;
+                        }
                     }
-                    catch (Exception)
-                    {
-                        Install.InstallText = Messages.BrowseHce;
-                    }
+                    else
+                        UCInstall.Install.Visibility = Visibility.Visible;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -11,12 +10,14 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class UserControlCompile : UserControl
     {
-        public Compile Compile;
-
+        public Compile Compile { get; set; }
         public UserControlCompile()
         {
             InitializeComponent();
             Compile = (Compile) DataContext;
+
+            if (DataContext == null)
+                Compile = new Compile();
         }
 
         private async void Commit(object sender, RoutedEventArgs e)
@@ -38,7 +39,7 @@ namespace AmaiSosu.GUI
         ///     runtime and the "%ProgramData%\\Kornner Studios" is constant,
         ///     only the location of the binaries/libraries is needed.
         /// </remarks>
-        private void Browse(object sender, RoutedEventArgs e)
+        private void BrowseSource(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog
             {
@@ -49,7 +50,7 @@ namespace AmaiSosu.GUI
             };
 
             if (openFileDialog.ShowDialog() == true)
-                Compile.Path = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
+                Compile.Source = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
         }
     }
 }

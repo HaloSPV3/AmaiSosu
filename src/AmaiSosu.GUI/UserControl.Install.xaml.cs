@@ -1,9 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
 
 namespace AmaiSosu.GUI
 {
@@ -13,19 +12,22 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class UserControlInstall : UserControl
     {
-        private Install _install;
+        public Install Install { get; set; } = new Install();
 
         public UserControlInstall()
         {
             InitializeComponent();
-            _install = (Install) DataContext;
+            Install = (Install) DataContext;
+
+            if (DataContext == null)
+                Install = new Install();
         }
 
         private async void Commit(object sender, RoutedEventArgs e)
         {
             InstallButton.IsEnabled = false;
 
-            await Task.Run(() => _install.Invoke());
+            await Task.Run(() => Install.Invoke());
 
             InstallButton.IsEnabled = true;
         }
@@ -38,7 +40,7 @@ namespace AmaiSosu.GUI
             };
 
             if (openFileDialog.ShowDialog() == true)
-                _install.Path = Path.GetDirectoryName(openFileDialog.FileName);
+                Install.Path = Path.GetDirectoryName(openFileDialog.FileName);
         }
     }
 }
