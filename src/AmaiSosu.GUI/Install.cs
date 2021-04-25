@@ -63,6 +63,7 @@ namespace AmaiSosu.GUI
                 if (value == _path) return;
                 _path = value;
                 OnPathChanged();
+                OnPropertyChanged();
             }
         }
 

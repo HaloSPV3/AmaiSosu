@@ -22,6 +22,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -65,9 +66,9 @@ namespace AmaiSosu.GUI
             get => _files;
             set
             {
-                if (value == _files) return;
+                if (value.SequenceEqual(_files)) return;
                 _files = value;
-
+                OnPropertyChanged();
             }
         }
 
@@ -99,7 +100,7 @@ namespace AmaiSosu.GUI
             }
         }
 
-        public static string Packages(string target)
+        private static string Packages(string target)
         {
             return System.IO.Path.Combine(target, "data");
         }
