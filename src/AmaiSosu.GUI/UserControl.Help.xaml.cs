@@ -7,12 +7,11 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class UserControlHelp : UserControl
     {
-        public Help Help { get; set; } = new Help();
+        public Help Help { get; set; }
 
         public UserControlHelp()
         {
             InitializeComponent();
-            Help = (Help) DataContext;
+            // DataContext "Help" is assigned in MainWindow and defined 
         }
     }
-}

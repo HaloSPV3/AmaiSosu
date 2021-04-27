@@ -36,7 +36,9 @@ namespace AmaiSosu.GUI
         private bool _canCompile;
         private List<string> _files;
         private string _compileText = "Locate the files to package.";
-        private string _source;
+        private string _source = string.IsNullOrWhiteSpace(Startup.Path) ?
+            Environment.CurrentDirectory :
+            Startup.Path;
         private Visibility _visibility = Visibility.Collapsed;
 
         /// <summary>

@@ -6,7 +6,8 @@ using System.Windows.Controls;
 namespace AmaiSosu.GUI
 {
     /// <summary>
-    /// Interaction logic for CompileUserControl.xaml
+    ///     Interaction logic for CompileUserControl.xaml
+    ///     a component of MainWindow.xaml
     /// </summary>
     public partial class UserControlCompile : UserControl
     {
@@ -14,10 +15,7 @@ namespace AmaiSosu.GUI
         public UserControlCompile()
         {
             InitializeComponent();
-            Compile = (Compile) DataContext;
-
-            if (DataContext == null)
-                Compile = new Compile();
+            // DataContext is assigned in MainWindow
         }
 
         private async void Commit(object sender, RoutedEventArgs e)

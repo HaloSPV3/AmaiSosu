@@ -15,7 +15,9 @@ namespace AmaiSosu.GUI
         /// </summary>
         private bool _canInstall = false;
 
-        private string _path = Startup.Path;
+        private string _path = string.IsNullOrWhiteSpace(Startup.Path) ?
+            Environment.CurrentDirectory :
+            Startup.Path;
 
         /// <summary>
         ///     Current state of the OpenSauce installation.

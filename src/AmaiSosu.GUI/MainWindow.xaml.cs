@@ -17,7 +17,6 @@
  * along with AmaiSosu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using System;
 using System.Diagnostics;
 using System.Windows;
 using MahApps.Metro.Controls;
@@ -33,6 +32,13 @@ namespace AmaiSosu.GUI
             InitializeComponent();
             _main = (Main) DataContext;
             _main.Initialise();
+
+            /// Main.Compile -> MainWindow.UCCompile.DataContext (in xaml) -> UCCompile.Compile
+            /// Main.Help    -> MainWindow.UCHelp.DataContext (in xaml)    -> UCHelp.Help
+            /// Main.Install -> MainWindow.UCInstall.DataContext (in xaml) -> UCInstall.Install
+            UCCompile.Compile = (Compile) UCCompile.DataContext;
+            UCHelp.Help       = (Help)    UCHelp.DataContext;
+            UCInstall.Install = (Install) UCInstall.DataContext;
         }
 
         private void About(object sender, RoutedEventArgs e)

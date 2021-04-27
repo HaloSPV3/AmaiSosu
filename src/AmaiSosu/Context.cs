@@ -25,7 +25,7 @@ namespace AmaiSosu
     public static class Context
     {
         /// <summary>
-        ///   Possible environment states.
+        ///   Possible environment operation modes.
         /// </summary>
         public enum Type
         {

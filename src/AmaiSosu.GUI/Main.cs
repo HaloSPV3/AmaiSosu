@@ -36,15 +36,17 @@ namespace AmaiSosu.GUI
     public sealed partial class Main : INotifyPropertyChanged
     {
         /// <summary>
-        ///     A multipurpose path variable.
+        ///     Main.Compile -> MainWindow.UCCompile.DataContext (in xaml) -> UCCompile.Compile
         /// </summary>
-        private string _path = string.IsNullOrWhiteSpace(Startup.Path) ?
-                                Environment.CurrentDirectory :
-                                Startup.Path;
-
-        public UserControlCompile UCCompile { get; set; } = new UserControlCompile();
-        public UserControlHelp    UCHelp    { get; set; } = new UserControlHelp();
-        public UserControlInstall UCInstall { get; set; } = new UserControlInstall();
+        public Compile Compile { get; set; } = new Compile();
+        /// <summary>
+        ///     Main.Help -> MainWindow.UCHelp.DataContext (in xaml) -> UCHelp.Help
+        /// </summary>
+        public Help    Help    { get; set; } = new Help();
+        /// <summary>
+        ///     Main.Install -> MainWindow.UCInstall.DataContext (in xaml) -> UCInstall.Install
+        /// </summary>
+        public Install Install { get; set; } = new Install();
 
         /// <summary>
         ///     Git version.
@@ -62,29 +64,17 @@ namespace AmaiSosu.GUI
             }
         }
 
+        /// <summary>
+        ///     Gets operation mode inferred at startup.
+        /// </summary>
+        /// <value>
+        ///     <see cref="Context.Type"/>
+        /// </value>
         public Context.Type Mode
         {
             get
             {
                 return Context.Infer();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets <see cref="_path"/> and sets
-        /// <see cref="Compile.Source"/> and
-        /// <see cref="Install.Path"/>.
-        /// </summary>
-        public string Path
-        {
-            get => _path;
-            set
-            {
-                if (value == _path) return;
-                _path = value;
-                UCCompile.Compile.Source = value;
-                UCInstall.Install.Path = value;
-                OnPropertyChanged();
             }
         }
 
@@ -98,30 +88,25 @@ namespace AmaiSosu.GUI
             switch (Mode)
             {
                 case Context.Type.Compile:
-                    UCCompile.Compile.Source = Path;
-                    UCCompile.Compile.Visibility = Visibility.Visible;
+                    Compile.Visibility = Visibility.Visible;
                     break;
                 case Context.Type.Help:
-                    UCHelp.Help.Visibility = Visibility.Visible;
+                    Help.Visibility = Visibility.Visible;
                     break;
                 case Context.Type.Install:
-                    UCInstall.Install.Path = string.IsNullOrWhiteSpace(Path) ?
-                            System.IO.Path.GetDirectoryName(Loader.Detect()) :
-                            _path;
                     if (Startup.Auto)
                     {
-                        UCInstall.Install.Visibility = Visibility.Collapsed;
+                        Install.Visibility = Visibility.Collapsed;
                         try
                         {
-                            UCInstall.Install.Invoke();
+                            Install.Invoke();
                         }
                         catch (Exception)
                         {
-                            UCInstall.Install.InstallText = Messages.BrowseHce;
+                            Install.InstallText = Messages.BrowseHce;
                         }
                     }
-                    else
-                        UCInstall.Install.Visibility = Visibility.Visible;
+                    Install.Visibility = Visibility.Visible;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -12,15 +12,12 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class UserControlInstall : UserControl
     {
-        public Install Install { get; set; } = new Install();
+        public Install Install { get; set; }
 
         public UserControlInstall()
         {
             InitializeComponent();
-            Install = (Install) DataContext;
-
-            if (DataContext == null)
-                Install = new Install();
+            // DataContext is assigned in MainWindow
         }
 
         private async void Commit(object sender, RoutedEventArgs e)

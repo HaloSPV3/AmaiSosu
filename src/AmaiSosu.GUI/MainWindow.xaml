@@ -54,11 +54,14 @@
 
 
     <!-- Body -->
-        <gui:UserControlCompile DataContext="{Binding UCCompile.Compile}"
+        <gui:UserControlCompile x:Name="UCCompile"
+                                DataContext="{Binding Compile}"
                                 Visibility="{Binding Visibility}"/>
-        <gui:UserControlHelp    DataContext="{Binding UCHelp.Help}"
+        <gui:UserControlHelp    x:Name="UCHelp"
+                                DataContext="{Binding Help}"
                                 Visibility="{Binding Visibility}"/>
-        <gui:UserControlInstall DataContext="{Binding UCInstall.Install}"
+        <gui:UserControlInstall x:Name="UCInstall"
+                                DataContext="{Binding Install}"
                                 Visibility="{Binding Visibility}"/>
 
         <!-- Footer -->
