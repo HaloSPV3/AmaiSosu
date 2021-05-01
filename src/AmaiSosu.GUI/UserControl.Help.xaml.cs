@@ -15,3 +15,4 @@ namespace AmaiSosu.GUI
             // DataContext "Help" is assigned in MainWindow and defined 
         }
     }
+}
