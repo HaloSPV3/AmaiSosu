@@ -28,6 +28,8 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using AmaiSosu.GUI.Properties;
+using System.Diagnostics;
+using static System.Environment;
 
 namespace AmaiSosu.GUI
 {
@@ -37,7 +39,7 @@ namespace AmaiSosu.GUI
         private List<string> _files;
         private string _compileText = "Locate the files to package.";
         private string _source = string.IsNullOrWhiteSpace(Startup.Path) ?
-            Environment.CurrentDirectory :
+            CurrentDirectory :
             Startup.Path;
         private Visibility _visibility = Visibility.Collapsed;
 
@@ -118,14 +120,56 @@ namespace AmaiSosu.GUI
         /// </summary>
         public void Invoke()
         {
+            /// We need items from two paths:
+            /// "%ProgramData%\\Kornner Studios"
+            /// and a directory containing OpenSauce's compiled executable/library assemblies (.exe, .dll).
+            FileInfo exeFileInfo = new FileInfo(Assembly.GetEntryAssembly()?.Location
+                                   ?? throw new InvalidOperationException());
+            DirectoryInfo sPath = new DirectoryInfo(Source);
+            DirectoryInfo tPath = new DirectoryInfo(Path.GetTempPath()).CreateSubdirectory("AmaiSosu.tmp");
+            DirectoryInfo Gui = tPath.CreateSubdirectory(Installation.Installer.GuiPackage);
+            DirectoryInfo Lib = tPath.CreateSubdirectory(Installation.Installer.LibPackage);
+            string KStudios = "Kornner Studios";
+
+            /** Copy libraries to temporary directory */
+            CopyFilesRecursively(Source, Lib.FullName);
+            /** Copy Kornner Studios to temp directory */
+            CopyFilesRecursively(
+                Path.Combine(GetFolderPath(SpecialFolder.CommonApplicationData), KStudios),
+                Path.Combine(Gui.FullName, KStudios));
+
             Task.Run(() => {
                 HXE.SFX.Compile(new HXE.SFX.Configuration
                 {
-                    Source = new DirectoryInfo(Source),
-                    Target = new DirectoryInfo(Environment.CurrentDirectory),
-                    Executable = new FileInfo(Assembly.GetExecutingAssembly().Location)
+                    Source = tPath,
+                    Target = new DirectoryInfo(CurrentDirectory),
+                    Executable = exeFileInfo
                 });
+                RenameTarget();
+                Directory.Delete(tPath.FullName, true); // cleanup
             });
+
+            /// <see cref="https://stackoverflow.com/a/3822913/14894786"/>
+            void CopyFilesRecursively(string sourcePath, string targetPath)
+            {
+                foreach (string dirPath in Directory.GetDirectories(sourcePath))
+                {
+                    Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+                }
+                foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                {
+                    File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+                }
+            }
+
+            void RenameTarget()
+            {
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(exeFileInfo.FullName);
+                FileInfo sfxOut = new FileInfo(Path.Combine(CurrentDirectory, exeFileInfo.Name));
+                string exeName = exeFileInfo.Name;
+
+                exeName = exeName.Replace(".GUI.exe", $"-{fvi.ProductVersion}.exe");
+                sfxOut.MoveTo(Path.Combine(CurrentDirectory, exeName));            }
         }
 
         /// <summary>
