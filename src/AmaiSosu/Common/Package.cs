@@ -99,8 +99,8 @@ namespace AmaiSosu.Common
         /// - Install destination does not exist.
         public Verification Verify()
         {
-            if (!File.Exists(ArchiveName))
-                return new Verification(false, "Cannot install specified package. Package archive does not exist.");
+            if (!System.IO.Directory.Exists(ArchiveName))
+                return new Verification(false, "Cannot install specified package. Package's directory does not exist.");
 
             if (!System.IO.Directory.Exists(Path))
                 return new Verification(false, "Cannot install specified package. Destination does not exist.");
