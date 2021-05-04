@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -48,7 +49,14 @@ namespace AmaiSosu.GUI
             };
 
             if (openFileDialog.ShowDialog() == true)
-                Compile.Source = System.IO.Path.GetDirectoryName(openFileDialog.FileName);
+            {
+                Compile.Source = Path.GetDirectoryName(openFileDialog.FileName);
+                if (File.Exists(Path.Combine(Compile.Source, "OpenSauceDedi.dll")))
+                {
+                    Compile.CanCompile = true;
+                    Compile.CompileText = "Ready to compile.";
+                }
+            }
         }
     }
 }
