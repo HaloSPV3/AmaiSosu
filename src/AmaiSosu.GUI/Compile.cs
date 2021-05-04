@@ -139,20 +139,22 @@ namespace AmaiSosu.GUI
                 Path.Combine(Gui.FullName, KStudios));
 
             Task.Run(() => {
+                CompileText = "Compiling...";
                 HXE.SFX.Compile(new HXE.SFX.Configuration
                 {
                     Source = tPath,
                     Target = new DirectoryInfo(CurrentDirectory),
                     Executable = exeFileInfo
                 });
-                RenameTarget();
+                var result = RenameTarget();
                 Directory.Delete(tPath.FullName, true); // cleanup
+                CompileText = $"Done. File is at \"{Path.GetFullPath(result)}\"";
             });
 
             /// <see cref="https://stackoverflow.com/a/3822913/14894786"/>
             void CopyFilesRecursively(string sourcePath, string targetPath)
             {
-                foreach (string dirPath in Directory.GetDirectories(sourcePath))
+                foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
                 {
                     Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
                 }
@@ -162,14 +164,25 @@ namespace AmaiSosu.GUI
                 }
             }
 
-            void RenameTarget()
+            string RenameTarget()
             {
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(exeFileInfo.FullName);
                 FileInfo sfxOut = new FileInfo(Path.Combine(CurrentDirectory, exeFileInfo.Name));
                 string exeName = exeFileInfo.Name;
 
                 exeName = exeName.Replace(".GUI.exe", $"-{fvi.ProductVersion}.exe");
-                sfxOut.MoveTo(Path.Combine(CurrentDirectory, exeName));            }
+
+                var renamedTarget = Path.Combine(CurrentDirectory, exeName);
+
+                foreach (var process in Process.GetProcessesByName(exeName))
+                {
+                    process.Kill();
+                }
+;
+                File.Delete(renamedTarget); // delete existing file
+                sfxOut.MoveTo(renamedTarget);
+                return renamedTarget;
+            }
         }
 
         /// <summary>
