@@ -94,8 +94,8 @@ namespace AmaiSosu.Installation
         {
             var guiDirPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
 
-            var libPackage = Path.Combine(Package.Directory, $"{Installer.LibPackage}.{Package.Extension}");
-            var guiPackage = Path.Combine(Package.Directory, $"{Installer.GuiPackage}.{Package.Extension}");
+            var libPackage = Path.Combine(Package.Directory, Installer.LibPackage);
+            var guiPackage = Path.Combine(Package.Directory, Installer.GuiPackage);
 
             return new List<Package>
             {

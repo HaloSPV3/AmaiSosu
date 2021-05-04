@@ -106,16 +106,20 @@ namespace AmaiSosu.Installation
         /// </exception>
         public void Install()
         {
-            // TODO
-            // Where should this go?
-            Task.Run(() => {
-                SFX.Extract(new SFX.Configuration
-                {
-                    Target = new DirectoryInfo(Package.Directory),
-                    Executable = new FileInfo(GetExecutingAssembly().Location)
-                });
-            });
+            /// TODO
+            /// Display HXE's console output in AmaiSosu.GUI.
+            /// It needs to be copied to AmaiSosu.GUI AND a standard console
+            ///  output so the output can still be displayed or caught if the
+            ///  GUI is skipped.
 
+            WriteInfo("Extracting packages...");
+            
+            SFX.Extract(new SFX.Configuration
+            {
+                Target = new DirectoryInfo(
+                    Combine(CurrentDirectory, Package.Directory))
+            });
+            
             WriteInfo("Verifying the OpenSauce installer.");
             var state = Verify();
 
