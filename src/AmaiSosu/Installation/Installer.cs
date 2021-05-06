@@ -111,6 +111,7 @@ namespace AmaiSosu.Installation
             /// It needs to be copied to AmaiSosu.GUI AND a standard console
             ///  output so the output can still be displayed or caught if the
             ///  GUI is skipped.
+            /// Add checkbox (default: checked) to delete extracted files afterward.
 
             WriteInfo("Extracting packages...");
             
@@ -129,7 +130,26 @@ namespace AmaiSosu.Installation
             var data = Combine(GetFolderPath(CommonApplicationData), "Kornner Studios");
 
             if (Directory.Exists(data))
-                Directory.Delete(data, true);
+            {
+                try
+                {
+                    Directory.Delete(data, true);
+                }
+                catch (System.UnauthorizedAccessException)
+                {
+                    /// <see cref="https://stackoverflow.com/a/31363010/14894786"/>
+                    /// <seealso cref="https://stackoverflow.com/a/8055390/14894786"/>
+                    var batPath = Combine(CurrentDirectory, Package.Directory, "AdminDelKorn.bat");
+                    var batText = "del /s /q \"Kornner Studios\" && rmdir /s /q \"Kornner Studios\"";
+                    System.IO.File.WriteAllText(batPath, batText);
+                    new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = batPath,
+                        Verb = "RunAs",
+                        WorkingDirectory = GetFolderPath(CommonApplicationData)
+                    };
+                }
+            }
 
             WriteSuccess("OpenSauce installer has been successfully verified.");
             WriteInfo("Attempting to install OpenSauce to the filesystem.");
