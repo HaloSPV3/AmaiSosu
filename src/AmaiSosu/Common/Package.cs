@@ -154,7 +154,9 @@ namespace AmaiSosu.Common
 
             try
             {
-                ZipFile.ExtractToDirectory(ArchiveName, Path);
+                if (!System.IO.Directory.Exists(Path))
+                    System.IO.Directory.CreateDirectory(Path);
+                CopyFilesRecursively(ArchiveName, new DirectoryInfo(Path).Parent.FullName);
             }
             catch (IOException)
             {
@@ -162,6 +164,19 @@ namespace AmaiSosu.Common
             }
 
             WriteSuccess($"{Description} data has been installed successfully to the filesystem.");
+
+            /// <see cref="https://stackoverflow.com/a/3822913/14894786"/>
+            void CopyFilesRecursively(string sourcePath, string targetPath)
+            {
+                foreach (string dirPath in System.IO.Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+                {
+                    System.IO.Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+                }
+                foreach (string newPath in System.IO.Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+                {
+                    File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+                }
+            }
         }
     }
 }
