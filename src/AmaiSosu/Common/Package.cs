@@ -156,7 +156,7 @@ namespace AmaiSosu.Common
             {
                 if (!System.IO.Directory.Exists(Path))
                     System.IO.Directory.CreateDirectory(Path);
-                CopyFilesRecursively(ArchiveName, new DirectoryInfo(Path).Parent.FullName);
+                CopyFilesRecursively(ArchiveName, new DirectoryInfo(Path).FullName);
             }
             catch (IOException)
             {
