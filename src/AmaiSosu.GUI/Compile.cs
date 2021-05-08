@@ -134,11 +134,12 @@ namespace AmaiSosu.GUI
             try
             {
                 /** Copy libraries to temporary directory */
-                CopyFilesRecursively(Source, Lib.FullName);
+                Installation.IO.Copy.All(sPath, Lib);
                 /** Copy Kornner Studios to temp directory */
-                CopyFilesRecursively(
-                    Path.Combine(GetFolderPath(SpecialFolder.CommonApplicationData), KStudios),
-                    Path.Combine(Gui.FullName, KStudios));
+                var ProgData = GetFolderPath(SpecialFolder.CommonApplicationData);
+                var ProgDataKStudios = new DirectoryInfo(Path.Combine(ProgData, KStudios));
+                var GuiKStudios = new DirectoryInfo(Path.Combine(Gui.FullName, KStudios));
+                Installation.IO.Copy.All(ProgDataKStudios, GuiKStudios);
             }
             catch(Exception e)
             {
@@ -160,26 +161,13 @@ namespace AmaiSosu.GUI
                 CompileText = $"Done. File is at \"{Path.GetFullPath(result)}\"";
             });
 
-            /// <see cref="https://stackoverflow.com/a/3822913/14894786"/>
-            void CopyFilesRecursively(string sourcePath, string targetPath)
-            {
-                foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
-                {
-                    Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
-                }
-                foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-                {
-                    File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
-                }
-            }
-
             string RenameTarget()
             {
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(exeFileInfo.FullName);
                 FileInfo sfxOut = new FileInfo(Path.Combine(CurrentDirectory, exeFileInfo.Name));
                 string exeName = exeFileInfo.Name;
 
-                exeName = exeName.Replace(".GUI.exe", $"-{fvi.ProductVersion}.exe");
+                exeName = exeName.Replace(".GUI.exe", $"-v{fvi.ProductVersion}.exe");
 
                 var renamedTarget = Path.Combine(CurrentDirectory, exeName);
 
