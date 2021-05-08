@@ -173,9 +173,8 @@ namespace AmaiSosu.Installation
                 }
             };
 
-            if (process.Start())
-                WriteAndThrow(new System.Exception("Failed to start DirectX Setup."));
 
+            process.Start();
             process.WaitForExit();
             if (process.ExitCode != 0)
                 WriteAndThrow(new System.Exception($"DirectX Setup exitted with code {process.ExitCode}."));
