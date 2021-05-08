@@ -131,12 +131,21 @@ namespace AmaiSosu.GUI
             DirectoryInfo Lib = tPath.CreateSubdirectory(Installation.Installer.LibPackage);
             string KStudios = "Kornner Studios";
 
-            /** Copy libraries to temporary directory */
-            CopyFilesRecursively(Source, Lib.FullName);
-            /** Copy Kornner Studios to temp directory */
-            CopyFilesRecursively(
-                Path.Combine(GetFolderPath(SpecialFolder.CommonApplicationData), KStudios),
-                Path.Combine(Gui.FullName, KStudios));
+            try
+            {
+                /** Copy libraries to temporary directory */
+                CopyFilesRecursively(Source, Lib.FullName);
+                /** Copy Kornner Studios to temp directory */
+                CopyFilesRecursively(
+                    Path.Combine(GetFolderPath(SpecialFolder.CommonApplicationData), KStudios),
+                    Path.Combine(Gui.FullName, KStudios));
+            }
+            catch(Exception e)
+            {
+                CanCompile = false;
+                CompileText = e.Message;
+                return;
+            }
 
             Task.Run(() => {
                 CompileText = "Compiling...";
