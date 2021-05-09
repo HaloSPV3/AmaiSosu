@@ -18,8 +18,8 @@
  */
 
 using System.IO;
-using System.IO.Compression;
 using AmaiSosu.Common.Exceptions;
+using AmaiSosu.Installation.IO;
 
 namespace AmaiSosu.Common
 {
@@ -28,12 +28,6 @@ namespace AmaiSosu.Common
     /// </summary>
     public class Package : Module, IVerifiable
     {
-        /// <summary>
-        ///     Whether or not the parent/root directory of a package is preserved. <br/>
-        ///     Useful for the 'Kornner Studios' directory.
-        /// </summary>
-        private bool _includeBaseDirectory;
-
         /// <summary>
         ///     Directory containing the expected packages.
         /// </summary>
@@ -49,24 +43,7 @@ namespace AmaiSosu.Common
         /// </summary>
         /// <param name="archiveName">Name of the archive.</param>
         /// <param name="description">The description.</param>
-        /// <param name="path">The source or destination path.</param>
-        /// <remarks>
-        ///     Remember to get the parent directory when needed.
-        /// </remarks>
-        public Package(string archiveName, string description, string path, bool includeBaseDirectory = false)
-        {
-            ArchiveName = archiveName;
-            Description = description;
-            Path = path;
-            _includeBaseDirectory = includeBaseDirectory;
-        }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="Package"/> class.
-        /// </summary>
-        /// <param name="archiveName">Name of the archive.</param>
-        /// <param name="description">The description.</param>
-        /// <param name="path">The source or destination path.</param>
+        /// <param name="path">The Compile source or Install destination path.</param>
         /// <param name="output">The instance of Output for outputting inbound messages.</param>
         public Package(string archiveName, string description, string path, Output output)
             : base(output)
@@ -103,7 +80,7 @@ namespace AmaiSosu.Common
                 return new Verification(false, "Cannot install specified package. Package's directory does not exist.");
 
             if (!System.IO.Directory.Exists(Path))
-                return new Verification(false, "Cannot install specified package. Destination does not exist.");
+                return new Verification(false, "Cannot install specified package. Source/Destination does not exist.");
 
             return new Verification(true);
         }
@@ -111,17 +88,16 @@ namespace AmaiSosu.Common
         /// <summary>
         ///     Compiles a directory to a new Package instance.
         /// </summary>
-        /// TODO Instead of multiple packages, compile to just one package with
-        /// contents' destinations determined at compile time.
+        /// TODO Use this instead of what's being used right now.
         public void Compile()
         {
             try
             {
-                ZipFile.CreateFromDirectory(Path, ArchiveName, CompressionLevel.Optimal, _includeBaseDirectory);
+                Copy.All(Path, ArchiveName);
             }
-            catch(IOException)
+            catch (IOException)
             {
-                WriteWarn($"{Description} failed to compress to an archive.");
+                WriteWarn($"{Description} failed to compile new package.");
             }
 
             WriteInfo($"Verifying {Description} package.");
@@ -141,7 +117,6 @@ namespace AmaiSosu.Common
         ///     - or -
         ///     Destination directory does not exist.
         /// </exception>
-        /// TODO Modify for HXE-SFX
         public void Install()
         {
             WriteInfo($"Verifying {Description} package.");
@@ -154,9 +129,7 @@ namespace AmaiSosu.Common
 
             try
             {
-                if (!System.IO.Directory.Exists(Path))
-                    System.IO.Directory.CreateDirectory(Path);
-                CopyFilesRecursively(ArchiveName, new DirectoryInfo(Path).FullName);
+                Copy.All(ArchiveName, Path);
             }
             catch (IOException)
             {
@@ -164,19 +137,6 @@ namespace AmaiSosu.Common
             }
 
             WriteSuccess($"{Description} data has been installed successfully to the filesystem.");
-
-            /// <see cref="https://stackoverflow.com/a/3822913/14894786"/>
-            void CopyFilesRecursively(string sourcePath, string targetPath)
-            {
-                foreach (string dirPath in System.IO.Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
-                {
-                    System.IO.Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
-                }
-                foreach (string newPath in System.IO.Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
-                {
-                    File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
-                }
-            }
         }
     }
 }
