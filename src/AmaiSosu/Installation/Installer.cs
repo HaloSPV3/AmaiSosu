@@ -19,13 +19,11 @@
 
 using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 using AmaiSosu.Common;
 using HXE;
 using static System.Environment;
 using static System.Environment.SpecialFolder;
 using static System.IO.Path;
-using static System.Reflection.Assembly;
 
 namespace AmaiSosu.Installation
 {
@@ -111,8 +109,18 @@ namespace AmaiSosu.Installation
             /// It needs to be copied to AmaiSosu.GUI AND a standard console
             ///  output so the output can still be displayed or caught if the
             ///  GUI is skipped.
-            /// Add checkbox (default: checked) to delete extracted files afterward.
+            /// TODO Add checkbox (default: checked) to delete/cleanup extracted files afterward.
+            /// TODO Backup Kornner Studios directory.
+            
+            /// 1. EXTRACT packages from the entry assembly (usually a SFX AmaiSosu.GUI)
+            /// 2. VERIFY the packages were extracted properly.
+            /// 3. Delete the Kornner Studios directory if it exists.
+            /// 4. INSTALL packages.
+            /// 5. INSTALL Direct3D9 Extensions
 
+            /** 
+             * 1. Extraction 
+             */
             WriteInfo("Extracting packages...");
             
             SFX.Extract(new SFX.Configuration
@@ -120,13 +128,19 @@ namespace AmaiSosu.Installation
                 Target = new DirectoryInfo(
                     Combine(CurrentDirectory, Package.Directory))
             });
-            
+
+            /**
+             * 2. Verification
+             */
             WriteInfo("Verifying the OpenSauce installer.");
             var state = Verify();
 
             if (!state.IsValid)
                 WriteAndThrow(new OpenSauceException(state.Reason));
 
+            /**
+             * 3. Delete Kornner Studios 
+             */
             var data = Combine(GetFolderPath(CommonApplicationData), "Kornner Studios");
 
             if (Directory.Exists(data))
@@ -152,12 +166,20 @@ namespace AmaiSosu.Installation
             }
 
             WriteSuccess("OpenSauce installer has been successfully verified.");
+
+            /**
+             * 4. Installation - packages
+             */
             WriteInfo("Attempting to install OpenSauce to the filesystem.");
 
             foreach (var package in _packages)
                 package.Install();
 
             WriteSuccess("OpenSauce has been successfully installed to the filesystem.");
+
+            /** 
+             * 5. Installation - Direct3D9 Extensions 
+             */
             WriteInfo("Direct3D9 Extensions must be installed for Open Sauce to work.");
 
             var process = new System.Diagnostics.Process
@@ -172,7 +194,6 @@ namespace AmaiSosu.Installation
                     Verb = "RunAs",
                 }
             };
-
 
             process.Start();
             process.WaitForExit();

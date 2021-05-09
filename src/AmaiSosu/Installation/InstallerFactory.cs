@@ -53,7 +53,7 @@ namespace AmaiSosu.Installation
         ///     The HCE directory path -- used to install the OpenSauce library data to.
         /// </param>
         /// <param name="output">
-        ///     Output class for  packages to write messages to.
+        ///     Output class for packages to write messages to.
         /// </param>
         public InstallerFactory(string installationPath, Output output) : this(installationPath)
         {
