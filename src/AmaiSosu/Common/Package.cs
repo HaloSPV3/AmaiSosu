@@ -20,6 +20,8 @@
 using System.IO;
 using AmaiSosu.Common.Exceptions;
 using AmaiSosu.Installation.IO;
+using static System.IO.Path;
+using static AmaiSosu.Common.Paths;
 
 namespace AmaiSosu.Common
 {
@@ -93,7 +95,7 @@ namespace AmaiSosu.Common
         {
             try
             {
-                Copy.All(Path, ArchiveName);
+                Copy.All(Path, Combine(Temp, Directory, ArchiveName));
             }
             catch (IOException)
             {
@@ -129,7 +131,7 @@ namespace AmaiSosu.Common
 
             try
             {
-                Copy.All(ArchiveName, Path);
+                Copy.All(Combine(Temp, Directory, ArchiveName), Path);
             }
             catch (IOException)
             {
