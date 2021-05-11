@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using AmaiSosu.Common;
+using AmaiSosu.Compilation;
 
 namespace AmaiSosu.Installation
 {
@@ -61,6 +62,28 @@ namespace AmaiSosu.Installation
         }
 
         /// <summary>
+        ///     Retrieves OpenSauceCompiler instance.
+        /// </summary>
+        /// <param name="type">
+        ///     Type of OpenSauceCompiler instance.
+        /// </param>
+        /// <returns>
+        ///     OpenSauceCompiler instancce for compiling OpenSauce to packages in an SFX application.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">type - null</exception>
+        public Compiler GetCompiler(Type type = Type.Default)
+        {
+            switch (type)
+            {
+                case Type.Default:
+                    return new Compiler(_installationPath, GetOpenSaucePackages(), _output);
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
+        /// <summary>
         ///     Retrieves OpenSauceInstaller instance.
         /// </summary>
         /// <param name="type">
@@ -72,12 +95,13 @@ namespace AmaiSosu.Installation
         /// <exception cref="ArgumentOutOfRangeException">
         ///     Invalid OpenSauceInstaller type given.
         /// </exception>
-        public Installer Get(Type type = Type.Default)
+        public Installer GetInstaller(Type type = Type.Default)
         {
             switch (type)
             {
                 case Type.Default:
                     return new Installer(_installationPath, GetOpenSaucePackages(), _output);
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }

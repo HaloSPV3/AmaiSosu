@@ -20,11 +20,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using AmaiSosu.Installation;
 using AmaiSosu.Installation.IO;
-using AmaiSosu.Resources;
+using static AmaiSosu.Common.Paths;
+using static AmaiSosu.Resources.FileNames;
 
 namespace AmaiSosu
 {
@@ -35,10 +36,10 @@ namespace AmaiSosu
         /// </summary>
         public void Install()
         {
-            var backupDir = Path.Combine(_path, FileNames.AmaiSosuBackup + '.' + Guid.NewGuid());
+            var backupDir = Path.Combine(_path, AmaiSosuBackup + '.' + Guid.NewGuid());
 
             CommitBackups(backupDir);
-            new InstallerFactory(_path).Get().Install();
+            new InstallerFactory(_path).GetInstaller().Install();
             FinishInstall(backupDir);
         }
 
@@ -70,19 +71,20 @@ namespace AmaiSosu
         private void FinishInstall(string backupDir)
         {
             // restore backed up HCE shaders
-            MoveFactory.Get(MoveFactory.Type.RestoreHceShaders, _path, backupDir).Commit();
+            MoveFactory.Get(MoveFactory.Type.RestoreHceShaders, _path, backupDir)
+                .Commit();
 
             var source =
-                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
-                    FileNames.OpenSauceDeveloper, FileNames.OpenSauceDirectory, FileNames.OpenSauceIDE);
+                Path.Combine(KStudios, OpenSauceDirectory, OpenSauceIDE);
 
-            var target = Path.Combine(_path, FileNames.OpenSauceIDE);
+            var target = Path.Combine(_path, OpenSauceIDE);
 
-            Copy.All(new DirectoryInfo(source), new DirectoryInfo(target));
-            Directory.Delete(source, true);
+            Copy.All(source, target);
 
             // cleans up backup directory
-            if (!Directory.EnumerateFileSystemEntries(backupDir).Any()) Directory.Delete(backupDir);
+            /// TODO FIX THIS...or don't
+            if (!Directory.EnumerateFileSystemEntries(backupDir).Any())
+                Directory.Delete(backupDir);
         }
     }
 }
