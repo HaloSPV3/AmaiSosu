@@ -62,6 +62,7 @@
     <Compile Include="Installation\IO\MoveFactory.cs" />
     <Compile Include="Installation\IO\MoveFile.cs" />
     <Compile Include="Installation\OpenSauceException.cs" />
+    <Compile Include="Main.Compile.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Main.Install.cs" />
     <Compile Include="Startup.cs" />

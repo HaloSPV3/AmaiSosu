@@ -21,14 +21,12 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
+using AmaiSosu.Common;
 using AmaiSosu.GUI.Properties;
-using System.Diagnostics;
+using AmaiSosu.GUI.Resources;
 using static System.Environment;
 
 namespace AmaiSosu.GUI
@@ -38,18 +36,19 @@ namespace AmaiSosu.GUI
         private bool _canCompile;
         private List<string> _files;
         private string _compileText = "Locate the files to package.";
+
         private string _source = string.IsNullOrWhiteSpace(Startup.Path) ?
             CurrentDirectory :
             Startup.Path;
+
         private Visibility _visibility = Visibility.Collapsed;
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance can compile.
+        ///     Gets or sets a value indicating whether AmaiSosu can compile a release.
         /// </summary>
         /// <value>
-        ///   <c>true</c> if this instance can compile; otherwise, <c>false</c>.
+        ///     <c>true</c> if this instance can compile; otherwise, <c>false</c>.
         /// </value>
-        /// TODO Edit XML Comment Template for CanCompile
         public bool CanCompile
         {
             get => _canCompile;
@@ -62,30 +61,8 @@ namespace AmaiSosu.GUI
         }
 
         /// <summary>
-        /// Gets or sets the files.
+        ///     Gets or sets the compile text message.
         /// </summary>
-        /// <value>
-        /// The files.
-        /// </value>
-        /// TODO Edit XML Comment Template for Files
-        public List<string> Files
-        {
-            get => _files;
-            set
-            {
-                if (value.SequenceEqual(_files)) return;
-                _files = value;
-                OnPropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// Gets or sets the compile text.
-        /// </summary>
-        /// <value>
-        /// The compile text.
-        /// </value>
-        /// TODO Edit XML Comment Template for CompileText
         public string CompileText
         {
             get => _compileText;
@@ -98,12 +75,8 @@ namespace AmaiSosu.GUI
         }
 
         /// <summary>
-        /// Gets or sets the path.
+        ///     Gets or sets the path containing OpenSauce binaries.
         /// </summary>
-        /// <value>
-        /// The path.
-        /// </value>
-        /// TODO Edit XML Comment Template for Path
         public string Source
         {
             get => _source;
@@ -120,65 +93,21 @@ namespace AmaiSosu.GUI
         /// </summary>
         public void Invoke()
         {
-            /// We need items from two paths:
-            /// "%ProgramData%\\Kornner Studios"
-            /// and a directory containing OpenSauce's compiled executable/library assemblies (.exe, .dll).
-            FileInfo exeFileInfo = new FileInfo(Assembly.GetEntryAssembly()?.Location
-                                   ?? throw new InvalidOperationException());
-            DirectoryInfo sPath = new DirectoryInfo(Source);
-            DirectoryInfo tPath = new DirectoryInfo(Path.GetTempPath()).CreateSubdirectory("AmaiSosu.tmp");
-            DirectoryInfo Gui = tPath.CreateSubdirectory(Installation.Installer.GuiPackage);
-            DirectoryInfo Lib = tPath.CreateSubdirectory(Installation.Installer.LibPackage);
-            string KStudios = "Kornner Studios";
-
             try
             {
-                /** Copy libraries to temporary directory */
-                Installation.IO.Copy.All(sPath, Lib);
-                /** Copy Kornner Studios to temp directory */
-                var ProgData = GetFolderPath(SpecialFolder.CommonApplicationData);
-                var ProgDataKStudios = new DirectoryInfo(Path.Combine(ProgData, KStudios));
-                var GuiKStudios = new DirectoryInfo(Path.Combine(Gui.FullName, KStudios));
-                Installation.IO.Copy.All(ProgDataKStudios, GuiKStudios);
+                Task.Run(() =>
+                {
+                    CompileText = "Compiling...";
+                    new AmaiSosu.Main(Source).Compile(); /// TODO
+                    CompileText = Messages.InstallSuccess;
+                    // TODO make Compile() return the path of the new exe
+                });
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 CanCompile = false;
                 CompileText = e.Message;
                 return;
-            }
-
-            Task.Run(() => {
-                CompileText = "Compiling...";
-                HXE.SFX.Compile(new HXE.SFX.Configuration
-                {
-                    Source = tPath,
-                    Target = new DirectoryInfo(CurrentDirectory),
-                    Executable = exeFileInfo
-                });
-                var result = RenameTarget();
-                Directory.Delete(tPath.FullName, true); // cleanup
-                CompileText = $"Done. File is at \"{Path.GetFullPath(result)}\"";
-            });
-
-            string RenameTarget()
-            {
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(exeFileInfo.FullName);
-                FileInfo sfxOut = new FileInfo(Path.Combine(CurrentDirectory, exeFileInfo.Name));
-                string exeName = exeFileInfo.Name;
-
-                exeName = exeName.Replace(".GUI.exe", $"-v{fvi.ProductVersion}.exe");
-
-                var renamedTarget = Path.Combine(CurrentDirectory, exeName);
-
-                foreach (var process in Process.GetProcessesByName(exeName))
-                {
-                    process.Kill();
-                }
-;
-                File.Delete(renamedTarget); // delete existing file
-                sfxOut.MoveTo(renamedTarget);
-                return renamedTarget;
             }
         }
 

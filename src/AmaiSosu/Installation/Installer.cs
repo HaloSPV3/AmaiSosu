@@ -24,6 +24,7 @@ using HXE;
 using static System.Environment;
 using static System.Environment.SpecialFolder;
 using static System.IO.Path;
+using static AmaiSosu.Common.Paths;
 
 namespace AmaiSosu.Installation
 {
@@ -53,13 +54,13 @@ namespace AmaiSosu.Installation
 
         public Installer(string hcePath, List<Package> packages)
         {
-            _hcePath  = hcePath;
+            _hcePath = hcePath;
             _packages = packages;
         }
 
         public Installer(string hcePath, List<Package> packages, Output output) : base(output)
         {
-            _hcePath  = hcePath;
+            _hcePath = hcePath;
             _packages = packages;
         }
 
@@ -111,22 +112,21 @@ namespace AmaiSosu.Installation
             ///  GUI is skipped.
             /// TODO Add checkbox (default: checked) to delete/cleanup extracted files afterward.
             /// TODO Backup Kornner Studios directory.
-            
+
             /// 1. EXTRACT packages from the entry assembly (usually a SFX AmaiSosu.GUI)
             /// 2. VERIFY the packages were extracted properly.
-            /// 3. Delete the Kornner Studios directory if it exists.
-            /// 4. INSTALL packages.
-            /// 5. INSTALL Direct3D9 Extensions
+            /// 3. INSTALL packages.
+            /// 4. INSTALL Direct3D9 Extensions
 
-            /** 
-             * 1. Extraction 
+            /**
+             * 1. Extraction
              */
             WriteInfo("Extracting packages...");
-            
+
             SFX.Extract(new SFX.Configuration
             {
                 Target = new DirectoryInfo(
-                    Combine(CurrentDirectory, Package.Directory))
+                    Combine(Temp, Package.Directory))
             });
 
             /**
@@ -134,14 +134,10 @@ namespace AmaiSosu.Installation
              */
             WriteInfo("Verifying the OpenSauce installer.");
             var state = Verify();
+            var data = Combine(GetFolderPath(CommonApplicationData), "Kornner Studios");
 
             if (!state.IsValid)
                 WriteAndThrow(new OpenSauceException(state.Reason));
-
-            /**
-             * 3. Delete Kornner Studios 
-             */
-            var data = Combine(GetFolderPath(CommonApplicationData), "Kornner Studios");
 
             if (Directory.Exists(data))
             {
@@ -177,8 +173,8 @@ namespace AmaiSosu.Installation
 
             WriteSuccess("OpenSauce has been successfully installed to the filesystem.");
 
-            /** 
-             * 5. Installation - Direct3D9 Extensions 
+            /**
+             * 5. Installation - Direct3D9 Extensions
              */
             WriteInfo("Direct3D9 Extensions must be installed for Open Sauce to work.");
 

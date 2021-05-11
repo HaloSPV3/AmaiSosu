@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.IO;
 using AmaiSosu.Common;
 using AmaiSosu.Compilation;
+using static AmaiSosu.Common.Paths;
 
 namespace AmaiSosu.Installation
 {
@@ -32,11 +33,13 @@ namespace AmaiSosu.Installation
         /// </summary>
         public enum Type
         {
-            Default
+            CompilerDefault,
+            InstallerDefault
         }
 
         private readonly string _installationPath;
         private readonly Output _output;
+        private Type _selection;
 
         /// <summary>
         ///     OpenSauceInstallerFactory constructor.
@@ -71,11 +74,12 @@ namespace AmaiSosu.Installation
         ///     OpenSauceCompiler instancce for compiling OpenSauce to packages in an SFX application.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">type - null</exception>
-        public Compiler GetCompiler(Type type = Type.Default)
+        public Compiler GetCompiler(Type type = Type.CompilerDefault)
         {
+            _selection = type;
             switch (type)
             {
-                case Type.Default:
+                case Type.CompilerDefault:
                     return new Compiler(_installationPath, GetOpenSaucePackages(), _output);
 
                 default:
@@ -95,11 +99,12 @@ namespace AmaiSosu.Installation
         /// <exception cref="ArgumentOutOfRangeException">
         ///     Invalid OpenSauceInstaller type given.
         /// </exception>
-        public Installer GetInstaller(Type type = Type.Default)
+        public Installer GetInstaller(Type type = Type.InstallerDefault)
         {
+            _selection = type;
             switch (type)
             {
-                case Type.Default:
+                case Type.InstallerDefault:
                     return new Installer(_installationPath, GetOpenSaucePackages(), _output);
 
                 default:
@@ -116,10 +121,12 @@ namespace AmaiSosu.Installation
         /// </returns>
         private List<Package> GetOpenSaucePackages()
         {
-            var guiDirPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            /// Install: new Package(source, desc, destination, _output)
+            /// Compile: new Package(destination, desc, source, _output)
+            var guiDirPath = ProgData;
 
-            var libPackage = Path.Combine(Package.Directory, Installer.LibPackage);
-            var guiPackage = Path.Combine(Package.Directory, Installer.GuiPackage);
+            var libPackage = Path.Combine(Temp, Package.Directory, Installer.LibPackage);
+            var guiPackage = Path.Combine(Temp, Package.Directory, Installer.GuiPackage);
 
             return new List<Package>
             {

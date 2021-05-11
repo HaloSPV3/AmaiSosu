@@ -2,15 +2,18 @@
 using System.IO;
 using System.Linq;
 using AmaiSosu.Common;
+using AmaiSosu.Installation;
+using HXE;
 using static System.Environment;
+using static AmaiSosu.Common.Paths;
+using File = System.IO.File;
+using Module = AmaiSosu.Common.Module;
 
 namespace AmaiSosu.Compilation
 {
     public class Compiler : Module
     {
         private static string _binariesPath = string.Empty;
-        private static readonly string _progData = GetFolderPath(SpecialFolder.CommonApplicationData);
-        private static readonly string _kStudios = Path.Combine(_progData, "Kornner Studios");
         public const string LibPackage = "lib";
         public const string GuiPackage = "gui";
         public List<Package> _packages;
@@ -40,7 +43,7 @@ namespace AmaiSosu.Compilation
         /// </returns>
         public Verification Verify()
         {
-            var dxrDir = Path.Combine(_kStudios, "OpenSauce", "dxredist");
+            var dxrDir = Path.Combine(KStudios, "OpenSauce", "dxredist");
             var dxrFiles = new List<string>
             {
                 "dsetup.dll",
@@ -94,8 +97,8 @@ namespace AmaiSosu.Compilation
                     return new Verification(false, $"OpenSauce main binary not found: {bin}");
             }
 
-            if (!Directory.Exists(_kStudios))
-                return new Verification(false, $"Kornner Studios not found in \"{_progData}\"");
+            if (!Directory.Exists(KStudios))
+                return new Verification(false, $"Kornner Studios not found in \"{ProgData}\"");
 
             if (!Directory.Exists(dxrDir))
                 return new Verification(false, $"Direct3D9 Extensions not found in {dxrDir}");
@@ -105,7 +108,7 @@ namespace AmaiSosu.Compilation
                     return new Verification(false, $"DirectX Redist file not found: {dxredist}");
             }
 
-            if (!Directory.Exists(Path.Combine(_kStudios, "OpenSauce", "OpenSauceIDE")))
+            if (!Directory.Exists(Path.Combine(KStudios, "OpenSauce", "OpenSauceIDE")))
                 return new Verification(false, "OpenSauceIDE not found in '/Kornner Studios/OpenSauce/'" + NewLine
                                                 + "Deleted by Install procedure?");
 
@@ -116,23 +119,58 @@ namespace AmaiSosu.Compilation
         ///     Compiles the OpenSauce libraries to packages.
         /// </summary>
         /// <exception cref="OpenSauceException">
-        ///     Invalid
+        ///     Invalid OpenSauce binaries directory path.
+        ///     - or -
+        ///     Important OpenSauce binaries don't exist.
+        ///     - or -
+        ///     Kornner Studios or its contents do not exist.
+        ///     - or -
+        ///     Direct3D9 Extensions DXSetup is not present.
         /// </exception>
         public void Compile()
         {
-            /// TODO need an Output instance from a Factory class.
             /// Summary
-            /// 1. 
+            /// 1. VERIFY expected files/directories are present.
+            /// 2. COMPILE packages from selected directories
+            /// 3. COMPILE packages to SFX assembly.
             _packages = new List<Package>{
-                new Package("lib", "", _kStudios, output: null),
+                new Package("lib", "", KStudios, output: null),
                 new Package("gui", "", _binariesPath, output: null)
             };
+            /// We need items from two paths:
+            /// "%ProgramData%\\Kornner Studios"
+            /// directory containing OpenSauce's compiled binaries.
 
-            
-            foreach(var package in _packages)
+            /**
+             * 1. Verification
+             */
+            WriteInfo("Verifying expected files.");
+            var state = Verify();
+
+            if (!state.IsValid)
+                WriteAndThrow(new OpenSauceException(state.Reason));
+
+            /**
+             * 2. Compilation - packages
+             */
+            WriteInfo("Attempting to copy files to package folder.");
+
+            foreach (var package in _packages)
             {
                 package.Compile();
             }
+
+            WriteSuccess("OpenSauce has been successfully compiled to the package workspace.");
+
+            /**
+             * 3. Compilation - SFX
+             */
+            WriteInfo("Compiling packages to fancy, self-extracting application.");
+
+            SFX.Compile(new SFX.Configuration
+            {
+                Source = TempDI,
+            });
         }
 
         protected override string Identifier { get; } = "OpenSauce.Compile";
