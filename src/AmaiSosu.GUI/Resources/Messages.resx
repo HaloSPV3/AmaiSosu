@@ -120,6 +120,12 @@
   <data name="BrowseHce" xml:space="preserve">
     <value>Click Browse to choose the HCE path.</value>
   </data>
+  <data name="CompileReady" xml:space="preserve">
+    <value>Click here to compile an OpenSauce release!</value>
+  </data>
+  <data name="CompileSuccess" xml:space="preserve">
+    <value>Compilation was successful!</value>
+  </data>
   <data name="InstallReady" xml:space="preserve">
     <value>Click here to install OpenSauce!</value>
   </data>

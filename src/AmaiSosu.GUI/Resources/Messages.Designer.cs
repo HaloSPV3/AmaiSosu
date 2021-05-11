@@ -70,7 +70,25 @@ namespace AmaiSosu.GUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click here to install OpenSauce!.
+        ///   Looks up a localized string similar to Click here to compile an OpenSauce release!.
+        /// </summary>
+        internal static string CompileReady {
+            get {
+                return ResourceManager.GetString("CompileReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compilation was successful!.
+        /// </summary>
+        internal static string CompileSuccess {
+            get {
+                return ResourceManager.GetString("CompileSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to compile an OpenSauce release!.
         /// </summary>
         internal static string InstallReady {
             get {
@@ -79,7 +97,7 @@ namespace AmaiSosu.GUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installation has been successful!.
+        ///   Looks up a localized string similar to Compilation was successful!.
         /// </summary>
         internal static string InstallSuccess {
             get {
