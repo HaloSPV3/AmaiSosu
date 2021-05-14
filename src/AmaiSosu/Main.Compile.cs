@@ -22,6 +22,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using AmaiSosu.Common;
 using AmaiSosu.Common.IO;
 using AmaiSosu.Installation;
 using static System.Environment;

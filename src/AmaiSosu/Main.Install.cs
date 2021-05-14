@@ -23,7 +23,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AmaiSosu.Common.IO;
-using AmaiSosu.Installation;
+using AmaiSosu.Common;
 using Paths = AmaiSosu.Common.Paths;
 using static AmaiSosu.Resources.FileNames;
 

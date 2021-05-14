@@ -55,7 +55,7 @@
     <Compile Include="Detection\Loader.cs" />
     <Compile Include="Detection\LoaderException.cs" />
     <Compile Include="Installation\Installer.cs" />
-    <Compile Include="Installation\PackageFactory.cs" />
+    <Compile Include="Common\PackageFactory.cs" />
     <Compile Include="Common\IO\Copy.cs" />
     <Compile Include="Common\IO\Move.cs" />
     <Compile Include="Common\IO\MoveDirectory.cs" />

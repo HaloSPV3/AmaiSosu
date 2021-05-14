@@ -20,11 +20,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using AmaiSosu.Common;
 using AmaiSosu.Compilation;
-using Paths = AmaiSosu.Common.Paths;
+using AmaiSosu.Installation;
 
-namespace AmaiSosu.Installation
+namespace AmaiSosu.Common
 {
     public class PackageFactory
     {
