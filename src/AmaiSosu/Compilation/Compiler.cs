@@ -80,8 +80,7 @@ namespace AmaiSosu.Compilation
                 "OS_haloceded.exe",
                 "OS_Sapien.exe",
                 "OS_Settings.Editor.xml",
-                "OS_Tool.exe",
-                "vccorlib120.dll"
+                "OS_Tool.exe"
             };
 
             if (!Directory.Exists(_binariesPath))
