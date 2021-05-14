@@ -22,7 +22,7 @@ using System.Collections.Generic;
 using System.IO;
 using AmaiSosu.Common;
 using AmaiSosu.Compilation;
-using static AmaiSosu.Common.Paths;
+using Paths = AmaiSosu.Common.Paths;
 
 namespace AmaiSosu.Installation
 {
@@ -123,10 +123,10 @@ namespace AmaiSosu.Installation
         {
             /// Install: new Package(source, desc, destination, _output)
             /// Compile: new Package(destination, desc, source, _output)
-            var guiDirPath = ProgData;
+            var guiDirPath = Paths.ProgData;
 
-            var libPackage = Path.Combine(Temp, Package.Directory, Installer.LibPackage);
-            var guiPackage = Path.Combine(Temp, Package.Directory, Installer.GuiPackage);
+            var libPackage = Path.Combine(Paths.Temp, Package.Directory, Installer.LibPackage);
+            var guiPackage = Path.Combine(Paths.Temp, Package.Directory, Installer.GuiPackage);
 
             return new List<Package>
             {

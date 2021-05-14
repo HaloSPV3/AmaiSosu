@@ -24,7 +24,7 @@ using System.IO;
 using System.Linq;
 using AmaiSosu.Common.IO;
 using AmaiSosu.Installation;
-using static AmaiSosu.Common.Paths;
+using Paths = AmaiSosu.Common.Paths;
 using static AmaiSosu.Resources.FileNames;
 
 namespace AmaiSosu
@@ -60,7 +60,7 @@ namespace AmaiSosu
                 MoveFactory.Get(MoveFactory.Type.BackupHac2Files, _path, backupDir)
             }.ForEach(move => move.Commit());
 
-            Directory.Move(KStudios, Path.Combine(backupDir, OpenSauceDeveloper));
+            Directory.Move(Paths.KStudios, Path.Combine(backupDir, OpenSauceDeveloper));
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace AmaiSosu
 
             // copy OS IDE to Install path
             var source =
-                Path.Combine(KStudios, OpenSauceDirectory, OpenSauceIDE);
+                Path.Combine(Paths.KStudios, OpenSauceDirectory, OpenSauceIDE);
 
             var target = Path.Combine(_path, OpenSauceIDE);
 

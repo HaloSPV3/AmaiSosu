@@ -25,7 +25,7 @@ using System.Reflection;
 using AmaiSosu.Common.IO;
 using AmaiSosu.Installation;
 using static System.Environment;
-using static AmaiSosu.Common.Paths;
+using Paths = AmaiSosu.Common.Paths;
 using static AmaiSosu.Resources.FileNames;
 
 namespace AmaiSosu
@@ -48,11 +48,11 @@ namespace AmaiSosu
         /// </summary>
         private void CopyOSIDE()
         {
-            if (!Directory.Exists(KStudios))
+            if (!Directory.Exists(Paths.KStudios))
                 throw new OpenSauceException("Kornner Studios directory not found.");
 
             var local = Path.Combine(_path, OpenSauceIDE);
-            var global = Path.Combine(KStudios, OpenSauceDirectory, OpenSauceIDE);
+            var global = Path.Combine(Paths.KStudios, OpenSauceDirectory, OpenSauceIDE);
 
             if (!Directory.Exists(global) && Directory.Exists(local))
                 Copy.All(local, global);
@@ -87,7 +87,7 @@ namespace AmaiSosu
         private void FinishCompile()
         {
             /// cleanup %temp%\\AmaiSosu.tmp\\
-            Directory.Delete(Temp, true);
+            Directory.Delete(Paths.Temp, true);
 
             /// modified from https://stackoverflow.com/a/9646139/14894786
             Process.Start("explorer.exe", "/select, " + RenameProduct());

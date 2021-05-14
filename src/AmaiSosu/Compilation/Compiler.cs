@@ -3,11 +3,12 @@ using System.IO;
 using System.Linq;
 using AmaiSosu.Common;
 using AmaiSosu.Installation;
-using HXE;
 using static System.Environment;
-using static AmaiSosu.Common.Paths;
+using static AmaiSosu.Resources.FileNames;
 using File = System.IO.File;
 using Module = AmaiSosu.Common.Module;
+using Paths = AmaiSosu.Common.Paths;
+using SFX = HXE.SFX;
 
 namespace AmaiSosu.Compilation
 {
@@ -43,7 +44,7 @@ namespace AmaiSosu.Compilation
         /// </returns>
         public Verification Verify()
         {
-            var dxrDir = Path.Combine(KStudios, "OpenSauce", "dxredist");
+            var dxrDir = Path.Combine(Paths.KStudios, OpenSauceDirectory, "dxredist");
             var dxrFiles = new List<string>
             {
                 "dsetup.dll",
@@ -97,8 +98,8 @@ namespace AmaiSosu.Compilation
                     return new Verification(false, $"OpenSauce main binary not found: {bin}");
             }
 
-            if (!Directory.Exists(KStudios))
-                return new Verification(false, $"Kornner Studios not found in \"{ProgData}\"");
+            if (!Directory.Exists(Paths.KStudios))
+                return new Verification(false, $"Kornner Studios not found in \"{Paths.ProgData}\"");
 
             if (!Directory.Exists(dxrDir))
                 return new Verification(false, $"Direct3D9 Extensions not found in {dxrDir}");
@@ -108,7 +109,7 @@ namespace AmaiSosu.Compilation
                     return new Verification(false, $"DirectX Redist file not found: {dxredist}");
             }
 
-            if (!Directory.Exists(Path.Combine(KStudios, "OpenSauce", "OpenSauceIDE")))
+            if (!Directory.Exists(Path.Combine(Paths.KStudios, OpenSauceDirectory, OpenSauceIDE)))
                 return new Verification(false, "OpenSauceIDE not found in '/Kornner Studios/OpenSauce/'" + NewLine
                                                 + "Deleted by Install procedure?");
 
@@ -134,7 +135,7 @@ namespace AmaiSosu.Compilation
             /// 2. COMPILE packages from selected directories
             /// 3. COMPILE packages to SFX assembly.
             _packages = new List<Package>{
-                new Package("lib", "", KStudios, output: null),
+                new Package("lib", "", Paths.KStudios, output: null),
                 new Package("gui", "", _binariesPath, output: null)
             };
             /// We need items from two paths:
@@ -169,7 +170,7 @@ namespace AmaiSosu.Compilation
 
             SFX.Compile(new SFX.Configuration
             {
-                Source = TempDI,
+                Source = Paths.TempDI,
             });
         }
 

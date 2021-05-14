@@ -20,11 +20,11 @@
 using System.Collections.Generic;
 using System.IO;
 using AmaiSosu.Common;
-using HXE;
 using static System.Environment;
 using static System.Environment.SpecialFolder;
 using static System.IO.Path;
-using static AmaiSosu.Common.Paths;
+using Paths = AmaiSosu.Common.Paths;
+using SFX = HXE.SFX;
 
 namespace AmaiSosu.Installation
 {
@@ -126,7 +126,7 @@ namespace AmaiSosu.Installation
             SFX.Extract(new SFX.Configuration
             {
                 Target = new DirectoryInfo(
-                    Combine(Temp, Package.Directory))
+                    Combine(Paths.Temp, Package.Directory))
             });
 
             /**
