@@ -56,11 +56,11 @@
     <Compile Include="Detection\LoaderException.cs" />
     <Compile Include="Installation\Installer.cs" />
     <Compile Include="Installation\InstallerFactory.cs" />
-    <Compile Include="Installation\IO\Copy.cs" />
-    <Compile Include="Installation\IO\Move.cs" />
-    <Compile Include="Installation\IO\MoveDirectory.cs" />
-    <Compile Include="Installation\IO\MoveFactory.cs" />
-    <Compile Include="Installation\IO\MoveFile.cs" />
+    <Compile Include="Common\IO\Copy.cs" />
+    <Compile Include="Common\IO\Move.cs" />
+    <Compile Include="Common\IO\MoveDirectory.cs" />
+    <Compile Include="Common\IO\MoveFactory.cs" />
+    <Compile Include="Common\IO\MoveFile.cs" />
     <Compile Include="Installation\OpenSauceException.cs" />
     <Compile Include="Main.Compile.cs" />
     <Compile Include="Main.cs" />

@@ -19,7 +19,7 @@
 
 using System.IO;
 using AmaiSosu.Common.Exceptions;
-using AmaiSosu.Installation.IO;
+using AmaiSosu.Common.IO;
 using static System.IO.Path;
 using static AmaiSosu.Common.Paths;
 

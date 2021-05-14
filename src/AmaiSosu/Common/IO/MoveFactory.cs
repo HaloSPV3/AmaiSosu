@@ -21,7 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace AmaiSosu.Installation.IO
+namespace AmaiSosu.Common.IO
 {
     /// <summary>
     ///     Returns Move instances built using the inbound arguments. This factory is designed for backing up or
@@ -104,6 +104,7 @@ namespace AmaiSosu.Installation.IO
                         "msvcp100.dll",
                         "OS_haloceded.exe"
                     }, sourceDirectory, targetDirectory);
+
                 case Type.BackupOsDirectories:
                     return new MoveDirectory(new List<string>
                     {
@@ -113,11 +114,13 @@ namespace AmaiSosu.Installation.IO
                         "tags",
                         "OpenSauceIDE"
                     }, sourceDirectory, targetDirectory);
+
                 case Type.BackupHac2Files:
                     return new MoveFile(new List<string>
                     {
                         "loader.dll"
                     }, Path.Combine(sourceDirectory, "controls"), targetDirectory);
+
                 case Type.RestoreHceShaders:
                     return new MoveFile(new List<string>
                     {
@@ -126,6 +129,7 @@ namespace AmaiSosu.Installation.IO
                         "EffectCollection_ps_2_0.enc",
                         "vsh.enc"
                     }, Path.Combine(targetDirectory, "shaders"), Path.Combine(sourceDirectory, "shaders"));
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }

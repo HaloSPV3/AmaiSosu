@@ -22,8 +22,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AmaiSosu.Common.IO;
 using AmaiSosu.Installation;
-using AmaiSosu.Installation.IO;
 using static AmaiSosu.Common.Paths;
 using static AmaiSosu.Resources.FileNames;
 

@@ -20,7 +20,7 @@
 using System;
 using System.IO;
 
-namespace AmaiSosu.Installation.IO
+namespace AmaiSosu.Common.IO
 {
     /// <summary>
     ///     Copy a directory and its contents. Adapted from the MSDN CopyAll method.
@@ -34,6 +34,7 @@ namespace AmaiSosu.Installation.IO
             var diTarget = new DirectoryInfo(Path.GetFullPath(target));
             All(diSource, diTarget);
         }
+
         public static void All(DirectoryInfo source, DirectoryInfo target)
         {
             if (string.Equals(source.FullName, target.FullName, StringComparison.CurrentCultureIgnoreCase)) return;
