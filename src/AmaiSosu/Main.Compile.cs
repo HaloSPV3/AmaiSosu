@@ -26,8 +26,8 @@ using AmaiSosu.Common;
 using AmaiSosu.Common.IO;
 using AmaiSosu.Installation;
 using static System.Environment;
-using Paths = AmaiSosu.Common.Paths;
 using static AmaiSosu.Resources.FileNames;
+using Paths = AmaiSosu.Common.Paths;
 
 namespace AmaiSosu
 {

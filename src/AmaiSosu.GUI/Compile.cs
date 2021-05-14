@@ -19,12 +19,10 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
-using AmaiSosu.Common;
 using AmaiSosu.GUI.Properties;
 using AmaiSosu.GUI.Resources;
 using static System.Environment;
@@ -34,7 +32,6 @@ namespace AmaiSosu.GUI
     public class Compile : INotifyPropertyChanged
     {
         private bool _canCompile;
-        private List<string> _files;
         private string _compileText = "Locate the files to package.";
 
         private string _source = string.IsNullOrWhiteSpace(Startup.Path) ?

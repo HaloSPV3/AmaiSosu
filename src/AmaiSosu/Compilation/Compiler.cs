@@ -15,8 +15,6 @@ namespace AmaiSosu.Compilation
     public class Compiler : Module
     {
         private static string _binariesPath = string.Empty;
-        public const string LibPackage = "lib";
-        public const string GuiPackage = "gui";
         public List<Package> _packages;
 
         public Compiler(string binariesPath, List<Package> packages)
@@ -134,13 +132,6 @@ namespace AmaiSosu.Compilation
             /// 1. VERIFY expected files/directories are present.
             /// 2. COMPILE packages from selected directories
             /// 3. COMPILE packages to SFX assembly.
-            _packages = new List<Package>{
-                new Package("lib", "", Paths.KStudios, output: null),
-                new Package("gui", "", _binariesPath, output: null)
-            };
-            /// We need items from two paths:
-            /// "%ProgramData%\\Kornner Studios"
-            /// directory containing OpenSauce's compiled binaries.
 
             /**
              * 1. Verification

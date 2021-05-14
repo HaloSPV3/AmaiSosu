@@ -1,10 +1,10 @@
-﻿using AmaiSosu.GUI.Properties;
-using System.Windows;
+﻿using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using AmaiSosu.GUI.Resources;
 using System.IO;
-using System;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using AmaiSosu.GUI.Properties;
+using AmaiSosu.GUI.Resources;
 
 namespace AmaiSosu.GUI
 {

@@ -24,7 +24,6 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using AmaiSosu.Detection;
 using AmaiSosu.GUI.Properties;
 using AmaiSosu.GUI.Resources;
 
@@ -39,10 +38,12 @@ namespace AmaiSosu.GUI
         ///     Main.Compile -> MainWindow.UCCompile.DataContext (in xaml) -> UCCompile.Compile
         /// </summary>
         public Compile Compile { get; set; } = new Compile();
+
         /// <summary>
         ///     Main.Help -> MainWindow.UCHelp.DataContext (in xaml) -> UCHelp.Help
         /// </summary>
-        public Help    Help    { get; set; } = new Help();
+        public Help Help { get; set; } = new Help();
+
         /// <summary>
         ///     Main.Install -> MainWindow.UCInstall.DataContext (in xaml) -> UCInstall.Install
         /// </summary>
@@ -90,9 +91,11 @@ namespace AmaiSosu.GUI
                 case Context.Type.Compile:
                     Compile.Visibility = Visibility.Visible;
                     break;
+
                 case Context.Type.Help:
                     Help.Visibility = Visibility.Visible;
                     break;
+
                 case Context.Type.Install:
                     if (Startup.Auto)
                     {
@@ -108,6 +111,7 @@ namespace AmaiSosu.GUI
                     }
                     Install.Visibility = Visibility.Visible;
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

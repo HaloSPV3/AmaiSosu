@@ -23,7 +23,6 @@ using AmaiSosu.Common;
 using static System.Environment;
 using static System.Environment.SpecialFolder;
 using static System.IO.Path;
-using Paths = AmaiSosu.Common.Paths;
 using SFX = HXE.SFX;
 
 namespace AmaiSosu.Installation
@@ -80,7 +79,7 @@ namespace AmaiSosu.Installation
             if (!Directory.Exists(_hcePath))
                 return new Verification(false, "Target directory for OpenSauce installation does not exist.");
 
-            if (!System.IO.File.Exists(Combine(_hcePath, "haloce.exe")))
+            if (!File.Exists(Combine(_hcePath, "haloce.exe")))
                 return new Verification(false, "Invalid target HCE directory path for OpenSauce installation.");
 
             foreach (var package in _packages)
@@ -151,7 +150,7 @@ namespace AmaiSosu.Installation
                     /// <seealso cref="https://stackoverflow.com/a/8055390/14894786"/>
                     var batPath = Combine(CurrentDirectory, Package.Directory, "AdminDelKorn.bat");
                     var batText = "del /s /q \"Kornner Studios\" && rmdir /s /q \"Kornner Studios\"";
-                    System.IO.File.WriteAllText(batPath, batText);
+                    File.WriteAllText(batPath, batText);
                     new System.Diagnostics.ProcessStartInfo
                     {
                         FileName = batPath,
