@@ -24,7 +24,6 @@ using System.IO;
 using System.Reflection;
 using AmaiSosu.Common;
 using AmaiSosu.Common.IO;
-using AmaiSosu.Installation;
 using static System.Environment;
 using static AmaiSosu.Resources.FileNames;
 using Paths = AmaiSosu.Common.Paths;

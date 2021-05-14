@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using AmaiSosu.Common;
-using AmaiSosu.Installation;
 using static System.Environment;
 using static AmaiSosu.Resources.FileNames;
 using File = System.IO.File;
