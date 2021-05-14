@@ -39,7 +39,7 @@ namespace AmaiSosu
             var backupDir = Path.Combine(_path, AmaiSosuBackup + '.' + Guid.NewGuid());
 
             CommitBackups(backupDir);
-            new InstallerFactory(_path).GetInstaller().Install();
+            new PackageFactory(_path).GetInstaller().Install();
             FinishInstall(backupDir);
         }
 

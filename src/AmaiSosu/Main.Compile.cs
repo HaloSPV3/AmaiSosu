@@ -38,7 +38,7 @@ namespace AmaiSosu
         public void Compile()
         {
             CopyOSIDE();
-            new InstallerFactory(_path).GetCompiler().Compile();
+            new PackageFactory(_path).GetCompiler().Compile();
             FinishCompile();
         }
 

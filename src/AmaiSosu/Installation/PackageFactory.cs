@@ -26,7 +26,7 @@ using Paths = AmaiSosu.Common.Paths;
 
 namespace AmaiSosu.Installation
 {
-    public class InstallerFactory
+    public class PackageFactory
     {
         /// <summary>
         ///     Available OpenSauce Installer types.
@@ -47,7 +47,7 @@ namespace AmaiSosu.Installation
         /// <param name="installationPath">
         ///     The HCE directory path -- used to install the OpenSauce library data to.
         /// </param>
-        public InstallerFactory(string installationPath)
+        public PackageFactory(string installationPath)
         {
             _installationPath = installationPath;
         }
@@ -59,7 +59,7 @@ namespace AmaiSosu.Installation
         /// <param name="output">
         ///     Output class for packages to write messages to.
         /// </param>
-        public InstallerFactory(string installationPath, Output output) : this(installationPath)
+        public PackageFactory(string installationPath, Output output) : this(installationPath)
         {
             _output = output;
         }
