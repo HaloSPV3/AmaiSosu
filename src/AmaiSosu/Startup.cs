@@ -17,8 +17,6 @@
  * along with AmaiSosu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-using AmaiSosu.Detection;
-
 namespace AmaiSosu
 {
     public static class Startup

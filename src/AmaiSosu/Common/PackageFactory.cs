@@ -20,8 +20,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using AmaiSosu.Compilation;
-using AmaiSosu.Installation;
+using AmaiSosu.Core;
 
 namespace AmaiSosu.Common
 {
@@ -42,22 +41,22 @@ namespace AmaiSosu.Common
         /// <summary>
         ///     OpenSauceInstallerFactory constructor.
         /// </summary>
-        /// <param name="installationPath">
+        /// <param name="path">
         ///     The HCE directory path -- used to install the OpenSauce library data to.
         /// </param>
-        public PackageFactory(string installationPath)
+        public PackageFactory(string path)
         {
-            _path = installationPath;
+            _path = path;
         }
 
         /// <inheritdoc />
-        /// <param name="installationPath">
+        /// <param name="path">
         ///     The HCE directory path -- used to install the OpenSauce library data to.
         /// </param>
         /// <param name="output">
         ///     Output class for packages to write messages to.
         /// </param>
-        public PackageFactory(string installationPath, Output output) : this(installationPath)
+        public PackageFactory(string path, Output output) : this(path)
         {
             _output = output;
         }
@@ -109,7 +108,7 @@ namespace AmaiSosu.Common
         }
 
         /// <summary>
-        ///     Retrieve a list of packages that represent the OpenSauce installation data.
+        ///     Retrieve a list of packages that represent the OpenSauce package data.
         /// </summary>
         /// <returns>
         ///     A list of OpenSauce packages that replicate an original OS installation when installed.

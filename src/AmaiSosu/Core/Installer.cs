@@ -25,7 +25,7 @@ using static System.Environment.SpecialFolder;
 using static System.IO.Path;
 using SFX = HXE.SFX;
 
-namespace AmaiSosu.Installation
+namespace AmaiSosu.Core
 {
     /// <summary>
     ///     Type for installing OpenSauce to the file system.

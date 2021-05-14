@@ -9,7 +9,7 @@ using Module = AmaiSosu.Common.Module;
 using Paths = AmaiSosu.Common.Paths;
 using SFX = HXE.SFX;
 
-namespace AmaiSosu.Compilation
+namespace AmaiSosu.Core
 {
     public class Compiler : Module
     {
