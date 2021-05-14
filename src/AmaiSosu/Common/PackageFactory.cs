@@ -36,9 +36,8 @@ namespace AmaiSosu.Common
             InstallerDefault
         }
 
-        private readonly string _installationPath;
+        private readonly string _path;
         private readonly Output _output;
-        private Type _selection;
 
         /// <summary>
         ///     OpenSauceInstallerFactory constructor.
@@ -48,7 +47,7 @@ namespace AmaiSosu.Common
         /// </param>
         public PackageFactory(string installationPath)
         {
-            _installationPath = installationPath;
+            _path = installationPath;
         }
 
         /// <inheritdoc />
@@ -75,11 +74,10 @@ namespace AmaiSosu.Common
         /// <exception cref="ArgumentOutOfRangeException">type - null</exception>
         public Compiler GetCompiler(Type type = Type.CompilerDefault)
         {
-            _selection = type;
             switch (type)
             {
                 case Type.CompilerDefault:
-                    return new Compiler(_installationPath, GetOpenSaucePackages(), _output);
+                    return new Compiler(_path, GetOpenSaucePackages(), _output);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -100,11 +98,10 @@ namespace AmaiSosu.Common
         /// </exception>
         public Installer GetInstaller(Type type = Type.InstallerDefault)
         {
-            _selection = type;
             switch (type)
             {
                 case Type.InstallerDefault:
-                    return new Installer(_installationPath, GetOpenSaucePackages(), _output);
+                    return new Installer(_path, GetOpenSaucePackages(), _output);
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
@@ -129,7 +126,7 @@ namespace AmaiSosu.Common
 
             return new List<Package>
             {
-                new Package(libPackage, "OpenSauce core and dependencies", _installationPath, _output),
+                new Package(libPackage, "OpenSauce core and dependencies", _path, _output),
                 new Package(guiPackage, "In-game OpenSauce UI assets", guiDirPath, _output),
             };
         }
