@@ -48,7 +48,7 @@ namespace AmaiSosu.GUI
                         try
                         {
                             path = RemoveInvalidChars(path);
-                            if (System.IO.Path.IsPathRooted(path) && System.IO.Directory.Exists(path))
+                            if (System.IO.Path.IsPathRooted(path))
                                 AmaiSosu.Startup.Path = path;
                         }
                         catch
