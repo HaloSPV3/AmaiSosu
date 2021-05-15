@@ -126,7 +126,7 @@ namespace AmaiSosu.Common
 
             try
             {
-                Copy.All(Combine(Paths.Temp, Directory, ArchiveName), Path);
+                Copy.All(Combine(Paths.Temp, ArchiveName), Path);
             }
             catch (IOException)
             {
