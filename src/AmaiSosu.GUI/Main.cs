@@ -89,6 +89,11 @@ namespace AmaiSosu.GUI
             switch (Mode)
             {
                 case Context.Type.Compile:
+                    if (Startup.Auto)
+                    {
+                        Compile.Visibility = Visibility.Collapsed;
+                        Compile.Invoke();
+                    }
                     Compile.Visibility = Visibility.Visible;
                     break;
 
