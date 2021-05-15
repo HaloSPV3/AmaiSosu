@@ -77,11 +77,8 @@ namespace AmaiSosu.Common
         /// - Install destination does not exist.
         public Verification Verify()
         {
-            if (!System.IO.Directory.Exists(ArchiveName))
+            if (!System.IO.Directory.Exists(Combine(Paths.Temp, ArchiveName)))
                 return new Verification(false, "Cannot install specified package. Package's directory does not exist.");
-
-            if (!System.IO.Directory.Exists(Path))
-                return new Verification(false, "Cannot install specified package. Source/Destination does not exist.");
 
             return new Verification(true);
         }
@@ -89,7 +86,6 @@ namespace AmaiSosu.Common
         /// <summary>
         ///     Compiles a directory to a new Package instance.
         /// </summary>
-        /// TODO Use this instead of what's being used right now.
         public void Compile()
         {
             try
