@@ -160,6 +160,7 @@ namespace AmaiSosu.Core
             SFX.Compile(new SFX.Configuration
             {
                 Source = Paths.TempDI,
+                Target = new DirectoryInfo(CurrentDirectory)
             });
         }
 
