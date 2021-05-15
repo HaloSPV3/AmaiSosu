@@ -104,14 +104,6 @@ namespace AmaiSosu.Core
         /// </exception>
         public void Install()
         {
-            /// TODO
-            /// Display HXE's console output in AmaiSosu.GUI.
-            /// It needs to be copied to AmaiSosu.GUI AND a standard console
-            ///  output so the output can still be displayed or caught if the
-            ///  GUI is skipped.
-            /// TODO Add checkbox (default: checked) to delete/cleanup extracted files afterward.
-            /// TODO Backup Kornner Studios directory.
-
             /// 1. EXTRACT packages from the entry assembly (usually a SFX AmaiSosu.GUI)
             /// 2. VERIFY the packages were extracted properly.
             /// 3. INSTALL packages.
@@ -125,7 +117,7 @@ namespace AmaiSosu.Core
             SFX.Extract(new SFX.Configuration
             {
                 Target = new DirectoryInfo(
-                    Combine(Paths.Temp, Package.Directory))
+                    Paths.Temp)
             });
 
             /**
@@ -133,32 +125,9 @@ namespace AmaiSosu.Core
              */
             WriteInfo("Verifying the OpenSauce installer.");
             var state = Verify();
-            var data = Combine(GetFolderPath(CommonApplicationData), "Kornner Studios");
 
             if (!state.IsValid)
                 WriteAndThrow(new OpenSauceException(state.Reason));
-
-            if (Directory.Exists(data))
-            {
-                try
-                {
-                    Directory.Delete(data, true);
-                }
-                catch (System.UnauthorizedAccessException)
-                {
-                    /// <see cref="https://stackoverflow.com/a/31363010/14894786"/>
-                    /// <seealso cref="https://stackoverflow.com/a/8055390/14894786"/>
-                    var batPath = Combine(CurrentDirectory, Package.Directory, "AdminDelKorn.bat");
-                    var batText = "del /s /q \"Kornner Studios\" && rmdir /s /q \"Kornner Studios\"";
-                    File.WriteAllText(batPath, batText);
-                    new System.Diagnostics.ProcessStartInfo
-                    {
-                        FileName = batPath,
-                        Verb = "RunAs",
-                        WorkingDirectory = GetFolderPath(CommonApplicationData)
-                    };
-                }
-            }
 
             WriteSuccess("OpenSauce installer has been successfully verified.");
 
