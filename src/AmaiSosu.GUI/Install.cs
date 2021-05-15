@@ -72,17 +72,20 @@ namespace AmaiSosu.GUI
         /// <summary>
         ///     Invokes the installation procedure.
         /// </summary>
-        public void Invoke()
+        /// TODO instead of a bool, return a SUCCESS or FAILURE enum
+        public bool Invoke()
         {
             try
             {
                 InstallText = "...";
                 new AmaiSosu.Main(Path).Install();
                 InstallText = Messages.InstallSuccess;
+                return true;
             }
             catch (Exception e)
             {
                 InstallText = e.Message;
+                return false;
             }
         }
 

@@ -88,22 +88,20 @@ namespace AmaiSosu.GUI
         /// <summary>
         ///     Invokes HXE's SFX Compiler
         /// </summary>
-        public void Invoke()
+        /// TODO instead of a bool, return a SUCCESS or FAILURE enum
+        public bool Invoke()
         {
             try
             {
-                Task.Run(() =>
-                {
-                    CompileText = "Compiling...";
-                    new AmaiSosu.Main(Source).Compile(); /// TODO
-                    CompileText = Messages.CompileSuccess;
-                });
+                CompileText = "Compiling...";
+                new AmaiSosu.Main(Source).Compile();
+                CompileText = Messages.CompileSuccess;
+                return true;
             }
             catch (Exception e)
             {
-                CanCompile = false;
                 CompileText = e.Message;
-                return;
+                return false;
             }
         }
 
