@@ -96,8 +96,7 @@ namespace AmaiSosu.GUI
                 {
                     CompileText = "Compiling...";
                     new AmaiSosu.Main(Source).Compile(); /// TODO
-                    CompileText = Messages.InstallSuccess;
-                    // TODO make Compile() return the path of the new exe
+                    CompileText = Messages.CompileSuccess;
                 });
             }
             catch (Exception e)
