@@ -94,7 +94,7 @@ namespace AmaiSosu.Common
         {
             try
             {
-                Copy.All(Path, Combine(Paths.Temp, Directory, ArchiveName));
+                Copy.All(Path, Combine(Paths.Temp, ArchiveName));
             }
             catch (IOException)
             {

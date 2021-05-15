@@ -118,10 +118,10 @@ namespace AmaiSosu.Common
         {
             /// Install: new Package(source, desc, destination, _output)
             /// Compile: new Package(destination, desc, source, _output)
-            var guiDirPath = Paths.ProgData;
+            var guiDirPath = Paths.KStudios;
 
-            var libPackage = Path.Combine(Paths.Temp, Package.Directory, Installer.LibPackage);
-            var guiPackage = Path.Combine(Paths.Temp, Package.Directory, Installer.GuiPackage);
+            var libPackage = Path.Combine(Package.Directory, Installer.LibPackage);
+            var guiPackage = Path.Combine(Package.Directory, Installer.GuiPackage);
 
             return new List<Package>
             {
