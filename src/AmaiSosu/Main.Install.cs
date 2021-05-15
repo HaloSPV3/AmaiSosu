@@ -52,6 +52,7 @@ namespace AmaiSosu
         private void CommitBackups(string backupDir)
         {
             Directory.CreateDirectory(backupDir);
+            var OSIDEbackupDir = Path.Combine(backupDir, OpenSauceDeveloper);
 
             new List<Move>
             {
@@ -60,7 +61,29 @@ namespace AmaiSosu
                 MoveFactory.Get(MoveFactory.Type.BackupHac2Files, _path, backupDir)
             }.ForEach(move => move.Commit());
 
-            Directory.Move(Paths.KStudios, Path.Combine(backupDir, OpenSauceDeveloper));
+            if (Directory.Exists(Paths.KStudios))
+            {
+                Copy.All(Paths.KStudios, OSIDEbackupDir);
+                try
+                {
+                    Directory.Delete(Paths.KStudios, true);
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    /// <see cref="https://stackoverflow.com/a/31363010/14894786"/>
+                    /// <seealso cref="https://stackoverflow.com/a/8055390/14894786"/>
+                    var batPath = Path.Combine(Paths.Temp, "AdminDelKorn.bat");
+                    var batText = "del /s /q \"Kornner Studios\" && rmdir /s /q \"Kornner Studios\"";
+                    File.WriteAllText(batPath, batText);
+                    new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = batPath,
+                        Verb = "RunAs",
+                        WorkingDirectory = Paths.ProgData
+                    };
+                }
+
+            }
         }
 
         /// <summary>
