@@ -156,6 +156,7 @@ namespace AmaiSosu.Core
                                        "dxredist",
                                        "dxsetup.exe"),
                     Verb = "RunAs",
+                    Arguments = "/silent"
                 }
             };
 
