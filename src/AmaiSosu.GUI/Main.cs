@@ -49,6 +49,8 @@ namespace AmaiSosu.GUI
         /// </summary>
         public Install Install { get; set; } = new Install();
 
+        public bool Success;
+
         /// <summary>
         ///     Git version.
         /// </summary>
@@ -92,7 +94,7 @@ namespace AmaiSosu.GUI
                     if (Startup.Auto)
                     {
                         Compile.Visibility = Visibility.Collapsed;
-                        Compile.Invoke();
+                        Success = Compile.Invoke();
                     }
                     Compile.Visibility = Visibility.Visible;
                     break;
@@ -105,14 +107,7 @@ namespace AmaiSosu.GUI
                     if (Startup.Auto)
                     {
                         Install.Visibility = Visibility.Collapsed;
-                        try
-                        {
-                            Install.Invoke();
-                        }
-                        catch (Exception)
-                        {
-                            Install.InstallText = Messages.BrowseHce;
-                        }
+                        Success = Install.Invoke();
                     }
                     Install.Visibility = Visibility.Visible;
                     break;

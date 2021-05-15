@@ -39,6 +39,9 @@ namespace AmaiSosu.GUI
             UCCompile.Compile = (Compile) UCCompile.DataContext;
             UCHelp.Help       = (Help)    UCHelp.DataContext;
             UCInstall.Install = (Install) UCInstall.DataContext;
+
+            if (Startup.Auto && _main.Success)
+                Process.GetCurrentProcess().CloseMainWindow();
         }
 
         private void About(object sender, RoutedEventArgs e)
