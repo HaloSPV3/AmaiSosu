@@ -41,7 +41,17 @@ namespace AmaiSosu.GUI
             UCInstall.Install = (Install) UCInstall.DataContext;
 
             if (Startup.Auto && _main.Success)
-                Process.GetCurrentProcess().CloseMainWindow();
+            {
+                System.Threading.Tasks.Task.Run(() =>
+                {
+                    bool closed = false;
+                    while (!closed)
+                    {
+                        closed = Process.GetCurrentProcess().CloseMainWindow();
+                        System.Threading.Thread.Sleep(100);
+                    }
+                });
+            }
         }
 
         private void About(object sender, RoutedEventArgs e)
