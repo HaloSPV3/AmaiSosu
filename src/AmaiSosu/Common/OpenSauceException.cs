@@ -20,7 +20,7 @@
 using System;
 using System.Runtime.Serialization;
 
-namespace AmaiSosu.Installation
+namespace AmaiSosu.Common
 {
     [Serializable]
     public class OpenSauceException : Exception

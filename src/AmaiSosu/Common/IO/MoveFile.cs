@@ -20,12 +20,12 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace AmaiSosu.Installation.IO
+namespace AmaiSosu.Common.IO
 {
     /// <inheritdoc />
-    public class MoveDirectory : Move
+    public class MoveFile : Move
     {
-        public MoveDirectory(List<string> data, string sourceDirectory, string targetDirectory) : base(data,
+        public MoveFile(List<string> data, string sourceDirectory, string targetDirectory) : base(data,
             sourceDirectory, targetDirectory)
         {
             // call parent constructor
@@ -34,13 +34,13 @@ namespace AmaiSosu.Installation.IO
         /// <inheritdoc />
         public override void Commit()
         {
-            foreach (var dir in Data)
+            foreach (var file in Data)
             {
-                var source = Path.Combine(SourceDirectory, dir);
-                var target = Path.Combine(TargetDirectory, dir);
+                var source = Path.Combine(SourceDirectory, file);
+                var target = Path.Combine(TargetDirectory, file);
 
-                if (Directory.Exists(source))
-                    Directory.Move(source, target);
+                if (File.Exists(source))
+                    File.Move(source, target);
             }
         }
     }

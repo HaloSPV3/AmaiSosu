@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AmaiSosu</RootNamespace>
     <AssemblyName>AmaiSosu</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,20 +46,26 @@
     <Compile Include="Common\Module.cs" />
     <Compile Include="Common\Output.cs" />
     <Compile Include="Common\Package.cs" />
+    <Compile Include="Common\Paths.cs" />
     <Compile Include="Common\Verification.cs" />
+    <Compile Include="Core\Compiler.cs" />
+    <Compile Include="Context.cs" />
     <Compile Include="Detection\Executable.cs" />
     <Compile Include="Detection\ExecutableFactory.cs" />
     <Compile Include="Detection\Loader.cs" />
     <Compile Include="Detection\LoaderException.cs" />
-    <Compile Include="Installation\Installer.cs" />
-    <Compile Include="Installation\InstallerFactory.cs" />
-    <Compile Include="Installation\IO\Copy.cs" />
-    <Compile Include="Installation\IO\Move.cs" />
-    <Compile Include="Installation\IO\MoveDirectory.cs" />
-    <Compile Include="Installation\IO\MoveFactory.cs" />
-    <Compile Include="Installation\IO\MoveFile.cs" />
-    <Compile Include="Installation\OpenSauceException.cs" />
+    <Compile Include="Core\Installer.cs" />
+    <Compile Include="Common\PackageFactory.cs" />
+    <Compile Include="Common\IO\Copy.cs" />
+    <Compile Include="Common\IO\Move.cs" />
+    <Compile Include="Common\IO\MoveDirectory.cs" />
+    <Compile Include="Common\IO\MoveFactory.cs" />
+    <Compile Include="Common\IO\MoveFile.cs" />
+    <Compile Include="Common\OpenSauceException.cs" />
+    <Compile Include="Main.Compile.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Main.Install.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\FileNames.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -77,6 +84,12 @@
     <EmbeddedResource Include="Resources\Version.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ext\HCE\hxe\kernel\src\HXE.csproj">
+      <Project>{acaa5d9f-b23d-43e1-b2df-8c03230975a1}</Project>
+      <Name>HXE</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

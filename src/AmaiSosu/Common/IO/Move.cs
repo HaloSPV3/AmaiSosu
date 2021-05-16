@@ -19,7 +19,7 @@
 
 using System.Collections.Generic;
 
-namespace AmaiSosu.Installation.IO
+namespace AmaiSosu.Common.IO
 {
     /// <summary>
     ///     Abstract representing a type that conducts data migration.

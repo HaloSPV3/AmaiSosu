@@ -3,7 +3,6 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                      xmlns:amaiSosu="clr-namespace:AmaiSosu"
                       xmlns:gui="clr-namespace:AmaiSosu.GUI"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       mc:Ignorable="d"
@@ -17,7 +16,7 @@
                       ShowTitleBar="False"
                       WindowStyle="None"
                       Icon="/icon.ico">
-    <!-- Window Styling -->
+  <!-- Window Styling -->
     <Window.Background>
         <ImageBrush ImageSource="Resources/background.png"
                     Stretch="UniformToFill"
@@ -37,7 +36,8 @@
     <!-- Main -->
     <Grid>
         <!-- Header -->
-        <StackPanel VerticalAlignment="Top"
+        <StackPanel x:Name="Header"
+                    VerticalAlignment="Top"
                     HorizontalAlignment="Center"
                     Margin="0,155">
             <Label Foreground="White"
@@ -52,40 +52,21 @@
             </Label>
         </StackPanel>
 
-        <!-- Body -->
-        <Grid VerticalAlignment="Bottom"
-              Margin="10,140">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
 
-            <DockPanel Grid.Column="0"
-                       Margin="5">
-                <Button DockPanel.Dock="Right"
-                        Style="{DynamicResource SquareButtonStyle}"
-                        BorderThickness="0"
-                        Content="Browse"
-                        Margin="1,0,0,0"
-                        Click="Browse" />
-                <TextBox Text="{Binding Path}"
-                         HorizontalContentAlignment="Center"
-                         BorderThickness="0"
-                         VerticalContentAlignment="Center" />
-            </DockPanel>
-
-            <Button Grid.Column="1"
-                    Style="{DynamicResource SquareButtonStyle}"
-                    BorderThickness="0"
-                    Margin="5"
-                    Content="{Binding InstallText}"
-                    IsEnabled="{Binding CanInstall}"
-                    Click="Install"
-                    Name="InstallButton" />
-        </Grid>
+    <!-- Body -->
+        <gui:UserControlCompile x:Name="UCCompile"
+                                DataContext="{Binding Compile}"
+                                Visibility="{Binding Visibility}"/>
+        <gui:UserControlHelp    x:Name="UCHelp"
+                                DataContext="{Binding Help}"
+                                Visibility="{Binding Visibility}"/>
+        <gui:UserControlInstall x:Name="UCInstall"
+                                DataContext="{Binding Install}"
+                                Visibility="{Binding Visibility}"/>
 
         <!-- Footer -->
-        <StackPanel Orientation="Horizontal"
+        <StackPanel x:Name="Footer"
+                    Orientation="Horizontal"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Center"
                     Margin="0,5">

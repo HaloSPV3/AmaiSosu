@@ -18,50 +18,40 @@
  */
 
 using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
 using MahApps.Metro.Controls;
-using Microsoft.Win32;
 
 namespace AmaiSosu.GUI
 {
     public partial class MainWindow : MetroWindow
     {
-        private readonly Main _main;
+        private Main _main;
 
         public MainWindow()
         {
             InitializeComponent();
             _main = (Main) DataContext;
             _main.Initialise();
-        }
 
-        public MainWindow(StartupEventArgs e)
-        {
-            InitializeComponent();
-            _main = (Main) DataContext;
-            _main.Initialise(e);
-        }
+            /// Main.Compile -> MainWindow.UCCompile.DataContext (in xaml) -> UCCompile.Compile
+            /// Main.Help    -> MainWindow.UCHelp.DataContext (in xaml)    -> UCHelp.Help
+            /// Main.Install -> MainWindow.UCInstall.DataContext (in xaml) -> UCInstall.Install
+            UCCompile.Compile = (Compile) UCCompile.DataContext;
+            UCHelp.Help       = (Help)    UCHelp.DataContext;
+            UCInstall.Install = (Install) UCInstall.DataContext;
 
-        private async void Install(object sender, RoutedEventArgs e)
-        {
-            InstallButton.IsEnabled = false;
-
-            await Task.Run(() => _main.Install());
-
-            InstallButton.IsEnabled = true;
-        }
-
-        private void Browse(object sender, RoutedEventArgs e)
-        {
-            var openFileDialog = new OpenFileDialog
+            if (Startup.Auto && _main.Success)
             {
-                Filter = "HCE Executable|haloce.exe"
-            };
-
-            if (openFileDialog.ShowDialog() == true)
-                _main.Path = Path.GetDirectoryName(openFileDialog.FileName);
+                System.Threading.Tasks.Task.Run(() =>
+                {
+                    bool closed = false;
+                    while (!closed)
+                    {
+                        closed = Process.GetCurrentProcess().CloseMainWindow();
+                        System.Threading.Thread.Sleep(100);
+                    }
+                });
+            }
         }
 
         private void About(object sender, RoutedEventArgs e)

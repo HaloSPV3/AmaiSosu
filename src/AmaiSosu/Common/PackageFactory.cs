@@ -20,44 +20,67 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using AmaiSosu.Common;
+using AmaiSosu.Core;
 
-namespace AmaiSosu.Installation
+namespace AmaiSosu.Common
 {
-    public class InstallerFactory
+    public class PackageFactory
     {
         /// <summary>
         ///     Available OpenSauce Installer types.
         /// </summary>
         public enum Type
         {
-            Default
+            CompilerDefault,
+            InstallerDefault
         }
 
-        private readonly string _installationPath;
+        private readonly string _path;
         private readonly Output _output;
 
         /// <summary>
         ///     OpenSauceInstallerFactory constructor.
         /// </summary>
-        /// <param name="installationPath">
+        /// <param name="path">
         ///     The HCE directory path -- used to install the OpenSauce library data to.
         /// </param>
-        public InstallerFactory(string installationPath)
+        public PackageFactory(string path)
         {
-            _installationPath = installationPath;
+            _path = path;
         }
 
         /// <inheritdoc />
-        /// <param name="installationPath">
+        /// <param name="path">
         ///     The HCE directory path -- used to install the OpenSauce library data to.
         /// </param>
         /// <param name="output">
-        ///     Output class for  packages to write messages to.
+        ///     Output class for packages to write messages to.
         /// </param>
-        public InstallerFactory(string installationPath, Output output) : this(installationPath)
+        public PackageFactory(string path, Output output) : this(path)
         {
             _output = output;
+        }
+
+        /// <summary>
+        ///     Retrieves OpenSauceCompiler instance.
+        /// </summary>
+        /// <param name="type">
+        ///     Type of OpenSauceCompiler instance.
+        /// </param>
+        /// <returns>
+        ///     OpenSauceCompiler instancce for compiling OpenSauce to packages in an SFX application.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">type - null</exception>
+        public Compiler GetCompiler(Type type = Type.CompilerDefault)
+        {
+            switch (type)
+            {
+                case Type.CompilerDefault:
+                    return new Compiler(_path, GetOpenSaucePackages(), _output);
+
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
 
         /// <summary>
@@ -72,19 +95,20 @@ namespace AmaiSosu.Installation
         /// <exception cref="ArgumentOutOfRangeException">
         ///     Invalid OpenSauceInstaller type given.
         /// </exception>
-        public Installer Get(Type type = Type.Default)
+        public Installer GetInstaller(Type type = Type.InstallerDefault)
         {
             switch (type)
             {
-                case Type.Default:
-                    return new Installer(_installationPath, GetOpenSaucePackages(), _output);
+                case Type.InstallerDefault:
+                    return new Installer(_path, GetOpenSaucePackages(), _output);
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
 
         /// <summary>
-        ///     Retrieve a list of packages that represent the OpenSauce installation data.
+        ///     Retrieve a list of packages that represent the OpenSauce package data.
         /// </summary>
         /// <returns>
         ///     A list of OpenSauce packages that replicate an original OS installation when installed.
@@ -92,15 +116,15 @@ namespace AmaiSosu.Installation
         /// </returns>
         private List<Package> GetOpenSaucePackages()
         {
-            var guiDirPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-
-            var libPackage = Path.Combine(Package.Directory, $"{Installer.LibPackage}.{Package.Extension}");
-            var guiPackage = Path.Combine(Package.Directory, $"{Installer.GuiPackage}.{Package.Extension}");
+            /// Install: new Package(source, desc, destination, _output)
+            /// Compile: new Package(destination, desc, source, _output)
+            var libPackage = Path.Combine(Package.Directory, Installer.LibPackage);
+            var guiPackage = Path.Combine(Package.Directory, Installer.GuiPackage);
 
             return new List<Package>
             {
-                new Package(libPackage, "OpenSauce core and dependencies", _installationPath, _output),
-                new Package(guiPackage, "In-game OpenSauce UI assets", guiDirPath, _output),
+                new Package(libPackage, "OpenSauce core and dependencies", _path, _output),
+                new Package(guiPackage, "In-game OpenSauce UI assets", Paths.KStudios, _output),
             };
         }
     }

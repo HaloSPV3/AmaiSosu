@@ -18,8 +18,9 @@
  */
 
 using System.IO;
-using System.IO.Compression;
 using AmaiSosu.Common.Exceptions;
+using AmaiSosu.Common.IO;
+using static System.IO.Path;
 
 namespace AmaiSosu.Common
 {
@@ -38,19 +39,19 @@ namespace AmaiSosu.Common
         /// </summary>
         public const string Extension = "pkg";
 
-        public Package(string archiveName, string description, string destination)
-        {
-            ArchiveName = archiveName;
-            Description = description;
-            Destination = destination;
-        }
-
-        public Package(string archiveName, string description, string destination, Output output)
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="Package"/> class.
+        /// </summary>
+        /// <param name="archiveName">Name of the archive.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="path">The Compile source or Install destination path.</param>
+        /// <param name="output">The instance of Output for outputting inbound messages.</param>
+        public Package(string archiveName, string description, string path, Output output)
             : base(output)
         {
             ArchiveName = archiveName;
             Description = description;
-            Destination = destination;
+            Path = path;
         }
 
         protected override string Identifier { get; } = "Atarashii.Package";
@@ -66,9 +67,9 @@ namespace AmaiSosu.Common
         public string Description { get; }
 
         /// <summary>
-        ///     Destination directory path for the installed contents.
+        ///     Source or destination directory path for the installed contents.
         /// </summary>
-        public string Destination { get; }
+        public string Path { get; }
 
         /// <inheritdoc />
         /// False if:
@@ -76,13 +77,33 @@ namespace AmaiSosu.Common
         /// - Install destination does not exist.
         public Verification Verify()
         {
-            if (!File.Exists(ArchiveName))
-                return new Verification(false, "Cannot install specified package. Package archive does not exist.");
-
-            if (!System.IO.Directory.Exists(Destination))
-                return new Verification(false, "Cannot install specified package. Destination does not exist.");
+            if (!System.IO.Directory.Exists(Combine(Paths.Temp, ArchiveName)))
+                return new Verification(false, "Cannot install specified package. Package's directory does not exist.");
 
             return new Verification(true);
+        }
+
+        /// <summary>
+        ///     Compiles a directory to a new Package instance.
+        /// </summary>
+        public void Compile()
+        {
+            try
+            {
+                Copy.All(Path, Combine(Paths.Temp, ArchiveName));
+            }
+            catch (IOException)
+            {
+                WriteWarn($"{Description} failed to compile new package.");
+            }
+
+            WriteInfo($"Verifying {Description} package.");
+            var state = Verify();
+
+            if (!state.IsValid)
+                WriteAndThrow(new PackageException(state.Reason));
+
+            WriteSuccess($"Package {Description} has been successfully verified.");
         }
 
         /// <summary>
@@ -105,7 +126,7 @@ namespace AmaiSosu.Common
 
             try
             {
-                ZipFile.ExtractToDirectory(ArchiveName, Destination);
+                Copy.All(Combine(Paths.Temp, ArchiveName), Path);
             }
             catch (IOException)
             {

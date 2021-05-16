@@ -19,7 +19,7 @@ namespace AmaiSosu.GUI.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Messages {
@@ -70,7 +70,25 @@ namespace AmaiSosu.GUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Click here to install OpenSauce!.
+        ///   Looks up a localized string similar to Click here to compile an OpenSauce release!.
+        /// </summary>
+        internal static string CompileReady {
+            get {
+                return ResourceManager.GetString("CompileReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Compilation was successful!.
+        /// </summary>
+        internal static string CompileSuccess {
+            get {
+                return ResourceManager.GetString("CompileSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click here to compile an OpenSauce release!.
         /// </summary>
         internal static string InstallReady {
             get {
@@ -79,7 +97,7 @@ namespace AmaiSosu.GUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Installation has been successful!.
+        ///   Looks up a localized string similar to Compilation was successful!.
         /// </summary>
         internal static string InstallSuccess {
             get {

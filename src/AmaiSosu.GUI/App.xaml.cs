@@ -16,18 +16,56 @@
  * You should have received a copy of the GNU General Public License
  * along with AmaiSosu.  If not, see <http://www.gnu.org/licenses/>.
  */
-using System.Windows;
 
-﻿namespace AmaiSosu.GUI
+using System.Windows;
+using System.Linq;
+using SSO = System.StringSplitOptions;
+
+namespace AmaiSosu.GUI
 {
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
-        private void AppStart_Auto(object sender, StartupEventArgs e)
+        private void AppStart(object sender, StartupEventArgs e)
         {
-            new MainWindow(e).Show();
+            /** Set Startup Settings */
+            if (e.Args.Length != 0)
+            {
+                foreach (var verb in e.Args)
+                {
+                    if (!AmaiSosu.Startup.Auto && verb.ToLower().Contains("--auto"))
+                        AmaiSosu.Startup.Auto = true;
+                    else if (!AmaiSosu.Startup.Compile && verb.ToLower().Contains("--compile"))
+                        AmaiSosu.Startup.Compile = true;
+                    else if (!AmaiSosu.Startup.Help && verb.ToLower().Contains("--help"))
+                        AmaiSosu.Startup.Help = true;
+                    else if (verb.ToLower().Contains("--path="))
+                    {
+                        var path = verb.Replace("--path=", string.Empty);
+                        path = path.Replace("\"", string.Empty);
+                        try
+                        {
+                            path = RemoveInvalidChars(path);
+                            if (System.IO.Path.IsPathRooted(path))
+                                AmaiSosu.Startup.Path = path;
+                        }
+                        catch
+                        { }
+                    }
+                }
+            }
+            new MainWindow().Show();
+        }
+
+        /// <summary>
+        ///     Strip illegal characters from a path string.
+        /// </summary>
+        /// <see cref="https://stackoverflow.com/a/23182807/14894786"/>
+        private string RemoveInvalidChars(string filename)
+        {
+            return string.Concat(filename.Split(System.IO.Path.GetInvalidPathChars()));
         }
     }
 }

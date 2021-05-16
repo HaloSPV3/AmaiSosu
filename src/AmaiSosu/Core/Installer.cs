@@ -23,8 +23,9 @@ using AmaiSosu.Common;
 using static System.Environment;
 using static System.Environment.SpecialFolder;
 using static System.IO.Path;
+using SFX = HXE.SFX;
 
-namespace AmaiSosu.Installation
+namespace AmaiSosu.Core
 {
     /// <summary>
     ///     Type for installing OpenSauce to the file system.
@@ -52,13 +53,13 @@ namespace AmaiSosu.Installation
 
         public Installer(string hcePath, List<Package> packages)
         {
-            _hcePath  = hcePath;
+            _hcePath = hcePath;
             _packages = packages;
         }
 
         public Installer(string hcePath, List<Package> packages, Output output) : base(output)
         {
-            _hcePath  = hcePath;
+            _hcePath = hcePath;
             _packages = packages;
         }
 
@@ -103,24 +104,46 @@ namespace AmaiSosu.Installation
         /// </exception>
         public void Install()
         {
+            /// 1. EXTRACT packages from the entry assembly (usually a SFX AmaiSosu.GUI)
+            /// 2. VERIFY the packages were extracted properly.
+            /// 3. INSTALL packages.
+            /// 4. INSTALL Direct3D9 Extensions
+
+            /**
+             * 1. Extraction
+             */
+            WriteInfo("Extracting packages...");
+
+            SFX.Extract(new SFX.Configuration
+            {
+                Target = new DirectoryInfo(
+                    Paths.Temp)
+            });
+
+            /**
+             * 2. Verification
+             */
             WriteInfo("Verifying the OpenSauce installer.");
             var state = Verify();
 
             if (!state.IsValid)
                 WriteAndThrow(new OpenSauceException(state.Reason));
 
-            var data = Combine(GetFolderPath(CommonApplicationData), "Kornner Studios");
-
-            if (Directory.Exists(data))
-                Directory.Delete(data, true);
-
             WriteSuccess("OpenSauce installer has been successfully verified.");
+
+            /**
+             * 4. Installation - packages
+             */
             WriteInfo("Attempting to install OpenSauce to the filesystem.");
 
             foreach (var package in _packages)
                 package.Install();
 
             WriteSuccess("OpenSauce has been successfully installed to the filesystem.");
+
+            /**
+             * 5. Installation - Direct3D9 Extensions
+             */
             WriteInfo("Direct3D9 Extensions must be installed for Open Sauce to work.");
 
             var process = new System.Diagnostics.Process
@@ -133,12 +156,11 @@ namespace AmaiSosu.Installation
                                        "dxredist",
                                        "dxsetup.exe"),
                     Verb = "RunAs",
+                    Arguments = "/silent"
                 }
             };
 
-            if (process.Start())
-                WriteAndThrow(new System.Exception("Failed to start DirectX Setup."));
-
+            process.Start();
             process.WaitForExit();
             if (process.ExitCode != 0)
                 WriteAndThrow(new System.Exception($"DirectX Setup exitted with code {process.ExitCode}."));

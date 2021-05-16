@@ -1,13 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{B5A95A87-2022-4BB8-A41C-CEF80E31E172}"
-ProjectSection(SolutionItems) = preProject
-	../README.md = ../README.md
-EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmaiSosu.GUI", "AmaiSosu.GUI\AmaiSosu.GUI.csproj", "{4AB5A870-7A84-4206-994B-EAB91473CD6C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{ACAA5D9F-B23D-43E1-B2DF-8C03230975A1} = {ACAA5D9F-B23D-43E1-B2DF-8C03230975A1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmaiSosu", "AmaiSosu\AmaiSosu.csproj", "{693BF44B-7BA3-461C-8CE1-D0F11FBE930D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HXE", "..\ext\HCE\hxe\kernel\src\HXE.csproj", "{ACAA5D9F-B23D-43E1-B2DF-8C03230975A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DBA2FA42-D4CE-4515-9FD7-9673D124AA96}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,7 +36,15 @@ Global
 		{693BF44B-7BA3-461C-8CE1-D0F11FBE930D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{693BF44B-7BA3-461C-8CE1-D0F11FBE930D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{693BF44B-7BA3-461C-8CE1-D0F11FBE930D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACAA5D9F-B23D-43E1-B2DF-8C03230975A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACAA5D9F-B23D-43E1-B2DF-8C03230975A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACAA5D9F-B23D-43E1-B2DF-8C03230975A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACAA5D9F-B23D-43E1-B2DF-8C03230975A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E873C6E7-6FA4-401F-A525-20926F55BCC8}
 	EndGlobalSection
 EndGlobal
