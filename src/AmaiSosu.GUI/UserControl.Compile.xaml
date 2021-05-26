@@ -34,10 +34,10 @@
                     BorderThickness="0"
                     Margin="5"
                     Content="{Binding CompileText}"
+                    ToolTip="{Binding CompileText}"
                     IsEnabled="{Binding CanCompile}"
                     Click="Commit"
                     Name="CompileButton" />
-            
         </Grid>
     </Grid>
 </UserControl>
