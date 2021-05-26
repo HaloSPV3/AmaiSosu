@@ -19,6 +19,7 @@
 
 using System.Windows;
 using System.Linq;
+using System.Collections.Generic;
 using SSO = System.StringSplitOptions;
 
 namespace AmaiSosu.GUI
@@ -30,6 +31,18 @@ namespace AmaiSosu.GUI
     {
         private void AppStart(object sender, StartupEventArgs e)
         {
+            /** Check if current process is elevated */
+            var process = System.Diagnostics.Process.GetCurrentProcess();
+            if (process.StartInfo.Verb != "runas")
+            {
+                var newProcess = process;
+                newProcess.StartInfo.Verb = "runas";
+                newProcess.Start();
+
+                process.CloseMainWindow(); // Does this end the current process? If not...
+                return;
+            }
+
             /** Set Startup Settings */
             if (e.Args.Length != 0)
             {
