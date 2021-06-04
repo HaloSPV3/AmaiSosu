@@ -17,10 +17,10 @@
  * along with AmaiSosu.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+using System;
+using System.ComponentModel;
+using System.Security.Principal;
 using System.Windows;
-using System.Linq;
-using System.Collections.Generic;
-using SSO = System.StringSplitOptions;
 
 namespace AmaiSosu.GUI
 {
@@ -29,56 +29,68 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class App : Application
     {
-        private void AppStart(object sender, StartupEventArgs e)
+        private void AppStart(object sender, StartupEventArgs args)
         {
-            /** Check if current process is elevated */
-            var process = System.Diagnostics.Process.GetCurrentProcess();
-            if (process.StartInfo.Verb != "runas")
-            {
-                var newProcess = process;
-                newProcess.StartInfo.Verb = "runas";
-                newProcess.Start();
+            var Args = args.Args;
 
-                process.CloseMainWindow(); // Does this end the current process? If not...
-                return;
+            /** Check if current process is elevated */
+            var isElevated = new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
+            if (isElevated)
+            {
+                var newProcess = System.Diagnostics.Process.GetCurrentProcess();
+                newProcess.StartInfo.FileName = newProcess.MainModule.FileName;
+                newProcess.StartInfo.Verb = "runas";
+                newProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
+                newProcess.StartInfo.Arguments = string.Join(" ", Args);
+                try
+                {
+                    newProcess.Start();
+                    newProcess.WaitForExit();
+                }
+                catch (Win32Exception e)
+                {
+                    throw new UnauthorizedAccessException("UAC prompt was declined.", e);
+                }
             }
 
             /** Set Startup Settings */
-            if (e.Args.Length != 0)
+            if (Args.Length != 0)
             {
-                foreach (var verb in e.Args)
+                foreach (var arg in Args)
                 {
-                    if (!AmaiSosu.Startup.Auto && verb.ToLower().Contains("--auto"))
+                    if (!AmaiSosu.Startup.Auto && arg.ToLower().Contains("--auto"))
                         AmaiSosu.Startup.Auto = true;
-                    else if (!AmaiSosu.Startup.Compile && verb.ToLower().Contains("--compile"))
+                    else if (!AmaiSosu.Startup.Compile && arg.ToLower().Contains("--compile"))
                         AmaiSosu.Startup.Compile = true;
-                    else if (!AmaiSosu.Startup.Help && verb.ToLower().Contains("--help"))
+                    else if (!AmaiSosu.Startup.Help && arg.ToLower().Contains("--help"))
                         AmaiSosu.Startup.Help = true;
-                    else if (verb.ToLower().Contains("--path="))
+                    else if (arg.Contains("--path="))
                     {
-                        var path = verb.Replace("--path=", string.Empty);
+                        var path = arg.Replace("--path=", string.Empty);
                         path = path.Replace("\"", string.Empty);
                         try
                         {
-                            path = RemoveInvalidChars(path);
                             if (System.IO.Path.IsPathRooted(path))
                                 AmaiSosu.Startup.Path = path;
                         }
-                        catch
-                        { }
+                        catch (ArgumentException e)
+                        {
+                            throw new ArgumentException($"The path supplied to --path was invalid: {path}", e);
+                        }
+                    }
+                    /// Tasks to execute with different Windows user/group permissions.
+                    else if (arg.Contains("--special-task="))
+                    {
+                        // example 1: --special-task=FileSystem.TakeOwnership{"C:\"}
+                        // example 2: --special-task=FileSystem.Delete{""}
+                        // Both examples require a Path parameter to do anything.
+                        // (!) What if --path was supplied after
+                        var task = arg.Replace("--special-task=", string.Empty); // remove argument's prefix
+                        task = task.Replace("\"", string.Empty); // remove quotation marks
                     }
                 }
             }
             new MainWindow().Show();
-        }
-
-        /// <summary>
-        ///     Strip illegal characters from a path string.
-        /// </summary>
-        /// <see cref="https://stackoverflow.com/a/23182807/14894786"/>
-        private string RemoveInvalidChars(string filename)
-        {
-            return string.Concat(filename.Split(System.IO.Path.GetInvalidPathChars()));
         }
     }
 }
