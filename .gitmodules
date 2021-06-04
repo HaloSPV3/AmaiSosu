@@ -1,3 +1,7 @@
 [submodule "ext/HCE"]
 	path = ext/HCE
 	url = ../HCE
+[submodule "ext/Intern"]
+	path = ext/Intern
+	url = https://github.com/BinToss/Intern.git
+	branch = main
