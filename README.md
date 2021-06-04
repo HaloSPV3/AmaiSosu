@@ -67,13 +67,20 @@ will be deactivated to ensure that there is no collision.
 
 ### Portable Installations
 
-For users out there with alternative HCE installations in conformist
+OpenSauce 4.0.0 (2015) and 4.0.1 (2017) require the following files at *non-portable* paths:
+| Usage                     | File Path
+| ------------------------- | ---------
+| In-game config overlay(?) | `C:\\ProgramData\\Kornner Studios\\Halo CE\\OpenSauceUI.pak`
+| Geometry Buffer shaders   | `C:\\ProgramData\\Kornner Studios\\Halo CE\\shaders\\gbuffer_shaders.shd`
+| Post-Processing shaders   | `C:\\ProgramData\\Kornner Studios\\Halo CE\\shaders\\pp_shaders.shd`
+
+~~For users out there with alternative HCE installations in conformist
 environments, download the installer and extract it using 7-Zip or WinRAR. Then,
 run the extracted `AmaiSosu.GUI.exe` executable without admin permissions and
-install it to your portable HCE directory.
+install it to your portable HCE directory.~~
 
-Note that attempting to install AmaiSosu to HCE in a restricted location (e.g.
-`Program Files\Microsoft Games\`) without admin permissions will cause issues!
+~~Note that attempting to install AmaiSosu to HCE in a restricted location (e.g.
+`Program Files\Microsoft Games\`) without admin permissions will cause issues!~~
 
 # Support
 
