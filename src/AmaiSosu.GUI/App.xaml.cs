@@ -21,6 +21,7 @@ using System;
 using System.ComponentModel;
 using System.Security.Principal;
 using System.Windows;
+using Tasks = Intern.Tasks;
 
 namespace AmaiSosu.GUI
 {
@@ -32,26 +33,6 @@ namespace AmaiSosu.GUI
         private void AppStart(object sender, StartupEventArgs args)
         {
             var Args = args.Args;
-
-            /** Check if current process is elevated */
-            var isElevated = new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
-            if (isElevated)
-            {
-                var newProcess = System.Diagnostics.Process.GetCurrentProcess();
-                newProcess.StartInfo.FileName = newProcess.MainModule.FileName;
-                newProcess.StartInfo.Verb = "runas";
-                newProcess.StartInfo.WorkingDirectory = Environment.CurrentDirectory;
-                newProcess.StartInfo.Arguments = string.Join(" ", Args);
-                try
-                {
-                    newProcess.Start();
-                    newProcess.WaitForExit();
-                }
-                catch (Win32Exception e)
-                {
-                    throw new UnauthorizedAccessException("UAC prompt was declined.", e);
-                }
-            }
 
             /** Set Startup Settings */
             if (Args.Length != 0)
@@ -81,12 +62,23 @@ namespace AmaiSosu.GUI
                     /// Tasks to execute with different Windows user/group permissions.
                     else if (arg.Contains("--special-task="))
                     {
-                        // example 1: --special-task=FileSystem.TakeOwnership{"C:\"}
-                        // example 2: --special-task=FileSystem.Delete{""}
-                        // Both examples require a Path parameter to do anything.
-                        // (!) What if --path was supplied after
-                        var task = arg.Replace("--special-task=", string.Empty); // remove argument's prefix
+                        // example 1: --special-task=FileSystemDelete{""}
+                        // example 2: --special-task=FileSystemModifyPermissions{""}
+                        string task = arg.Replace("--special-task=", string.Empty); // remove argument's prefix
                         task = task.Replace("\"", string.Empty); // remove quotation marks
+                        switch (task)
+                        {
+                            case string task1 when task1.StartsWith("FileSystemDelete{") && task1.EndsWith("}"):
+                                var path = task1.Replace("FileSystemDelete{", string.Empty).Replace("}", string.Empty); // trim matched characters
+                                Tasks.DoTask(Tasks.Type.FileSystemDelete, path);
+                                break;
+
+                            case string task2 when task2.StartsWith("FileSystemModifyPermissions") && task2.EndsWith(""):
+                                break;
+
+                            default:
+                                throw new ArgumentOutOfRangeException("The specified Task is unrecognized.");
+                        }
                     }
                 }
             }

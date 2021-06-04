@@ -150,6 +150,10 @@
       <Project>{acaa5d9f-b23d-43e1-b2df-8c03230975a1}</Project>
       <Name>HXE</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ext\Intern\Intern.csproj">
+      <Project>{d7de3cd9-4325-4c48-8b4d-a88f507c65de}</Project>
+      <Name>Intern</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AmaiSosu\AmaiSosu.csproj">
       <Project>{693bf44b-7ba3-461c-8ce1-d0f11fbe930d}</Project>
       <Name>AmaiSosu</Name>
