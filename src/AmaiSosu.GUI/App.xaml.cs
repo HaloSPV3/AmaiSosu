@@ -18,10 +18,8 @@
  */
 
 using System;
-using System.ComponentModel;
-using System.Security.Principal;
 using System.Windows;
-using Tasks = Intern.Tasks;
+using Intern;
 
 namespace AmaiSosu.GUI
 {
@@ -64,20 +62,15 @@ namespace AmaiSosu.GUI
                     {
                         // example 1: --special-task=FileSystemDelete{""}
                         // example 2: --special-task=FileSystemModifyPermissions{""}
-                        string task = arg.Replace("--special-task=", string.Empty); // remove argument's prefix
-                        task = task.Replace("\"", string.Empty); // remove quotation marks
-                        switch (task)
+                        string memo = arg.Replace("--special-task=", string.Empty); // remove argument's prefix
+                        memo = memo.Replace("\"", string.Empty); // remove quotation marks
+
+                        if (new System.IO.FileInfo(memo).Exists)
                         {
-                            case string task1 when task1.StartsWith("FileSystemDelete{") && task1.EndsWith("}"):
-                                var path = task1.Replace("FileSystemDelete{", string.Empty).Replace("}", string.Empty); // trim matched characters
-                                Tasks.DoTask(Tasks.Type.FileSystemDelete, path);
-                                break;
-
-                            case string task2 when task2.StartsWith("FileSystemModifyPermissions") && task2.EndsWith(""):
-                                break;
-
-                            default:
-                                throw new ArgumentOutOfRangeException("The specified Task is unrecognized.");
+                            Status status = new Memo.Read(memo);
+                            // TODO:
+                            // Severity	Code	Description
+                            // Error CS0426   The type name 'Read' does not exist in the type 'Memo'
                         }
                     }
                 }
