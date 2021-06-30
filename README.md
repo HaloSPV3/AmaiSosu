@@ -22,6 +22,18 @@
     </p>
 </html>
 
+<html>
+    <a href="https://codeclimate.com/github/HaloSPV3/AmaiSosu/maintainability">
+        <img src="https://api.codeclimate.com/v1/badges/a095f82cd198d0034b04/maintainability" />
+    </a>
+    <a href="https://codeclimate.com/github/HaloSPV3/AmaiSosu/test_coverage">
+        <img src="https://api.codeclimate.com/v1/badges/a095f82cd198d0034b04/test_coverage" />
+    </a>
+    <a href="https://codecov.io/gh/HaloSPV3/AmaiSosu">
+        <img src="https://codecov.io/gh/HaloSPV3/AmaiSosu/branch/main/graph/badge.svg?token=55B93J5TFA" />
+    </a>
+</html>
+
 # Introduction
 
 AmaiSosu is an installer for the HCE OpenSauce mod, which seeks to make the
@@ -68,6 +80,7 @@ will be deactivated to ensure that there is no collision.
 ### Portable Installations
 
 OpenSauce 4.0.0 (2015) and 4.0.1 (2017) require the following files at *non-portable* paths:
+
 | Usage                     | File Path
 | ------------------------- | ---------
 | In-game config overlay(?) | `C:\\ProgramData\\Kornner Studios\\Halo CE\\OpenSauceUI.pak`
@@ -100,3 +113,19 @@ The following invaluable testers have reported/assisted with issues:
 
 - [Icon](https://www.flaticon.com/free-icon/bowl-and-chopsticks-of-japan_12775)
 - [OpenSauce](https://twitter.com/KornnerStudios)
+
+# Badge dump
+### Markdown
+[![codecov](https://codecov.io/gh/HaloSPV3/AmaiSosu/branch/main/graph/badge.svg?token=55B93J5TFA)](https://codecov.io/gh/HaloSPV3/AmaiSosu)
+### HTML
+<html>
+    <a href="https://codeclimate.com/github/HaloSPV3/AmaiSosu/maintainability">
+        <img src="https://api.codeclimate.com/v1/badges/a095f82cd198d0034b04/maintainability" />
+    </a>
+    <a href="https://codeclimate.com/github/HaloSPV3/AmaiSosu/test_coverage">
+        <img src="https://api.codeclimate.com/v1/badges/a095f82cd198d0034b04/test_coverage" />
+    </a>
+    <a href="https://codecov.io/gh/HaloSPV3/AmaiSosu">
+        <img src="https://codecov.io/gh/HaloSPV3/AmaiSosu/branch/main/graph/badge.svg?token=55B93J5TFA" />
+    </a>
+</html>
