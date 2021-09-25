@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2018-2019 Emilian Roman
+ * Copyright (C) 2021 Noah Sherwin
  *
  * This file is part of AmaiSosu.
  *
