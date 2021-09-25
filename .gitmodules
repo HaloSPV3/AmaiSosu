@@ -1,7 +1,8 @@
-[submodule "ext/HCE"]
-	path = ext/HCE
-	url = ../HCE
 [submodule "ext/Intern"]
 	path = ext/Intern
 	url = https://github.com/BinToss/Intern.git
+	branch = main
+[submodule "HXE"]
+	path = ext/HXE
+	url = https://github.com/HaloSPV3/HXE.git
 	branch = main
