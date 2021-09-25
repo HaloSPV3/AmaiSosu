@@ -18,8 +18,17 @@
  */
 
 using System;
+using System.Diagnostics;
+using System.IO;
+using System.Management;
+using System.Security;
+using System.Security.AccessControl;
+using System.Security.Permissions;
+using System.Security.Principal;
 using System.Windows;
 using Intern;
+using static System.Environment;
+using static System.IO.Path;
 using ASStartup = AmaiSosu.Startup;
 
 namespace AmaiSosu.GUI
@@ -66,13 +75,67 @@ namespace AmaiSosu.GUI
                             }
                         case var text when text.StartsWith(Arg.Path):
                             {
+                                /// Rules:
+                                /// - Always a directory
+                                /// - Must be resolvable to a local directory path.
+                                /// - If it does not exist, it will be created.
+                                var path = text.Replace(Arg.Path, string.Empty).Replace("\"", string.Empty);
+                                var dir = new DirectoryInfo(path);
                                 try
                                 {
-                        catch (ArgumentException e)
-                        {
-                            throw new ArgumentException($"The path supplied to --path was invalid: {path}", e);
-                        }
-                    }
+                                    if (!IsPathRooted(dir.FullName))
+                                        throw new ArgumentException("The path does not have a filesystem root.");
+                                }
+                                catch (Exception e)
+                                {
+                                    var msg = $"The path, \"{path}\" supplied to --path was invalid. The application will close now. {NewLine}{e.Message}";
+                                    MessageBox.Show(msg, "Error: Path Not Valid", MessageBoxButton.OK, MessageBoxImage.Error);
+                                    throw new UriFormatException(msg, e);
+                                }
+
+                                try
+                                {
+                                    bool canWrite;
+
+                                    try
+                                    {
+                                        new System.Security.Permissions.FileIOPermission(FileIOPermissionAccess.AllAccess, path).Demand();
+                                        canWrite = true;
+                                    }
+                                    catch (SecurityException)
+                                    {
+                                        canWrite = false;
+                                    }
+                                    /// TODO: If we don't have Write access to 'path', start an Intern process to change that.
+                                    /// Note: The path likely contains either OpenSauce binaries or
+                                    /// SPV3/Halo binaries.
+
+                                    var process = (Intern.Helpers.Process) Process.GetCurrentProcess();
+                                    var processOwner = process.ProcessOwner;
+                                    ManagementObject processO = new ManagementObject();
+
+                                    DirectorySecurity acl;
+                                    AuthorizationRuleCollection rules;
+                                    if (!dir.Exists)
+                                    {
+                                        var parent = dir.Parent;
+                                        while (!parent.Exists)
+                                            parent = parent.Parent;
+                                        acl = parent.GetAccessControl(AccessControlSections.All);
+                                        rules = acl.GetAccessRules(true, true, typeof(NTAccount));
+                                    }
+                                    else
+                                    {
+                                        acl = dir.GetAccessControl(AccessControlSections.All);
+                                        rules = acl.GetAccessRules(true, true, typeof(NTAccount));
+                                    }
+
+                                    foreach (AuthorizationRule rule in rules)
+                                    {
+                                        if (rule.IdentityReference.Value.Equals(processOwner, StringComparison.CurrentCultureIgnoreCase))
+                                        {
+                                        }
+                                    }
 
                                     ASStartup.Path = dir.FullName;
                                 }
