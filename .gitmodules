@@ -2,7 +2,9 @@
 	path = ext/Intern
 	url = https://github.com/BinToss/Intern.git
 	branch = main
+	ignore = all
 [submodule "HXE"]
 	path = ext/HXE
 	url = https://github.com/HaloSPV3/HXE.git
 	branch = main
+	ignore = all
