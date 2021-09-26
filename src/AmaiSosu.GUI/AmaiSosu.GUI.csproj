@@ -48,12 +48,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Costura.Fody" Version="3.3.3" />
     <PackageReference Include="Fody" Version="4.2.1" />
-    <PackageReference Include="MahApps.Metro" Version="1.6.5" />
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.246501">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Costura.Fody" Version="5.6.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.7" />
   </ItemGroup>
   <PropertyGroup>
     <PreBuildEvent>git describe --tags &gt; "$(ProjectDir)\Resources\Version.txt"</PreBuildEvent>
