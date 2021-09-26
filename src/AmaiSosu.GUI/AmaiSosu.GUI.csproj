@@ -48,11 +48,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ControlzEx" Version="3.0.2.4" />
     <PackageReference Include="Costura.Fody" Version="3.3.3" />
     <PackageReference Include="Fody" Version="4.2.1" />
     <PackageReference Include="MahApps.Metro" Version="1.6.5" />
-    <PackageReference Include="System.Management" Version="5.0.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.246501">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <PropertyGroup>
     <PreBuildEvent>git describe --tags &gt; "$(ProjectDir)\Resources\Version.txt"</PreBuildEvent>
