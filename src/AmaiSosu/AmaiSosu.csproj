@@ -1,9 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <!-- Application | General -->
     <OutputType>Library</OutputType>
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
+    <TargetFrameworks>net6.0-windows;net5.0-windows</TargetFrameworks>
+    <AssemblyName>AmaiSosu.lib</AssemblyName>
+    <RootNamespace>AmaiSosu</RootNamespace>
+    <ProjectGuid>693BF44B-7BA3-461C-8CE1-D0F11FBE930D</ProjectGuid>
+    <!-- Build | General -->
+    <Deterministic>true</Deterministic>
+    <FileAlignment>512</FileAlignment>
+    <!-- Build | Error and warnings -->
+    <WarningLevel>4</WarningLevel>
+    <!-- Build | Output -->
+    <!-- Build | Events -->
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <!-- GitVersion DotNet SDK Compatibility -->
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <!-- Misc -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <TrimmingEnabled>true</TrimmingEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>..\..\bin\Debug\</OutputPath>
