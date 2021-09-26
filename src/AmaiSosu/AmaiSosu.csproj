@@ -7,6 +7,7 @@
     <RootNamespace>AmaiSosu</RootNamespace>
     <ProjectGuid>693BF44B-7BA3-461C-8CE1-D0F11FBE930D</ProjectGuid>
     <!-- Build | General -->
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <Deterministic>true</Deterministic>
     <FileAlignment>512</FileAlignment>
     <!-- Build | Error and warnings -->

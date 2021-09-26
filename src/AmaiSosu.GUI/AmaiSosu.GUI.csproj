@@ -8,6 +8,7 @@
     <!-- Application | Resources -->
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <!-- Build | General -->
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <Deterministic>true</Deterministic>
     <FileAlignment>512</FileAlignment>
     <!-- Build | Error and warnings -->
