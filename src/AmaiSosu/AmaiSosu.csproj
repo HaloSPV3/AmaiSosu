@@ -7,9 +7,6 @@
     <RootNamespace>AmaiSosu</RootNamespace>
     <ProjectGuid>693BF44B-7BA3-461C-8CE1-D0F11FBE930D</ProjectGuid>
     <!-- Build | General -->
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Deterministic>true</Deterministic>
-    <FileAlignment>512</FileAlignment>
     <!-- Build | Error and warnings -->
     <WarningLevel>4</WarningLevel>
     <!-- Build | Output -->
@@ -19,7 +16,7 @@
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <!-- Misc -->
     <PublishSingleFile>true</PublishSingleFile>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <TrimmingEnabled>true</TrimmingEnabled>
   </PropertyGroup>

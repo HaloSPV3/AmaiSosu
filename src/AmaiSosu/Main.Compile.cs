@@ -21,7 +21,6 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using AmaiSosu.Common;
 using AmaiSosu.Common.IO;
 using static System.Environment;
@@ -60,7 +59,7 @@ namespace AmaiSosu
 
         private string RenameProduct()
         {
-            var exeFileInfo = new FileInfo(Assembly.GetEntryAssembly()?.Location
+            var exeFileInfo = new FileInfo(AppContext.BaseDirectory
                              ?? throw new InvalidOperationException());
 
             var fvi = FileVersionInfo.GetVersionInfo(exeFileInfo.FullName);

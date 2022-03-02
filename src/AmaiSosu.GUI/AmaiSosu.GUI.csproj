@@ -8,16 +8,11 @@
     <!-- Application | Resources -->
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <!-- Build | General -->
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <Deterministic>true</Deterministic>
-    <FileAlignment>512</FileAlignment>
     <!-- Build | Error and warnings -->
     <WarningLevel>4</WarningLevel>
     <!-- Build | Output -->
     <!-- Build | Events -->
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <!-- Build | Strong Naming -->
-    <SignAssembly>False</SignAssembly>
     <!-- NuGet Packaging -->
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/HaloSPV3/AmaiSosu</PackageProjectUrl>
@@ -33,8 +28,6 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <IncludeSymbols>false</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <!-- GitVersion DotNet SDK Compatibility -->
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <!-- Manifest Info -->
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <UseApplicationTrust>true</UseApplicationTrust><!-- use ProductName, PublisherName, SupportUrl-->
@@ -43,9 +36,6 @@
     <TargetZone>Internet</TargetZone>
     <!-- Misc -->
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <PublishSingleFile>true</PublishSingleFile>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <ToolCommandName>amaisosu</ToolCommandName>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
@@ -78,6 +68,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="gitversion.msbuild" Version="5.7.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.246501">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
