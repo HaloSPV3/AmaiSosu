@@ -5,11 +5,11 @@
     <TargetFrameworks>net6.0-windows;net5.0-windows</TargetFrameworks>
     <AssemblyName>AmaiSosu</AssemblyName>
     <RootNamespace>AmaiSosu.GUI</RootNamespace>
+    <OutputPath>..\..\bin\$(Configuration)</OutputPath>
     <!-- Application | Resources -->
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <!-- Build | General -->
     <!-- Build | Error and warnings -->
-    <WarningLevel>4</WarningLevel>
     <!-- Build | Output -->
     <!-- Build | Events -->
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -24,28 +24,18 @@
     <Company>github/HaloSPV3</Company>
     <Description>OpenSauce Installer</Description>
     <Copyright>Copyright © 2021</Copyright>
-    <PackageIcon></PackageIcon>
+    <PackageIcon>https://user-images.githubusercontent.com/10241434/61166409-7f6f7d80-a55f-11e9-8e68-bfaa3e39890e.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <IncludeSymbols>false</IncludeSymbols>
+    <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <!-- Manifest Info -->
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
-    <UseApplicationTrust>true</UseApplicationTrust><!-- use ProductName, PublisherName, SupportUrl-->
     <PublisherName>Halo SPV3 Team</PublisherName>
     <SupportUrl>https://github.com/HaloSPV3/AmaiSosu/issues</SupportUrl>
     <TargetZone>Internet</TargetZone>
     <!-- Misc -->
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <ToolCommandName>amaisosu</ToolCommandName>
     <UseWPF>true</UseWPF>
-    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\bin\Debug\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>..\..\bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ext\hxe\src\HXE.csproj" />
@@ -79,6 +69,6 @@
     <PackageReference Include="MahApps.Metro" Version="2.4.7" />
   </ItemGroup>
   <PropertyGroup>
-    <PreBuildEvent>git describe --tags &gt; "$(ProjectDir)\Resources\Version.txt"</PreBuildEvent>
+    <PreBuildEvent>git describe --tags &gt; "$(MSBuildProjectDirectory)\Resources\Version.txt"</PreBuildEvent>
   </PropertyGroup>
 </Project>

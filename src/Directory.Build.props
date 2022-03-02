@@ -1,0 +1,16 @@
+<Project>
+ <PropertyGroup>
+ </PropertyGroup>
+  <PropertyGroup>
+  <!-- Application -->
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Deterministic>true</Deterministic>
+    <FileAlignment>512</FileAlignment>
+  <!-- Publish -->
+    <PublishSingleFile>true</PublishSingleFile>
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+  <!-- Analyzers -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+  </PropertyGroup>
+</Project>

@@ -3,28 +3,19 @@
     <!-- Application | General -->
     <OutputType>Library</OutputType>
     <TargetFrameworks>net6.0-windows;net5.0-windows</TargetFrameworks>
-    <AssemblyName>AmaiSosu.lib</AssemblyName>
+    <AssemblyName>AmaiSosu</AssemblyName>
     <RootNamespace>AmaiSosu</RootNamespace>
     <ProjectGuid>693BF44B-7BA3-461C-8CE1-D0F11FBE930D</ProjectGuid>
+    <OutputPath>..\..\bin\$(Configuration)</OutputPath>
     <!-- Build | General -->
     <!-- Build | Error and warnings -->
-    <WarningLevel>4</WarningLevel>
     <!-- Build | Output -->
     <!-- Build | Events -->
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <!-- GitVersion DotNet SDK Compatibility -->
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <!-- Misc -->
-    <PublishSingleFile>true</PublishSingleFile>
-    <RuntimeIdentifier>win10-x86</RuntimeIdentifier>
-    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <!-- Publish -->
+    <IsTrimmable>true</IsTrimmable>
     <TrimmingEnabled>true</TrimmingEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\bin\Debug\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>..\..\bin\Release\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Resources\FileNames.Designer.cs">
