@@ -64,8 +64,8 @@
 
     <None Include="..\..\README.md" Path="true" PackagePath="" />
 
-    <PackageReference Include="Costura.Fody" Version="5.6.0" />
-    <PackageReference Include="MahApps.Metro" Version="2.4.7" />
+    <PackageReference Include="Costura.Fody" Version="6.2.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.4.11" />
   </ItemGroup>
   <PropertyGroup>
     <PreBuildEvent>git describe --tags &gt; "$(ProjectDir)\Resources\Version.txt"</PreBuildEvent>
