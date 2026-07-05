@@ -18,21 +18,18 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <!-- Build | Strong Naming -->
     <SignAssembly>False</SignAssembly>
-    <!-- NuGet Packaging -->
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageProjectUrl>https://github.com/HaloSPV3/AmaiSosu</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/HaloSPV3/AmaiSosu</RepositoryUrl>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageTags>Halo</PackageTags>
-    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
-    <Authors>HaloSPV3</Authors>
-    <Company>github/HaloSPV3</Company>
-    <Description>OpenSauce Installer</Description>
-    <Copyright>Copyright © 2021</Copyright>
-    <PackageIcon></PackageIcon>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <IncludeSymbols>false</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <TFM_NET6_OR_LATER>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))</TFM_NET6_OR_LATER>
+
+    <!-- Publish -->
+    <IsTrimmable>$(TFM_NET6_OR_LATER)</IsTrimmable>
+    <!-- Waiting for trim-compatible WPF -->
+    <!--<PublishTrimmed>true</PublishTrimmed> -->
+    <PublishSingleFile>$(TFM_NET6_OR_LATER)</PublishSingleFile>
+    <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' AND '$(PublishSingleFile)' == 'true'">win7-x86</RuntimeIdentifier>
+    <SelfContained Condition="'$(SelfContained)' == '' AND '$(RuntimeIdentifier)' != ''">true</SelfContained>
+    <PublishSingleFile Condition="'$(PublishSingleFile)' == 'true' AND $(RuntimeIdentifier.Contains('win7'))">$([MSBuild]::VersionGreaterThanOrEquals($(NETCoreSdkVersion), '6.0.300'))</PublishSingleFile>
+
     <!-- GitVersion DotNet SDK Compatibility -->
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <!-- Manifest Info -->
@@ -52,6 +49,42 @@
 
     <PreBuildEvent>git describe --tags &gt; "$(ProjectDir)\Resources\Version.txt"</PreBuildEvent>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(PublishSingleFile)' == 'true'">
+    <SelfContained>true</SelfContained>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>$(TFM_NET6_OR_LATER)</EnableCompressionInSingleFile>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Nuget Properties">
+    <_changelogPath>$([System.IO.Path]::GetFullPath($(MSBuildProjectDirectory)/../../CHANGELOG.md))</_changelogPath>
+    <Authors>HaloSPV3</Authors>
+    <Company>github/HaloSPV3</Company>
+    <Copyright>Copyright © 2021</Copyright>
+    <Description>OpenSauce Installer</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeSource>true</IncludeSource>
+    <IncludeSymbols>true</IncludeSymbols>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageIconUrl>https://github.com/HaloSPV3/AmaiSosu/blob/main/src/AmaiSosu.GUI/icon.ico</PackageIconUrl>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/HaloSPV3/AmaiSosu</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes Condition="Exists($(_changelogPath))">$([System.IO.File]::ReadAllText($(_changelogPath)))</PackageReleaseNotes>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageTags>Halo</PackageTags>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/HaloSPV3/AmaiSosu</RepositoryUrl>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup Label="NuGet Package Items">
+    <None Include="../../media/icons/AmaiSosu.png" Pack="true" PackagePath="/" />
+    <None Include="../../README.md" Pack="true" PackagePath="/">
+      <Link>.docs-misc/readme.md</Link>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\ext\hxe\src\HXE.csproj" />
