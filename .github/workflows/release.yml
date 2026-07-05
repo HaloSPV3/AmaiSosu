@@ -1,0 +1,80 @@
+name: release
+
+on:
+  push:
+    branches: [main, develop]
+
+env:
+  DOTNET_ROLL_FORWARD: Major
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO: 1
+  # https://stackoverflow.com/questions/75180149/how-to-cache-dotnet-installation-in-github-actions
+  # access to "usr/lib/dotnet" is denied
+  DOTNET_INSTALL_DIR: /usr/share/dotnet
+  DOTNET_ROOT: /usr/share/dotnet
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+  release:
+    name: Release
+    # required for proper WPF builds/publishes
+    runs-on: windows-latest
+    needs: ci
+    permissions:
+      contents: write # publish a GitHub Release
+      id-token: write # Trusted Publishing (tokenless NuGet pushes)
+      issues: write # comment on released issues
+      packages: write # push packages to "HaloSPV3" GitHub Nuget Package Registry
+      pull-requests: write # comment on released pull requests
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0 # Required by GitVersion, Semantic Release
+          submodules: recursive
+
+      - run: corepack enable
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          # cache: yarn
+          node-version-file: .nvmrc
+
+      - run: corepack enable
+
+      - run: yarn install --immutable #--immutable-cache
+
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v5
+        with:
+          cache: true
+          cache-dependency-path: |
+            src/packages.lock.json
+            src/packages-debug.lock.json
+
+      - name: NuGet login (OIDC → temp API key)
+        uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: nToss
+
+      - id: isPwshAvailable
+        run: pwsh -v
+        continue-on-error: true
+      - if: ${{ steps.isPwshAvailable.outcome != 'success' }}
+        name: Install PowerShell
+        uses: PSModule/install-powershell@159c2929fac34e3c7fc55d75e8997fb27fc7f75a # v1.2.0
+
+      - name: Semantic Release
+        id: semantic-release
+        run: yarn run release
+        env:
+          DEBUG: semantic-release*
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NUGET_TOKEN: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
