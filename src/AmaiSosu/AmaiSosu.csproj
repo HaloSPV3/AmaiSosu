@@ -23,17 +23,16 @@
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <TrimmingEnabled>true</TrimmingEnabled>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Update="Resources\FileNames.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FileNames.resx</DependentUpon>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
+
     <Resource Include="Resources\Background.png" />
-  </ItemGroup>
-  <ItemGroup>
+
     <EmbeddedResource Update="Resources\FileNames.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FileNames.Designer.cs</LastGenOutput>
@@ -41,11 +40,8 @@
     <EmbeddedResource Include="Resources\Version.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+
     <ProjectReference Include="..\..\ext\hxe\src\HXE.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="10.0.9" />
   </ItemGroup>
 </Project>

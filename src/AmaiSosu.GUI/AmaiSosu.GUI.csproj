@@ -55,23 +55,15 @@
     <ProjectReference Include="..\..\ext\hxe\src\HXE.csproj" />
     <ProjectReference Include="..\..\ext\Intern\Intern.csproj" />
     <ProjectReference Include="..\AmaiSosu\AmaiSosu.csproj" />
-  </ItemGroup>
-  <ItemGroup>
+
     <Resource Include="Resources\Background.png" />
     <Resource Include="icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Version.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\README.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
+
+    <EmbeddedResource Include="Resources\Version.txt"
+      CopyToOutputDirectory="Always" />
+
+    <None Include="..\..\README.md" Path="true" PackagePath="" />
+
     <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.246501">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
