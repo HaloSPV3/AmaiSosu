@@ -2,7 +2,7 @@
   <PropertyGroup>
     <!-- Application | General -->
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net6.0-windows;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net462;net480;net6.0-windows</TargetFrameworks>
     <AssemblyName>AmaiSosu</AssemblyName>
     <RootNamespace>AmaiSosu.GUI</RootNamespace>
     <!-- Application | Resources -->

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <!-- Application | General -->
     <OutputType>Library</OutputType>
-    <TargetFrameworks>net6.0-windows;net5.0-windows</TargetFrameworks>
+    <TargetFrameworks>net462;net480;net6.0-windows</TargetFrameworks>
     <AssemblyName>AmaiSosu.lib</AssemblyName>
     <RootNamespace>AmaiSosu</RootNamespace>
     <ProjectGuid>693BF44B-7BA3-461C-8CE1-D0F11FBE930D</ProjectGuid>
