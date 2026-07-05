@@ -1,6 +1,8 @@
 import baseConfig from '@halospv3/hce.shared-config/commitlintConfig';
 
 const scopes = {
+  AmaiSosu: 'Affects the AmaiSosu.csproj or its files.',
+  'AmaiSosu.GUI': 'Affects the AmaiSosu.GUI project.',
   commitlint: 'Affects this repo\'s commitlint config, esp. its commit scopes.',
   contributing: 'Affects CONTRIBUTING.md',
   'conv-pr': 'Affects ".github/workflows/conv-pull-requests.yml".',
@@ -11,8 +13,6 @@ const scopes = {
     + 'but are not required at runtime nor bundled with or statically linked into the published '
     + 'binaries or packages. For NuGet packages/PackageReferences, this would be anything with'
     + 'PrivateAssets="All" and no "runtime", "native", or "contentfiles" to be included in output.',
-  GUI: 'Affects the AmaiSosu.GUI project.',
-  lib: 'Affects the AmaiSosu core/lib project.',
   README: 'Affects README.md or any other README documents.',
   release: 'Reserved for release commits.',
   TODO: 'Affects TODO.md or any todo comments.',
