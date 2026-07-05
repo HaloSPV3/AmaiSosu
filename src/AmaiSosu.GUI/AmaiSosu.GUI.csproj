@@ -49,14 +49,8 @@
     <ToolCommandName>amaisosu</ToolCommandName>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
-    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>..\..\bin\Debug\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>..\..\bin\Release\</OutputPath>
-  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\ext\hxe\src\HXE.csproj" />
     <ProjectReference Include="..\..\ext\Intern\Intern.csproj" />
