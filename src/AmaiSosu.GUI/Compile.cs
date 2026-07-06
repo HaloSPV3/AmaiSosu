@@ -88,7 +88,6 @@ namespace AmaiSosu.GUI
         /// <summary>
         ///     Invokes HXE's SFX Compiler
         /// </summary>
-        /// TODO instead of a bool, return a SUCCESS or FAILURE enum
         public bool Invoke()
         {
             try
