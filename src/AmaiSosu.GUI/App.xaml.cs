@@ -82,17 +82,6 @@ namespace AmaiSosu.GUI
                                 /// - If it does not exist, it will be created.
                                 var path = text.Replace(Arg.Path, string.Empty).Replace("\"", string.Empty);
                                 var dir = new DirectoryInfo(path);
-                                try
-                                {
-                                    if (!IsPathRooted(dir.FullName))
-                                        throw new ArgumentException("The path does not have a filesystem root.");
-                                }
-                                catch (Exception e)
-                                {
-                                    var msg = $"The path, \"{path}\" supplied to --path was invalid. The application will close now. {NewLine}{e.Message}";
-                                    MessageBox.Show(msg, "Error: Path Not Valid", MessageBoxButton.OK, MessageBoxImage.Error);
-                                    throw new UriFormatException(msg, e);
-                                }
 
                                 try
                                 {
