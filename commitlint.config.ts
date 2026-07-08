@@ -4,6 +4,7 @@ const scopes = {
   AmaiSosu: 'Affects the AmaiSosu.csproj or its files.',
   'AmaiSosu.GUI': 'Affects the AmaiSosu.GUI project.',
   commitlint: 'Affects this repo\'s commitlint config, esp. its commit scopes.',
+  Compile: 'Affects "src/AmaiSosu/Main.Compile.cs" or "src/AmaiSosu.GUI/Compile.cs".',
   contributing: 'Affects CONTRIBUTING.md',
   'conv-pr': 'Affects ".github/workflows/conv-pull-requests.yml".',
   deps: 'Affects dependencies bundled with or depended on by published packages and artifacts. '
@@ -13,7 +14,7 @@ const scopes = {
     + 'but are not required at runtime nor bundled with or statically linked into the published '
     + 'binaries or packages. For NuGet packages/PackageReferences, this would be anything with'
     + 'PrivateAssets="All" and no "runtime", "native", or "contentfiles" to be included in output.',
-  Install: 'Affects "src/AmaiSosu.GUI/Install.cs" or "src/AmaiSosu/Main.Install.cs',
+  Install: 'Affects "src/AmaiSosu/Main.Install.cs" or "src/AmaiSosu.GUI/Install.cs".',
   README: 'Affects README.md or any other README documents.',
   release: 'Reserved for release commits.',
   TODO: 'Affects TODO.md or any todo comments.',
