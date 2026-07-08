@@ -370,3 +370,4 @@ tsconfig.tsbuildinfo
 .tsout
 
 .env*
+FodyWeavers.xsd
