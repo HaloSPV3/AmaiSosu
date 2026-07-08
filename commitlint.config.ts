@@ -14,6 +14,7 @@ const scopes = {
     + 'but are not required at runtime nor bundled with or statically linked into the published '
     + 'binaries or packages. For NuGet packages/PackageReferences, this would be anything with'
     + 'PrivateAssets="All" and no "runtime", "native", or "contentfiles" to be included in output.',
+  Help: 'Affects "src/AmaiSosu.GUI/Help.cs".',
   Install: 'Affects "src/AmaiSosu/Main.Install.cs" or "src/AmaiSosu.GUI/Install.cs".',
   README: 'Affects README.md or any other README documents.',
   release: 'Reserved for release commits.',
