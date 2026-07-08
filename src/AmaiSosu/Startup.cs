@@ -46,6 +46,6 @@ namespace AmaiSosu
         /// <summary>
         /// String passed via the --path startup argument.
         /// </summary>
-        public static string Path;
+        public static string Path = string.Empty;
     }
 }
