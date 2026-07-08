@@ -231,7 +231,7 @@ namespace AmaiSosu.GUI.Properties
             ParameterName = parameterName;
         }
 
-        [CanBeNull] public string ParameterName { get; }
+        [CanBeNull] public string? ParameterName { get; }
     }
 
     /// <summary>
@@ -507,7 +507,7 @@ namespace AmaiSosu.GUI.Properties
             Comment = comment;
         }
 
-        [CanBeNull] public string Comment { get; }
+        [CanBeNull] public string? Comment { get; }
     }
 
     /// <summary>
@@ -553,7 +553,7 @@ namespace AmaiSosu.GUI.Properties
             Justification = justification;
         }
 
-        [CanBeNull] public string Justification { get; }
+        [CanBeNull] public string? Justification { get; }
     }
 
     /// <summary>
@@ -597,7 +597,7 @@ namespace AmaiSosu.GUI.Properties
             BasePath = basePath;
         }
 
-        [CanBeNull] public string BasePath { get; }
+        [CanBeNull] public string? BasePath { get; }
     }
 
     /// <summary>
@@ -664,7 +664,7 @@ namespace AmaiSosu.GUI.Properties
         ///     parameter when the template is expanded.
         /// </summary>
         [CanBeNull]
-        public string Expression { get; set; }
+        public string? Expression { get; set; }
 
         /// <summary>
         ///     Allows specifying which occurrence of the target parameter becomes editable when the template is deployed.
@@ -682,7 +682,7 @@ namespace AmaiSosu.GUI.Properties
         ///     <see cref="MacroAttribute" /> is applied on a template method.
         /// </summary>
         [CanBeNull]
-        public string Target { get; set; }
+        public string? Target { get; set; }
     }
 
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Field | AttributeTargets.Property, AllowMultiple =
@@ -775,7 +775,7 @@ namespace AmaiSosu.GUI.Properties
             AnonymousProperty = anonymousProperty;
         }
 
-        [CanBeNull] public string AnonymousProperty { get; }
+        [CanBeNull] public string? AnonymousProperty { get; }
     }
 
     /// <summary>
@@ -795,7 +795,7 @@ namespace AmaiSosu.GUI.Properties
             AnonymousProperty = anonymousProperty;
         }
 
-        [CanBeNull] public string AnonymousProperty { get; }
+        [CanBeNull] public string? AnonymousProperty { get; }
     }
 
     /// <summary>
@@ -816,7 +816,7 @@ namespace AmaiSosu.GUI.Properties
             AnonymousProperty = anonymousProperty;
         }
 
-        [CanBeNull] public string AnonymousProperty { get; }
+        [CanBeNull] public string? AnonymousProperty { get; }
     }
 
     /// <summary>
@@ -945,7 +945,7 @@ namespace AmaiSosu.GUI.Properties
             Name = name;
         }
 
-        [CanBeNull] public string Name { get; }
+        [CanBeNull] public string? Name { get; }
     }
 
     [AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Field | AttributeTargets.Property)]
@@ -1218,7 +1218,7 @@ namespace AmaiSosu.GUI.Properties
         }
 
         [NotNull] public string BaseType { get; }
-        [CanBeNull] public string PageName { get; }
+        [CanBeNull] public string? PageName { get; }
     }
 
     [AttributeUsage(AttributeTargets.Method)]
