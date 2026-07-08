@@ -8,6 +8,12 @@
         "resolved": "6.8.1",
         "contentHash": "x3lIU/s5zFuacWETug6PmeAo0lDXjYjEVWq5OPEQy4FXxbc6MrW/4/+4Ewvmgxsakd8IHvcQPhthYJ4KDg0Tww=="
       },
+      "Meziantou.Polyfill": {
+        "type": "Direct",
+        "requested": "[1.0.157, )",
+        "resolved": "1.0.157",
+        "contentHash": "LUmzYqhB9Ho0QxOzWomIr3TjAQI4kZNSJ8Xf4lL4jVahggVU2cujlAI6OhbKJJF9GsRzqmph7C0OhPDNU3fs/Q=="
+      },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",
         "requested": "[1.0.3, )",
@@ -494,6 +500,12 @@
         "requested": "[6.8.1, )",
         "resolved": "6.8.1",
         "contentHash": "x3lIU/s5zFuacWETug6PmeAo0lDXjYjEVWq5OPEQy4FXxbc6MrW/4/+4Ewvmgxsakd8IHvcQPhthYJ4KDg0Tww=="
+      },
+      "Meziantou.Polyfill": {
+        "type": "Direct",
+        "requested": "[1.0.157, )",
+        "resolved": "1.0.157",
+        "contentHash": "LUmzYqhB9Ho0QxOzWomIr3TjAQI4kZNSJ8Xf4lL4jVahggVU2cujlAI6OhbKJJF9GsRzqmph7C0OhPDNU3fs/Q=="
       },
       "Microsoft.NETFramework.ReferenceAssemblies": {
         "type": "Direct",
@@ -994,6 +1006,12 @@
         "requested": "[6.8.1, )",
         "resolved": "6.8.1",
         "contentHash": "x3lIU/s5zFuacWETug6PmeAo0lDXjYjEVWq5OPEQy4FXxbc6MrW/4/+4Ewvmgxsakd8IHvcQPhthYJ4KDg0Tww=="
+      },
+      "Meziantou.Polyfill": {
+        "type": "Direct",
+        "requested": "[1.0.157, )",
+        "resolved": "1.0.157",
+        "contentHash": "LUmzYqhB9Ho0QxOzWomIr3TjAQI4kZNSJ8Xf4lL4jVahggVU2cujlAI6OhbKJJF9GsRzqmph7C0OhPDNU3fs/Q=="
       },
       "Microsoft.NET.ILLink.Analyzers": {
         "type": "Direct",

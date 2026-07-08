@@ -46,6 +46,8 @@
     <ToolCommandName>amaisosu</ToolCommandName>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(PublishSingleFile)' == 'true'">
@@ -95,6 +97,9 @@
 
     <PackageReference Include="Costura.Fody" Version="6.2.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.11" />
+    <PackageReference Include="Meziantou.Polyfill" Version="1.0.157"
+      IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive"
+      PrivateAssets="All" />
     <PackageReference Include="GitVersion.MsBuild" Version="6.8.1"
       PrivateAssets="All" />
   </ItemGroup>

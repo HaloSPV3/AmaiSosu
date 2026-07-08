@@ -20,6 +20,8 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <TrimmingEnabled>true</TrimmingEnabled>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -38,6 +40,9 @@
 
     <ProjectReference Include="..\..\ext\hxe\src\HXE.csproj" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.9" />
+    <PackageReference Include="Meziantou.Polyfill" Version="1.0.157"
+      IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive"
+      PrivateAssets="All" />
     <PackageReference Include="GitVersion.MsBuild" Version="6.8.1"
       PrivateAssets="All" />
   </ItemGroup>
