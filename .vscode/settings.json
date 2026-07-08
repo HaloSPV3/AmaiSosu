@@ -68,6 +68,7 @@
     "editor.defaultFormatter": "dbaeumer.vscode-eslint"
   },
   "files.associations": {
-    "**/.vscode/*.json": "jsonc"
+    "**/.vscode/*.json": "jsonc",
+    "*.xaml": "xaml"
   }
 }
