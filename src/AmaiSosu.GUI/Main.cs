@@ -106,6 +106,7 @@ namespace AmaiSosu.GUI
             }
         }
 
+        // todo: consider why this is unused
         [NotifyPropertyChangedInvocator]
         private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
