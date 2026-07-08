@@ -18,6 +18,7 @@
     "build": "dotnet build -c:Debug && dotnet build -c:Release",
     "postinstall": "husky",
     "lint": "eslint --cache",
+    "publish": "dotnet restore ./src/AmaiSosu.GUI -p:Configuration=Release -t:PublishAll",
     "release": "semantic-release --debug",
     "restore": "dotnet restore && dotnet restore -p:Configuration=Release",
     "test": "dotnet test"
