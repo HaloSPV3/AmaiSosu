@@ -49,7 +49,9 @@ namespace AmaiSosu.GUI
 
             if (openFileDialog.ShowDialog() == true)
             {
-                Compile.Source = Path.GetDirectoryName(openFileDialog.FileName);
+                Compile.Source = Path.GetDirectoryName(openFileDialog.FileName)
+                    ?? Path.GetPathRoot(openFileDialog.FileName)
+                    ?? string.Empty;
                 if (File.Exists(Path.Combine(Compile.Source, "OpenSauceDedi.dll")))
                 {
                     Compile.CanCompile = true;
