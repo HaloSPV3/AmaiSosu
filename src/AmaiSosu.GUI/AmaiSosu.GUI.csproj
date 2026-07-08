@@ -30,8 +30,6 @@
     <SelfContained Condition="'$(SelfContained)' == '' AND '$(RuntimeIdentifier)' != ''">true</SelfContained>
     <PublishSingleFile Condition="'$(PublishSingleFile)' == 'true' AND $(RuntimeIdentifier.Contains('win7'))">$([MSBuild]::VersionGreaterThanOrEquals($(NETCoreSdkVersion), '6.0.300'))</PublishSingleFile>
 
-    <!-- GitVersion DotNet SDK Compatibility -->
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <!-- Manifest Info -->
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
     <UseApplicationTrust>true</UseApplicationTrust><!-- use ProductName, PublisherName, SupportUrl-->
