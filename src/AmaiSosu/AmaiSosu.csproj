@@ -23,6 +23,9 @@
     <TrimmingEnabled>$(IsTrimmable)</TrimmingEnabled>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
+
+    <!-- Enable this while you are working on HXE hot-fixes -->
+    <UseBleedingEdge_HXE Condition="'$(CI)' != 'true'">false</UseBleedingEdge_HXE>
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,7 +40,8 @@
       <LastGenOutput>FileNames.Designer.cs</LastGenOutput>
     </EmbeddedResource>
 
-    <ProjectReference Include="..\..\ext\hxe\src\HXE.csproj" />
+    <ProjectReference Include="..\..\ext\hxe\src\HXE.csproj" Condition="'$(UseBleedingEdge_HXE)' == 'true'"/>
+    <PackageReference Include="HXE" Version="2.3.0" Condition="'$(UseBleedingEdge_HXE)' != 'true'" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.9" />
     <PackageReference Include="Meziantou.Polyfill" Version="1.0.157"
       IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive"

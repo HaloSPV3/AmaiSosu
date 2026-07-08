@@ -54,6 +54,17 @@
         "resolved": "6.9.3",
         "contentHash": "1CUGgFdyECDKgi5HaUBhdv6k+VG9Iy4OCforGfHyar3xQXAJypZkzymgKtWj/4SPd6nSG0Qi7NH71qHrDSZLaA=="
       },
+      "HXE": {
+        "type": "Transitive",
+        "resolved": "2.3.0",
+        "contentHash": "NxnYzM77RxBlRXQZeMxIsLrKDRWiEfLrimAbuzFKnVLYXgzoyFheFhVH1mvHV+6czsuyJGrGHVS4MKMwYjp/6A==",
+        "dependencies": {
+          "System.Memory": "4.6.3",
+          "System.Net.Http": "4.3.4",
+          "System.Text.Json": "4.6.0",
+          "XmlSourceGenerator": "1.0.2-alpha"
+        }
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
         "resolved": "1.0.0",
@@ -522,17 +533,8 @@
       "AmaiSosu.lib": {
         "type": "Project",
         "dependencies": {
-          "HXE": "[1.0.0, )",
+          "HXE": "[2.3.0, )",
           "Microsoft.Windows.Compatibility": "[6.0.9, )"
-        }
-      },
-      "hxe": {
-        "type": "Project",
-        "dependencies": {
-          "System.Memory": "[4.6.3, )",
-          "System.Net.Http": "[4.3.4, )",
-          "System.Text.Json": "[4.6.0, )",
-          "XmlSourceGenerator": "[1.0.2-alpha, )"
         }
       }
     },
@@ -765,6 +767,17 @@
         "type": "Transitive",
         "resolved": "6.9.3",
         "contentHash": "1CUGgFdyECDKgi5HaUBhdv6k+VG9Iy4OCforGfHyar3xQXAJypZkzymgKtWj/4SPd6nSG0Qi7NH71qHrDSZLaA=="
+      },
+      "HXE": {
+        "type": "Transitive",
+        "resolved": "2.3.0",
+        "contentHash": "NxnYzM77RxBlRXQZeMxIsLrKDRWiEfLrimAbuzFKnVLYXgzoyFheFhVH1mvHV+6czsuyJGrGHVS4MKMwYjp/6A==",
+        "dependencies": {
+          "System.Memory": "4.6.3",
+          "System.Net.Http": "4.3.4",
+          "System.Text.Json": "4.6.0",
+          "XmlSourceGenerator": "1.0.2-alpha"
+        }
       },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
@@ -1247,17 +1260,8 @@
       "AmaiSosu.lib": {
         "type": "Project",
         "dependencies": {
-          "HXE": "[1.0.0, )",
+          "HXE": "[2.3.0, )",
           "Microsoft.Windows.Compatibility": "[6.0.9, )"
-        }
-      },
-      "hxe": {
-        "type": "Project",
-        "dependencies": {
-          "System.Memory": "[4.6.3, )",
-          "System.Net.Http": "[4.3.4, )",
-          "System.Text.Json": "[4.6.0, )",
-          "XmlSourceGenerator": "[1.0.2-alpha, )"
         }
       }
     },
@@ -1497,6 +1501,14 @@
         "type": "Transitive",
         "resolved": "6.9.3",
         "contentHash": "1CUGgFdyECDKgi5HaUBhdv6k+VG9Iy4OCforGfHyar3xQXAJypZkzymgKtWj/4SPd6nSG0Qi7NH71qHrDSZLaA=="
+      },
+      "HXE": {
+        "type": "Transitive",
+        "resolved": "2.3.0",
+        "contentHash": "NxnYzM77RxBlRXQZeMxIsLrKDRWiEfLrimAbuzFKnVLYXgzoyFheFhVH1mvHV+6czsuyJGrGHVS4MKMwYjp/6A==",
+        "dependencies": {
+          "XmlSourceGenerator": "1.0.2-alpha"
+        }
       },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
@@ -1926,14 +1938,8 @@
       "AmaiSosu.lib": {
         "type": "Project",
         "dependencies": {
-          "HXE": "[1.0.0, )",
+          "HXE": "[2.3.0, )",
           "Microsoft.Windows.Compatibility": "[6.0.9, )"
-        }
-      },
-      "hxe": {
-        "type": "Project",
-        "dependencies": {
-          "XmlSourceGenerator": "[1.0.2-alpha, )"
         }
       }
     },

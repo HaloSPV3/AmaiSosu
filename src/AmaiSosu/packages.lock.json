@@ -8,6 +8,18 @@
         "resolved": "6.8.1",
         "contentHash": "x3lIU/s5zFuacWETug6PmeAo0lDXjYjEVWq5OPEQy4FXxbc6MrW/4/+4Ewvmgxsakd8IHvcQPhthYJ4KDg0Tww=="
       },
+      "HXE": {
+        "type": "Direct",
+        "requested": "[2.3.0, )",
+        "resolved": "2.3.0",
+        "contentHash": "NxnYzM77RxBlRXQZeMxIsLrKDRWiEfLrimAbuzFKnVLYXgzoyFheFhVH1mvHV+6czsuyJGrGHVS4MKMwYjp/6A==",
+        "dependencies": {
+          "System.Memory": "4.6.3",
+          "System.Net.Http": "4.3.4",
+          "System.Text.Json": "4.6.0",
+          "XmlSourceGenerator": "1.0.2-alpha"
+        }
+      },
       "Meziantou.Polyfill": {
         "type": "Direct",
         "requested": "[1.0.157, )",
@@ -483,15 +495,6 @@
         "type": "Transitive",
         "resolved": "1.0.2-alpha",
         "contentHash": "66rw74gtxwAsQEWoBq5xyT/g90zqNUCp4ubbHnGSpGQPm51FgUdC71WBvadb1dBJ/2YYX4pDKBnI7OQPIVSJIQ=="
-      },
-      "hxe": {
-        "type": "Project",
-        "dependencies": {
-          "System.Memory": "[4.6.3, )",
-          "System.Net.Http": "[4.3.4, )",
-          "System.Text.Json": "[4.6.0, )",
-          "XmlSourceGenerator": "[1.0.2-alpha, )"
-        }
       }
     },
     ".NETFramework,Version=v4.8": {
@@ -500,6 +503,18 @@
         "requested": "[6.8.1, )",
         "resolved": "6.8.1",
         "contentHash": "x3lIU/s5zFuacWETug6PmeAo0lDXjYjEVWq5OPEQy4FXxbc6MrW/4/+4Ewvmgxsakd8IHvcQPhthYJ4KDg0Tww=="
+      },
+      "HXE": {
+        "type": "Direct",
+        "requested": "[2.3.0, )",
+        "resolved": "2.3.0",
+        "contentHash": "NxnYzM77RxBlRXQZeMxIsLrKDRWiEfLrimAbuzFKnVLYXgzoyFheFhVH1mvHV+6czsuyJGrGHVS4MKMwYjp/6A==",
+        "dependencies": {
+          "System.Memory": "4.6.3",
+          "System.Net.Http": "4.3.4",
+          "System.Text.Json": "4.6.0",
+          "XmlSourceGenerator": "1.0.2-alpha"
+        }
       },
       "Meziantou.Polyfill": {
         "type": "Direct",
@@ -989,15 +1004,6 @@
         "type": "Transitive",
         "resolved": "1.0.2-alpha",
         "contentHash": "66rw74gtxwAsQEWoBq5xyT/g90zqNUCp4ubbHnGSpGQPm51FgUdC71WBvadb1dBJ/2YYX4pDKBnI7OQPIVSJIQ=="
-      },
-      "hxe": {
-        "type": "Project",
-        "dependencies": {
-          "System.Memory": "[4.6.3, )",
-          "System.Net.Http": "[4.3.4, )",
-          "System.Text.Json": "[4.6.0, )",
-          "XmlSourceGenerator": "[1.0.2-alpha, )"
-        }
       }
     },
     "net6.0-windows7.0": {
@@ -1006,6 +1012,15 @@
         "requested": "[6.8.1, )",
         "resolved": "6.8.1",
         "contentHash": "x3lIU/s5zFuacWETug6PmeAo0lDXjYjEVWq5OPEQy4FXxbc6MrW/4/+4Ewvmgxsakd8IHvcQPhthYJ4KDg0Tww=="
+      },
+      "HXE": {
+        "type": "Direct",
+        "requested": "[2.3.0, )",
+        "resolved": "2.3.0",
+        "contentHash": "NxnYzM77RxBlRXQZeMxIsLrKDRWiEfLrimAbuzFKnVLYXgzoyFheFhVH1mvHV+6czsuyJGrGHVS4MKMwYjp/6A==",
+        "dependencies": {
+          "XmlSourceGenerator": "1.0.2-alpha"
+        }
       },
       "Meziantou.Polyfill": {
         "type": "Direct",
@@ -1440,12 +1455,6 @@
         "type": "Transitive",
         "resolved": "1.0.2-alpha",
         "contentHash": "66rw74gtxwAsQEWoBq5xyT/g90zqNUCp4ubbHnGSpGQPm51FgUdC71WBvadb1dBJ/2YYX4pDKBnI7OQPIVSJIQ=="
-      },
-      "hxe": {
-        "type": "Project",
-        "dependencies": {
-          "XmlSourceGenerator": "[1.0.2-alpha, )"
-        }
       }
     }
   }
