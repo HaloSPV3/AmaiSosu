@@ -15,8 +15,6 @@
     <!-- Build | Output -->
     <!-- Build | Events -->
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    <!-- GitVersion DotNet SDK Compatibility -->
-    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
     <!-- Misc -->
     <PublishSingleFile>true</PublishSingleFile>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
@@ -37,11 +35,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FileNames.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Version.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
 
     <ProjectReference Include="..\..\ext\hxe\src\HXE.csproj" />
     <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.9" />
+    <PackageReference Include="GitVersion.MsBuild" Version="6.8.1"
+      PrivateAssets="All" />
   </ItemGroup>
 </Project>

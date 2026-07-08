@@ -46,8 +46,6 @@
     <ToolCommandName>amaisosu</ToolCommandName>
     <UseWPF>true</UseWPF>
     <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
-
-    <PreBuildEvent>git describe --tags &gt; "$(ProjectDir)\Resources\Version.txt"</PreBuildEvent>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(PublishSingleFile)' == 'true'">
@@ -93,12 +91,11 @@
     <Resource Include="Resources\Background.png" />
     <Resource Include="icon.ico" />
 
-    <EmbeddedResource Include="Resources\Version.txt"
-      CopyToOutputDirectory="Always" />
-
     <None Include="..\..\README.md" Path="true" PackagePath="" />
 
     <PackageReference Include="Costura.Fody" Version="6.2.0" />
     <PackageReference Include="MahApps.Metro" Version="2.4.11" />
+    <PackageReference Include="GitVersion.MsBuild" Version="6.8.1"
+      PrivateAssets="All" />
   </ItemGroup>
 </Project>

@@ -70,15 +70,6 @@ namespace AmaiSosu.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AmaiSosu.GUI.Resources.Version.txt.
-        /// </summary>
-        internal static string AmaiSosuVersion {
-            get {
-                return ResourceManager.GetString("AmaiSosuVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to haloce.exe.
         /// </summary>
         internal static string HceExecutable {
