@@ -44,10 +44,10 @@ namespace AmaiSosu
         }
 
         /// <summary>
-        ///     Conducts the OpenSauce & HAC2 data backup routines.
+        ///     Conducts the OpenSauce and HAC2 data backup routines.
         /// </summary>
         /// <param name="backupDir">
-        ///     Backup directory to use for backing up OpenSauce & HAC2 data.
+        ///     Backup directory to use for backing up OpenSauce and HAC2 data.
         /// </param>
         private void CommitBackups(string backupDir)
         {
@@ -70,8 +70,8 @@ namespace AmaiSosu
                 }
                 catch (UnauthorizedAccessException)
                 {
-                    /// <see cref="https://stackoverflow.com/a/31363010/14894786"/>
-                    /// <seealso cref="https://stackoverflow.com/a/8055390/14894786"/>
+                    // <see href="https://stackoverflow.com/a/31363010/14894786"/> <br/>
+                    // <seealso href="https://stackoverflow.com/a/8055390/14894786"/>
                     var batPath = Path.Combine(Paths.Temp, "AdminDelKorn.bat");
                     var batText = "del /s /q \"Kornner Studios\" && rmdir /s /q \"Kornner Studios\"";
                     File.WriteAllText(batPath, batText);
