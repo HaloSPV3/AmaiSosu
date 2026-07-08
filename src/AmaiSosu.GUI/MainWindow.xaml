@@ -10,7 +10,7 @@
                       Width="860"
                       Height="480"
                       WindowStartupLocation="CenterScreen"
-                      GlowBrush="{DynamicResource AccentColorBrush}"
+                      GlowColor="{DynamicResource AccentColorBrush}"
                       ResizeMode="CanMinimize"
                       SnapsToDevicePixels="True"
                       ShowTitleBar="False"
