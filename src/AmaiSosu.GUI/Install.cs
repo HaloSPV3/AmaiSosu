@@ -10,14 +10,23 @@ namespace AmaiSosu.GUI
 {
     public class Install : INotifyPropertyChanged
     {
+        public Install()
+        {
+            _path = string.IsNullOrWhiteSpace(Startup.Path) ?
+                        Environment.CurrentDirectory :
+                        Startup.Path;
+            OnPathChanged();
+
+            // is this necessary in a constructor?
+            OnPropertyChanged(nameof(Path));
+        }
+
         /// <summary>
         ///     Installation is possible given the current state.
         /// </summary>
         private bool _canInstall = false;
 
-        private string _path = string.IsNullOrWhiteSpace(Startup.Path) ?
-            Environment.CurrentDirectory :
-            Startup.Path;
+        private string _path;
 
         /// <summary>
         ///     Current state of the OpenSauce installation.
