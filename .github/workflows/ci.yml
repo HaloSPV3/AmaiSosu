@@ -56,8 +56,10 @@ jobs:
         with:
           cache: true
           cache-dependency-path: |
-            src/packages.lock.json
-            src/packages-debug.lock.json
+            src/AmaiSosu/packages.lock.json
+            src/AmaiSosu/packages-debug.lock.json
+            src/AmaiSosu.GUI/packages.lock.json
+            src/AmaiSosu.GUI/packages-debug.lock.json
 
       - id: isPwshAvailable
         run: pwsh -v
@@ -68,13 +70,13 @@ jobs:
 
       # if run simultaneously, the logs would be a mess
       - name: Build (Debug)
-        run: dotnet build -c Debug -check
+        run: dotnet build src/AmaiSosu.GUI -c Debug -check
       # if run simultaneously, the logs would be a mess
       - name: Build (Release)
-        run: dotnet build -c Release -check
+        run: dotnet build src/AmaiSosu.GUI -c Release -check
 
       - name: Pack (Release)
-        run: dotnet pack
+        run: dotnet pack src/AmaiSosu && dotnet pack src/AmaiSosu.GUI
 
       - name: Publish (Release)
-        run: dotnet restore -t:PublishAll
+        run: dotnet restore src/AmaiSosu.GUI -t:PublishAll

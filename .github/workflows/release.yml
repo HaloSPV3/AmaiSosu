@@ -55,8 +55,10 @@ jobs:
         with:
           cache: true
           cache-dependency-path: |
-            src/packages.lock.json
-            src/packages-debug.lock.json
+            src/AmaiSosu/packages.lock.json
+            src/AmaiSosu/packages-debug.lock.json
+            src/AmaiSosu.GUI/packages.lock.json
+            src/AmaiSosu.GUI/packages-debug.lock.json
 
       - name: NuGet login (OIDC → temp API key)
         uses: NuGet/login@v1
