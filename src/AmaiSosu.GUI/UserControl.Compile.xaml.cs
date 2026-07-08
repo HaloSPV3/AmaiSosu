@@ -1,8 +1,8 @@
-﻿using Microsoft.Win32;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 
 namespace AmaiSosu.GUI
 {
@@ -43,7 +43,6 @@ namespace AmaiSosu.GUI
             var openFileDialog = new OpenFileDialog
             {
                 Title = "Locate OpenSauce's freshly-built binaries",
-                
                 ReadOnlyChecked = true,
                 Filter = "OpenSauce DLL|*.dll"
             };
