@@ -47,7 +47,11 @@ namespace AmaiSosu.GUI
             {
                 foreach (var arg in Args)
                 {
-                    switch (arg)
+                    // if arg is enclosed with double-quotes, take the inner string
+                    string _arg = arg[0] == '"' && arg[arg.Length - 1] == '"'
+                              ? arg.Substring(1, arg.Length - 2)
+                              : arg;
+                    switch (_arg)
                     {
                         case var text when text == Arg.Auto:
                             {
