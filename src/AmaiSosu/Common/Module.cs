@@ -32,7 +32,7 @@ namespace AmaiSosu.Common
         /// <param name="output">
         ///     Optional Output type for writing messages to.
         /// </param>
-        protected Module(Output output = null)
+        protected Module(Output? output = null)
         {
             Output = output;
         }
@@ -45,7 +45,7 @@ namespace AmaiSosu.Common
         /// <summary>
         ///     Optional Output type for writing messages to.
         /// </summary>
-        private Output Output { get; }
+        private Output? Output { get; }
 
         /// <summary>
         ///     Invokes the Output.Write with the inbound exception message, then throws the exception.

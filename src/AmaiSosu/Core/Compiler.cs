@@ -22,7 +22,7 @@ namespace AmaiSosu.Core
             _packages = packages;
         }
 
-        public Compiler(string binariesPath, List<Package> packages, Output output) : base(output)
+        public Compiler(string binariesPath, List<Package> packages, Output? output) : base(output)
         {
             _binariesPath = binariesPath;
             _packages = packages;

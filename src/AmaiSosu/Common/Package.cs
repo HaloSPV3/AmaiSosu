@@ -46,7 +46,7 @@ namespace AmaiSosu.Common
         /// <param name="description">The description.</param>
         /// <param name="path">The Compile source or Install destination path.</param>
         /// <param name="output">The instance of Output for outputting inbound messages.</param>
-        public Package(string archiveName, string description, string path, Output output)
+        public Package(string archiveName, string description, string path, Output? output)
             : base(output)
         {
             ArchiveName = archiveName;

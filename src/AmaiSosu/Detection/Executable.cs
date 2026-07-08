@@ -40,7 +40,7 @@ namespace AmaiSosu.Detection
             Path = path;
         }
 
-        public Executable(string path, Output output) : base(output)
+        public Executable(string path, Output? output) : base(output)
         {
             Path = path;
         }

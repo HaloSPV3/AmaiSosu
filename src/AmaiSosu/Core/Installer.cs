@@ -57,7 +57,7 @@ namespace AmaiSosu.Core
             _packages = packages;
         }
 
-        public Installer(string hcePath, List<Package> packages, Output output) : base(output)
+        public Installer(string hcePath, List<Package> packages, Output? output) : base(output)
         {
             _hcePath = hcePath;
             _packages = packages;

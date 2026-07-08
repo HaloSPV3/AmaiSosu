@@ -36,7 +36,7 @@ namespace AmaiSosu.Common
         }
 
         private readonly string _path;
-        private readonly Output _output;
+        private readonly Output? _output;
 
         /// <summary>
         ///     OpenSauceInstallerFactory constructor.

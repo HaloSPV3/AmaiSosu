@@ -69,7 +69,7 @@ namespace AmaiSosu.Detection
         /// <exception cref="ArgumentOutOfRangeException">
         ///     Invalid enum value.
         /// </exception>
-        public static Executable Get(Type type, Output output = null)
+        public static Executable Get(Type type, Output? output = null)
         {
             switch (type)
             {
