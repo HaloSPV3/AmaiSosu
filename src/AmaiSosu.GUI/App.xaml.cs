@@ -20,7 +20,7 @@
 
 using System.IO;
 using System.Windows;
-using ASStartup = AmaiSosu.Startup;
+using Startup = AmaiSosu.Startup;
 
 namespace AmaiSosu.GUI
 {
@@ -55,17 +55,17 @@ namespace AmaiSosu.GUI
                     {
                         case var text when text == Arg.Auto:
                             {
-                                ASStartup.Auto = true;
+                AmaiSosu.Startup.Auto = true;
                                 break;
                             }
                         case var text when text == Arg.Compile:
                             {
-                                ASStartup.Compile = true;
+                AmaiSosu.Startup.Compile = true;
                                 break;
                             }
                         case var text when text == Arg.Help:
                             {
-                                ASStartup.Help = true;
+                AmaiSosu.Startup.Help = true;
                                 break;
                             }
                         // Used by either Compile or Install; If you need more path validation, don't do it here!
@@ -77,7 +77,7 @@ namespace AmaiSosu.GUI
                                 try { text = Path.GetFullPath(text); }
                                 catch { }
 
-                                ASStartup.Path = text;
+                AmaiSosu.Startup.Path = text;
                                 break;
                             }
                         default: break;
