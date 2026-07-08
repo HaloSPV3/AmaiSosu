@@ -15,11 +15,12 @@
     <!-- Build | Output -->
     <!-- Build | Events -->
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <!-- Publish -->
+    <TFM_NET6_OR_LATER>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))</TFM_NET6_OR_LATER>
+    <IsTrimmable>$(TFM_NET6_OR_LATER)</IsTrimmable>
     <!-- Misc -->
-    <PublishSingleFile>true</PublishSingleFile>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <TrimmingEnabled>true</TrimmingEnabled>
+    <TrimmingEnabled>$(IsTrimmable)</TrimmingEnabled>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
