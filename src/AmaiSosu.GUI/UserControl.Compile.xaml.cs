@@ -48,7 +48,7 @@ namespace AmaiSosu.GUI
         {
             if (Compile == null)
             {
-                MessageBox.Show($"If you're seeing this, a programmer messed up. {nameof(UserControlCompile)}.{nameof(Compile)} is null. So, paths selected for {nameof(Compile)} cannot be processed.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"If you're seeing this, a programmer messed up. {nameof(UserControlCompile)}.{nameof(Compile)} is null. So, {nameof(Compile)} cannot process paths.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
