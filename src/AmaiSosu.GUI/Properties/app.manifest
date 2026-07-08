@@ -15,7 +15,7 @@
             Remove this element if your application requires this virtualization for backwards
             compatibility.
         -->
-        <requestedExecutionLevel level="requireAdministrator" />
+        <requestedExecutionLevel level="asInvoker" />
       </requestedPrivileges>
     </security>
   </trustInfo>
