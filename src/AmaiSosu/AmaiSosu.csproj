@@ -31,8 +31,6 @@
       <DependentUpon>FileNames.resx</DependentUpon>
     </Compile>
 
-    <Resource Include="Resources\Background.png" />
-
     <EmbeddedResource Update="Resources\FileNames.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>FileNames.Designer.cs</LastGenOutput>
