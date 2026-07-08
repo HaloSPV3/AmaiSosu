@@ -12,7 +12,7 @@ namespace AmaiSosu.GUI
     /// </summary>
     public partial class UserControlCompile : UserControl
     {
-        public Compile Compile { get; set; }
+        public Compile? Compile { get; set; }
         public UserControlCompile()
         {
             InitializeComponent();
@@ -22,6 +22,12 @@ namespace AmaiSosu.GUI
         private async void Commit(object sender, RoutedEventArgs e)
         {
             CompileButton.IsEnabled = false;
+
+            if (Compile == null)
+            {
+                MessageBox.Show($"If you're seeing this, a programmer messed up. {nameof(UserControlCompile)}.{nameof(Compile)} is null. So, {nameof(Compile)} cannot be invoked.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
 
             await Task.Run(() => Compile.Invoke());
 
@@ -40,6 +46,12 @@ namespace AmaiSosu.GUI
         /// </remarks>
         private void BrowseSource(object sender, RoutedEventArgs e)
         {
+            if (Compile == null)
+            {
+                MessageBox.Show($"If you're seeing this, a programmer messed up. {nameof(UserControlCompile)}.{nameof(Compile)} is null. So, paths selected for {nameof(Compile)} cannot be processed.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             var openFileDialog = new OpenFileDialog
             {
                 Title = "Locate OpenSauce's freshly-built binaries",
