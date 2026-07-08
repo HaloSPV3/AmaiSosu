@@ -86,7 +86,7 @@ namespace AmaiSosu.GUI
         }
 
         /// <summary>
-        ///     Invokes HXE's SFX Compiler
+        ///     Invokes AmaiSosu's Compiler
         /// </summary>
         public bool Invoke()
         {
