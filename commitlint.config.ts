@@ -4,6 +4,7 @@ const scopes = {
   AmaiSosu: 'Affects the AmaiSosu.csproj or its files.',
   'AmaiSosu.GUI': 'Affects the AmaiSosu.GUI project.',
   commitlint: 'Affects this repo\'s commitlint config, esp. its commit scopes.',
+  Common: 'Affects "src/AmaiSosu/Common/**/*.cs".',
   Compile: 'Affects "src/AmaiSosu/Main.Compile.cs", "src/AmaiSosu/Core/Compiler.cs", or "src/AmaiSosu.GUI/Compile.cs".',
   contributing: 'Affects CONTRIBUTING.md',
   'conv-pr': 'Affects ".github/workflows/conv-pull-requests.yml".',
