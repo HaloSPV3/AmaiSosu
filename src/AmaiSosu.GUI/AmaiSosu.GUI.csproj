@@ -40,8 +40,6 @@
     <TargetZone>Internet</TargetZone>
     <!-- Misc -->
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <PublishSingleFile>true</PublishSingleFile>
-    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <ToolCommandName>amaisosu</ToolCommandName>
     <UseWPF>true</UseWPF>
