@@ -7,7 +7,9 @@
   </Folder>
   <Project Path="ext/hxe/src/HXE.csproj" />
   <Project Path="src/AmaiSosu.GUI/AmaiSosu.GUI.csproj">
+    <BuildDependency Project="src/AmaiSosu/AmaiSosu.csproj" />
+  </Project>
+  <Project Path="src/AmaiSosu/AmaiSosu.csproj" >
     <BuildDependency Project="ext/hxe/src/HXE.csproj" />
   </Project>
-  <Project Path="src/AmaiSosu/AmaiSosu.csproj" />
 </Solution>
