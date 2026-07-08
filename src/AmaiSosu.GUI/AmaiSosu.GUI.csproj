@@ -93,7 +93,7 @@
 
     <None Include="..\..\README.md" Path="true" PackagePath="" />
 
-    <PackageReference Include="Costura.Fody" Version="6.2.0" />
+    <PackageReference Include="Costura.Fody" Version="6.2.0" PrivateAssets="All" />
     <PackageReference Include="MahApps.Metro" Version="2.4.11" />
     <PackageReference Include="Meziantou.Polyfill" Version="1.0.157"
       IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive"
