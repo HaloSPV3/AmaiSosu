@@ -41,6 +41,7 @@ namespace AmaiSosu.Core
         /// </returns>
         public Verification Verify()
         {
+            // todo: Openauce only needs d3dx9.dll
             var dxrDir = Path.Combine(Paths.KStudios, OpenSauceDirectory, "dxredist");
             var dxrFiles = new List<string>
             {
