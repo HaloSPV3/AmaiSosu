@@ -26,6 +26,7 @@ namespace AmaiSosu.Common
         public Verification(bool isValid)
         {
             IsValid = isValid;
+            Reason = string.Empty;
         }
 
         public Verification(bool isValid, string reason) : this(isValid)
