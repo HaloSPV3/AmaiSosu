@@ -29,6 +29,8 @@
     <TrimmingEnabled>$(IsTrimmable)</TrimmingEnabled>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
+    <DebugType>Embedded</DebugType>
+    <DebugType Condition="'$(Configuration)' == 'Release'">none</DebugType>
 
     <!-- Enable this while you are working on HXE hot-fixes -->
     <UseBleedingEdge_HXE Condition="'$(CI)' != 'true'">false</UseBleedingEdge_HXE>
