@@ -29,8 +29,6 @@
     <!--<PublishTrimmed>true</PublishTrimmed> -->
     <PublishSingleFile>$(TFM_NET6_OR_LATER)</PublishSingleFile>
     <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' AND '$(PublishSingleFile)' == 'true'">win7-x86</RuntimeIdentifier>
-    <!-- Disable this if we want to require users to install .NET Desktop Runtime 6 or whatever we are targeting at the moment -->
-    <SelfContained Condition="'$(SelfContained)' == '' AND '$(RuntimeIdentifier)' != '' AND '$(TFM_NET6_OR_LATER)' == 'true'">true</SelfContained>
     <PublishSingleFile Condition="'$(PublishSingleFile)' == 'true' AND $(RuntimeIdentifier.Contains('win7'))">$([MSBuild]::VersionGreaterThanOrEquals($(NETCoreSdkVersion), '6.0.300'))</PublishSingleFile>
 
     <!-- Manifest Info -->
@@ -52,9 +50,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(PublishSingleFile)' == 'true'">
-    <SelfContained>true</SelfContained>
+    <!-- Disable this if we want to require users to install .NET Desktop Runtime 6 or whatever we are targeting at the moment -->
+    <SelfContained Condition="'$(SelfContained)' == '' AND '$(RuntimeIdentifier)' != ''">true</SelfContained>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
-    <EnableCompressionInSingleFile>$(TFM_NET6_OR_LATER)</EnableCompressionInSingleFile>
+    <EnableCompressionInSingleFile>$(SelfContained)</EnableCompressionInSingleFile>
     <StripSymbols Condition="'$(PublishAot)' == 'true' AND '$(Configuration)' == 'Debug'">false</StripSymbols>
   </PropertyGroup>
 
