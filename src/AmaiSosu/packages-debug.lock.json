@@ -10,12 +10,11 @@
       },
       "HXE": {
         "type": "Direct",
-        "requested": "[2.3.0, )",
-        "resolved": "2.3.0",
-        "contentHash": "NxnYzM77RxBlRXQZeMxIsLrKDRWiEfLrimAbuzFKnVLYXgzoyFheFhVH1mvHV+6czsuyJGrGHVS4MKMwYjp/6A==",
+        "requested": "[2.3.1, )",
+        "resolved": "2.3.1",
+        "contentHash": "ZO/oqIut5wJTOt8VnTIKFKylNl6dptwMzl0+2IBCNT5q0qsBAC/oErthacgfYucKkav72bbMix9WSOZSBD3HoQ==",
         "dependencies": {
           "System.Memory": "4.6.3",
-          "System.Net.Http": "4.3.4",
           "System.Text.Json": "4.6.0",
           "XmlSourceGenerator": "1.0.2-alpha"
         }
@@ -257,14 +256,6 @@
           "System.Runtime.CompilerServices.Unsafe": "6.1.2"
         }
       },
-      "System.Net.Http": {
-        "type": "Transitive",
-        "resolved": "4.3.4",
-        "contentHash": "aOa2d51SEbmM+H+Csw7yJOuNZoHkrP2XnAurye5HWYgGVVU54YZDvsLUYRv6h18X3sPnjNCANmN7ZhIPiqMcjA==",
-        "dependencies": {
-          "System.Security.Cryptography.X509Certificates": "4.3.0"
-        }
-      },
       "System.Numerics.Vectors": {
         "type": "Transitive",
         "resolved": "4.6.1",
@@ -327,11 +318,6 @@
           "System.Security.Cryptography.Algorithms": "4.3.1"
         }
       },
-      "System.Security.Cryptography.Encoding": {
-        "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "1DEWjZZly9ae9C79vFwqaO5kaOlI5q+3/55ohmq/7dpDyDfc8lYe7YVxJUZ5MF/NtbkRjwFRo14yM4OEo9EmDw=="
-      },
       "System.Security.Cryptography.Pkcs": {
         "type": "Transitive",
         "resolved": "6.0.5",
@@ -346,15 +332,6 @@
         "type": "Transitive",
         "resolved": "6.0.0",
         "contentHash": "rp1gMNEZpvx9vP0JW0oHLxlf8oSiQgtno77Y4PLUBjSiDYoD77Y8uXHr1Ea5XG4/pIKhqAdxZ8v8OTUtqo9PeQ=="
-      },
-      "System.Security.Cryptography.X509Certificates": {
-        "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "t2Tmu6Y2NtJ2um0RtcuhP7ZdNNxXEgUm2JeoA/0NvlMjAhKCnM1NX07TDl3244mVp3QU6LPEhT3HTtH1uF7IYw==",
-        "dependencies": {
-          "System.Security.Cryptography.Algorithms": "4.3.0",
-          "System.Security.Cryptography.Encoding": "4.3.0"
-        }
       },
       "System.Security.Cryptography.Xml": {
         "type": "Transitive",
@@ -506,12 +483,11 @@
       },
       "HXE": {
         "type": "Direct",
-        "requested": "[2.3.0, )",
-        "resolved": "2.3.0",
-        "contentHash": "NxnYzM77RxBlRXQZeMxIsLrKDRWiEfLrimAbuzFKnVLYXgzoyFheFhVH1mvHV+6czsuyJGrGHVS4MKMwYjp/6A==",
+        "requested": "[2.3.1, )",
+        "resolved": "2.3.1",
+        "contentHash": "ZO/oqIut5wJTOt8VnTIKFKylNl6dptwMzl0+2IBCNT5q0qsBAC/oErthacgfYucKkav72bbMix9WSOZSBD3HoQ==",
         "dependencies": {
           "System.Memory": "4.6.3",
-          "System.Net.Http": "4.3.4",
           "System.Text.Json": "4.6.0",
           "XmlSourceGenerator": "1.0.2-alpha"
         }
@@ -758,14 +734,6 @@
           "System.Runtime.CompilerServices.Unsafe": "6.1.2"
         }
       },
-      "System.Net.Http": {
-        "type": "Transitive",
-        "resolved": "4.3.4",
-        "contentHash": "aOa2d51SEbmM+H+Csw7yJOuNZoHkrP2XnAurye5HWYgGVVU54YZDvsLUYRv6h18X3sPnjNCANmN7ZhIPiqMcjA==",
-        "dependencies": {
-          "System.Security.Cryptography.X509Certificates": "4.3.0"
-        }
-      },
       "System.Numerics.Vectors": {
         "type": "Transitive",
         "resolved": "4.6.1",
@@ -855,15 +823,6 @@
         "type": "Transitive",
         "resolved": "6.0.0",
         "contentHash": "rp1gMNEZpvx9vP0JW0oHLxlf8oSiQgtno77Y4PLUBjSiDYoD77Y8uXHr1Ea5XG4/pIKhqAdxZ8v8OTUtqo9PeQ=="
-      },
-      "System.Security.Cryptography.X509Certificates": {
-        "type": "Transitive",
-        "resolved": "4.3.0",
-        "contentHash": "t2Tmu6Y2NtJ2um0RtcuhP7ZdNNxXEgUm2JeoA/0NvlMjAhKCnM1NX07TDl3244mVp3QU6LPEhT3HTtH1uF7IYw==",
-        "dependencies": {
-          "System.Security.Cryptography.Algorithms": "4.3.0",
-          "System.Security.Cryptography.Encoding": "4.3.0"
-        }
       },
       "System.Security.Cryptography.Xml": {
         "type": "Transitive",
@@ -1015,9 +974,9 @@
       },
       "HXE": {
         "type": "Direct",
-        "requested": "[2.3.0, )",
-        "resolved": "2.3.0",
-        "contentHash": "NxnYzM77RxBlRXQZeMxIsLrKDRWiEfLrimAbuzFKnVLYXgzoyFheFhVH1mvHV+6czsuyJGrGHVS4MKMwYjp/6A==",
+        "requested": "[2.3.1, )",
+        "resolved": "2.3.1",
+        "contentHash": "ZO/oqIut5wJTOt8VnTIKFKylNl6dptwMzl0+2IBCNT5q0qsBAC/oErthacgfYucKkav72bbMix9WSOZSBD3HoQ==",
         "dependencies": {
           "XmlSourceGenerator": "1.0.2-alpha"
         }
