@@ -19,14 +19,17 @@
     <!-- Build | Strong Naming -->
     <SignAssembly>False</SignAssembly>
 
-    <TFM_NET6_OR_LATER>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))</TFM_NET6_OR_LATER>
-
     <!-- Publish -->
+    <TFM_NET6_OR_LATER>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))</TFM_NET6_OR_LATER>
     <IsTrimmable>$(TFM_NET6_OR_LATER)</IsTrimmable>
+    <IsAotCompatible Condition="'$(UseWPF)' != 'true'">$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))</IsAotCompatible>
+    <VerifyReferenceAotCompatibility>$(IsAotCompatible)</VerifyReferenceAotCompatibility>
+    <PublishAot>$(IsAotCompatible)</PublishAot>
     <!-- Waiting for trim-compatible WPF -->
     <!--<PublishTrimmed>true</PublishTrimmed> -->
     <PublishSingleFile>$(TFM_NET6_OR_LATER)</PublishSingleFile>
     <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == '' AND '$(PublishSingleFile)' == 'true'">win7-x86</RuntimeIdentifier>
+    <!-- Disable this if we want to require users to install .NET Desktop Runtime 6 or whatever we are targeting at the moment -->
     <SelfContained Condition="'$(SelfContained)' == '' AND '$(RuntimeIdentifier)' != '' AND '$(TFM_NET6_OR_LATER)' == 'true'">true</SelfContained>
     <PublishSingleFile Condition="'$(PublishSingleFile)' == 'true' AND $(RuntimeIdentifier.Contains('win7'))">$([MSBuild]::VersionGreaterThanOrEquals($(NETCoreSdkVersion), '6.0.300'))</PublishSingleFile>
 
