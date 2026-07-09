@@ -20,7 +20,7 @@
     "lint": "eslint --cache",
     "publish": "dotnet restore ./src/AmaiSosu.GUI -p:Configuration=Release -t:PublishAll",
     "release": "semantic-release --debug",
-    "restore": "dotnet restore && dotnet restore -p:Configuration=Release",
+    "restore": "dotnet restore -p:Configuration=Debug && dotnet restore -p:Configuration=Release",
     "test": "dotnet test"
   },
   "devDependencies": {
