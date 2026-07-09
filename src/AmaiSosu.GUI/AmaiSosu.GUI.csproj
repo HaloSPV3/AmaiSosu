@@ -52,6 +52,24 @@
     <EnableCompressionInSingleFile>$(TFM_NET6_OR_LATER)</EnableCompressionInSingleFile>
   </PropertyGroup>
 
+  <Choose>
+    <When Condition="$(TargetFramework.StartsWith('net4'))">
+      <PropertyGroup Label="Additional Properties (NET4)">
+        <!-- Disabling these two properties prevents the output of (App).exe.config. Yippee! -->
+        <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
+        <GenerateSupportedRuntime>false</GenerateSupportedRuntime>
+        <WeaverConfiguration>
+          <Weavers>
+            <Costura />
+          </Weavers>
+        </WeaverConfiguration>
+      </PropertyGroup>
+      <ItemGroup Label="Additional References (NET4)">
+        <PackageReference Include="Costura.Fody" Version="6.2.0" PrivateAssets="all" />
+      </ItemGroup>
+    </When>
+  </Choose>
+
   <PropertyGroup Label="Nuget Properties">
     <_changelogPath>$([System.IO.Path]::GetFullPath($(MSBuildProjectDirectory)/../../CHANGELOG.md))</_changelogPath>
     <Authors>HaloSPV3</Authors>
@@ -88,7 +106,6 @@
     <Resource Include="Resources\Background.png" />
     <Resource Include="icon.ico" />
 
-    <PackageReference Include="Costura.Fody" Version="6.2.0" PrivateAssets="All" />
     <PackageReference Include="MahApps.Metro" Version="3.0.0-rc0529" />
     <PackageReference Include="Meziantou.Polyfill" Version="1.0.157"
       IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive"
