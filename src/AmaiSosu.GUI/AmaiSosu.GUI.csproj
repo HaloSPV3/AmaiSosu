@@ -53,6 +53,7 @@
     <SelfContained>true</SelfContained>
     <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
     <EnableCompressionInSingleFile>$(TFM_NET6_OR_LATER)</EnableCompressionInSingleFile>
+    <StripSymbols Condition="'$(PublishAot)' == 'true' AND '$(Configuration)' == 'Debug'">false</StripSymbols>
   </PropertyGroup>
 
   <Choose>
