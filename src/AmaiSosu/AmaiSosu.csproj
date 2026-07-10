@@ -17,16 +17,14 @@
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
 
     <!-- Publish -->
+    <IsPublishable>false</IsPublishable>
     <TFM_NET6_OR_LATER>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net6.0'))</TFM_NET6_OR_LATER>
     <IsTrimmable>$(TFM_NET6_OR_LATER)</IsTrimmable>
     <IsAotCompatible>$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net8.0'))</IsAotCompatible>
     <VerifyReferenceAotCompatibility>$(IsAotCompatible)</VerifyReferenceAotCompatibility>
-    <PublishAot>$(IsAotCompatible)</PublishAot>
-    <PublishTrimmed>$(IsTrimmable)</PublishTrimmed>
 
     <!-- Misc -->
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <TrimmingEnabled>$(IsTrimmable)</TrimmingEnabled>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <DebugType>Embedded</DebugType>
