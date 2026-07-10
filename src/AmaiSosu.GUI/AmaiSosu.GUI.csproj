@@ -46,7 +46,8 @@
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <DebugType>Embedded</DebugType>
-    <DebugType Condition="'$(Configuration)' == 'Release'">none</DebugType>
+    <!-- If we are publishing a release, do not include symbols; shave a MiB or two -->
+    <DebugType Condition="'$(Configuration)' == 'Release' AND '_IsPublishing' == 'true'">none</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(PublishSingleFile)' == 'true'">
