@@ -56,6 +56,8 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/HaloSPV3/AmaiSosu</RepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <!-- If we are packing, we MUST include PDBs for the symbols package -->
+    <DebugType Condition="'_IsPacking' == 'true'">pdbonly</DebugType>
   </PropertyGroup>
 
   <ItemGroup Label="NuGet Package Items">
