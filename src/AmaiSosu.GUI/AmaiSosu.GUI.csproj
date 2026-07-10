@@ -98,7 +98,7 @@
     <RepositoryUrl>https://github.com/HaloSPV3/AmaiSosu</RepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <!-- If we are packing, we MUST include PDBs for the symbols package -->
-    <DebugType Condition="'_IsPacking' == 'true'">pdbonly</DebugType>
+    <DebugType Condition="'$(_IsPacking)' == 'true'">portable</DebugType>
   </PropertyGroup>
 
   <ItemGroup Label="NuGet Package Items">
