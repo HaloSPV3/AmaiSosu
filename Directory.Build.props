@@ -10,6 +10,7 @@
     <NuGetLockFilePath Condition="'$(Configuration)' == Debug AND Exists('$(MSBuildProjectDirectory)/packages.$(_MSBuildProjectNameUnderscored).lock.json')">
       $(MSBuildProjectDirectory)/packages-debug.$(_MSBuildProjectNameUnderscored).lock.json
     </NuGetLockFilePath>
+    <Configuration Condition="'$(_IsPublishing)' == 'true'">Release</Configuration>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
   </PropertyGroup>
 
