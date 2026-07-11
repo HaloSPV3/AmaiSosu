@@ -8,10 +8,10 @@ import { exit } from 'node:process';
 const projectsToPublish = [
   './src/AmaiSosu.GUI/AmaiSosu.GUI.csproj' as const,
 ] satisfies [string];
-const projectsToPackAndPush = [
-  './src/AmaiSosu/AmaiSosu.csproj' as const,
-  projectsToPublish[0],
-] satisfies [string, string];
+// const projectsToPackAndPush = [
+//   './src/AmaiSosu/AmaiSosu.csproj' as const,
+//   projectsToPublish[0],
+// ] satisfies [string, string];
 
 async function tryGetConfig(projectsToPublish: Parameters<typeof getConfig>[0], projectsToPackAndPush: Parameters<typeof getConfig>[1]) {
   try {
@@ -28,7 +28,8 @@ async function tryGetConfig(projectsToPublish: Parameters<typeof getConfig>[0], 
 
 const config: Options | Error = await tryGetConfig(
   projectsToPublish,
-  projectsToPackAndPush,
+  // projectsToPackAndPush,
+  [],
 );
 
 if (Error.isError(config)) {
