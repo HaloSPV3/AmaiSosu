@@ -41,7 +41,7 @@
     <Company>github/HaloSPV3</Company>
     <Copyright>Copyright © 2021</Copyright>
     <Description>OpenSauce Installer</Description>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IncludeSource>true</IncludeSource>
     <IncludeSymbols>true</IncludeSymbols>
     <PackageIcon>icon.png</PackageIcon>
