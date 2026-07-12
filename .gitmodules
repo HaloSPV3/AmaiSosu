@@ -2,7 +2,6 @@
 	path = ext/hxe
 	url = https://github.com/HaloSPV3/HXE.git
 	branch = main
-	ignore = all
 [submodule "media"]
 	path = media
 	url = https://github.com/HaloSPV3/AmaiSosu.git
